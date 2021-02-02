@@ -77,6 +77,12 @@ const useAuthProvider = () => {
         return auth.signOut().then(() => setUser(false));
     };
 
+    const sendPasswordResetEmail = (email) => {
+        return auth.sendPasswordResetEmail(email).then((response) => {
+            return response;
+        });
+    };
+
     const handleAuthStateChanged = (user: firebase.User) => {
         setUser(user);
         if (user) {
@@ -105,6 +111,7 @@ const useAuthProvider = () => {
         signUp,
         signIn,
         getUserAdditionalData,
-        signOut
+        signOut,
+        sendPasswordResetEmail
     };
 };

@@ -6,7 +6,7 @@ export const useRequireAuth = () => {
     const router = useRouter();
     console.log("useRequireAuth:", auth)
     useEffect(() => {
-        if (!auth.user) {
+        if (auth.user === false) {
             router.push('/login');
         }
     }, [auth, router]);
