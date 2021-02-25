@@ -56,5 +56,3 @@ function About({ router: { query } }) {
         </div>
     );
 }
-
-export default withRouter(About);
