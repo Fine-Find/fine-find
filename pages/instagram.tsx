@@ -38,20 +38,20 @@ export default function Home({ posts }) {
     );
 }
 
-export async function getStaticProps(context) {
-    const client = new Instagram({
-        username: "***",
-        password: "***",
-    });
-    await client.login();
-
-    const response = await client.getPhotosByUsername({
-        username: "thefinefind",
-    });
-
-    return {
-        props: {
-            posts: response.user.edge_owner_to_timeline_media.edges,
-        }, // will be passed to the page component as props
-    };
-}
+// export async function getStaticProps(context) {
+//     const client = new Instagram({
+//         username: "***",
+//         password: "***",
+//     });
+//     await client.login();
+//
+//     const response = await client.getPhotosByUsername({
+//         username: "thefinefind",
+//     });
+//
+//     return {
+//         props: {
+//             posts: response.user.edge_owner_to_timeline_media.edges,
+//         }, // will be passed to the page component as props
+//     };
+// }
