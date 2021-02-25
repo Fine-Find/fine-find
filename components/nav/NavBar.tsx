@@ -3,7 +3,7 @@ import { Component } from "react";
 
 class NavBar extends Component {
   constructor(props) {
-    super();
+    super(props);
   }
   render() {
     return (
