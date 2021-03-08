@@ -1,0 +1,93 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "@next/next"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "prettier/react",
+    "prettier/@typescript-eslint",
+    "plugin:jest/recommended",
+    "plugin:@next/next/recommended"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "react/display-name": 0,
+    "react/prop-types": 0,
+    "react/no-unescaped-entities": [
+      "error",
+      {
+        "forbid": [
+          {
+            "char": ">",
+            "alternatives": ["&gt;"]
+          },
+          {
+            "char": "}",
+            "alternatives": ["&#125;"]
+          }
+        ]
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "@typescript-eslint/member-delimiter-style": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    // no-unused-vars interference fix.
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      2,
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-console": [
+      2,
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    // indent interference fix.
+    "indent": "off",
+    "@typescript-eslint/indent": ["error", 2, { "SwitchCase": 1 }],
+    // no-array-constructor interference fix.
+    "no-array-constructor": "off",
+    "@typescript-eslint/no-array-constructor": "error",
+    // no-useless-constructor interference fix.
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": "error",
+    // semi interference fix.
+    "semi": "off",
+    "@typescript-eslint/semi": "warn",
+    // no-shadow interference fix.
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+    // no-redeclare interference fix.
+    "no-redeclare": "off",
+    "@typescript-eslint/no-redeclare": "error",
+    // no-use-before-define interference fix.
+    // allow functions to be defined after they"re used
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error", "nofunc"]
+  }
+}
