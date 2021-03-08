@@ -9,8 +9,8 @@
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write ./src && eslint ./src/**/*.{js,ts,tsx} --fix",
     "lint": "prettier --check ./src && eslint ./src/**/*.{js,ts,tsx}",
-    "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn test"
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@ionic/core": "^5.6.0",
