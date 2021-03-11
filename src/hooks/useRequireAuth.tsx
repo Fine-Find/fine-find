@@ -1,15 +1,18 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import {useAuth} from "./useAuth";
-export const useRequireAuth = () => {
-    const auth = useAuth();
-    const router = useRouter();
-    console.log("useRequireAuth:", auth)
-    useEffect(() => {
-        if (auth.user === false) {
-            router.push('/login');
-        }
-    }, [auth, router]);
+import { useEffect } from 'react';
 
-    return auth;
+import { useAuth } from './useAuth';
+
+export const useRequireAuth = () => {
+  const auth = useAuth();
+  const router = useRouter();
+  // eslint-disable-next-line no-console
+  console.log('useRequireAuth:', auth);
+  useEffect(() => {
+    if (!auth.user) {
+      router.push('/login');
+    }
+  }, [auth, router]);
+
+  return auth;
 };

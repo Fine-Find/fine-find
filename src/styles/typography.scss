@@ -1,0 +1,9 @@
+.h1 {
+  font-weight: 700;
+  font-size: 5rem;
+}
+
+.h2 {
+  @extend .h1;
+  font-size: 4rem;
+}

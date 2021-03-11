@@ -1,0 +1,43 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+html,
+*::shadow {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+*,
+*:before,
+*:after,
+*::shadow {
+  box-sizing: inherit;
+}
+
+:root {
+  --ion-margin: 0;
+  --ion-padding: 0;
+  --ion-grid-padding: 0;
+  --ion-grid-column-padding: 0;
+  --ion-gird-row-padding: 0;
+
+  --page-gutter: 16px;
+}
+
+:host {
+  margin: inherit;
+}

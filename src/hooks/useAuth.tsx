@@ -1,117 +1,119 @@
+import firebase from 'firebase';
 import React, {
-    useState,
-    useEffect,
-    useContext,
-    createContext,
-    ReactNode,
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
 } from 'react';
+
 import { auth, db } from '../config/firebase';
-import firebase from "firebase";
+
 const authContext = createContext({ user: {} });
 const { Provider } = authContext;
 
-export function AuthProvider(props: { children: ReactNode }): JSX.Element {
-    const auth = useAuthProvider();
-    return <Provider value={auth}>{props.children}</Provider>;
-}
-
 export const useAuth: any = () => {
-    return useContext(authContext);
+  return useContext(authContext);
 };
 
 // Provider hook that creates an auth object and handles its state
 const useAuthProvider = () => {
-    const [user, setUser] = useState(null);
-    const createUser = (user) => {
-        return db
-            .collection('users')
-            .doc(user.uid)
-            .set(user)
-            .then(() => {
-                setUser(user);
-                return user;
-            })
-            .catch((error) => {
-                return { error };
-            });
-    };
+  const [user, setUser] = useState(null);
+  const createUser = (createdUser) => {
+    return db
+      .collection('users')
+      .doc(createdUser.uid)
+      .set(createdUser)
+      .then(() => {
+        setUser(createdUser);
+        return createdUser;
+      })
+      .catch((error) => {
+        return { error };
+      });
+  };
 
-    const signUp = ({ name, email, password }) => {
-        return auth
-            .createUserWithEmailAndPassword(email, password)
-            .then((response) => {
-                auth.currentUser.sendEmailVerification();
-                return createUser({ uid: response.user.uid, email, name });
-            })
-            .catch((error) => {
-                return { error };
-            });
-    };
+  const signUp = ({ name, email, password }) => {
+    return auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        auth.currentUser.sendEmailVerification();
+        return createUser({ uid: response.user.uid, email, name });
+      })
+      .catch((error) => {
+        return { error };
+      });
+  };
 
-    const signIn = ({ email, password }) => {
-        return auth
-            .signInWithEmailAndPassword(email, password)
-            .then((response) => {
-                setUser(response.user);
-                getUserAdditionalData(user);
-                return response.user;
-            })
-            .catch((error) => {
-                return { error };
-            });
-    };
-
-    const getUserAdditionalData = (user: firebase.User) => {
-        return db
-            .collection('users')
-            .doc(user.uid)
-            .get()
-            .then((userData) => {
-                if (userData.data()) {
-                    setUser(userData.data());
-                }
-            });
-    };
-
-    const signOut = () => {
-        return auth.signOut().then(() => setUser(false));
-    };
-
-    const sendPasswordResetEmail = (email) => {
-        return auth.sendPasswordResetEmail(email).then((response) => {
-            return response;
-        });
-    };
-
-    const handleAuthStateChanged = (user: firebase.User) => {
-        setUser(user);
-        if (user) {
-            getUserAdditionalData(user);
+  const getUserAdditionalData = (userToGet: firebase.User) => {
+    return db
+      .collection('users')
+      .doc(userToGet.uid)
+      .get()
+      .then((userData) => {
+        if (userData.data()) {
+          setUser(userData.data());
         }
-    };
-    useEffect(() => {
-        const unsub = auth.onAuthStateChanged(handleAuthStateChanged);
+      });
+  };
 
-        return () => unsub();
-    }, []);
+  const signIn = ({ email, password }) => {
+    return auth
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        setUser(response.user);
+        getUserAdditionalData(user);
+        return response.user;
+      })
+      .catch((error) => {
+        return { error };
+      });
+  };
 
-    useEffect(() => {
-        if (user?.uid) {
-            // Subscribe to user document on mount
-            const unsubscribe = db
-                .collection('users')
-                .doc(user.uid)
-                .onSnapshot((doc) => setUser(doc.data()));
-            return () => unsubscribe();
-        }
-    }, []);
+  const signOut = () => {
+    return auth.signOut().then(() => setUser(false));
+  };
 
-    return {
-        user,
-        signUp,
-        signIn,
-        getUserAdditionalData,
-        signOut,
-        sendPasswordResetEmail
-    };
+  const sendPasswordResetEmail = (email) => {
+    return auth.sendPasswordResetEmail(email).then((response) => {
+      return response;
+    });
+  };
+
+  const handleAuthStateChanged = (changedUser: firebase.User) => {
+    setUser(changedUser);
+    if (changedUser) {
+      getUserAdditionalData(changedUser);
+    }
+  };
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged(handleAuthStateChanged);
+
+    return () => unsub();
+  }, []);
+
+  useEffect(() => {
+    if (user?.uid) {
+      // Subscribe to user document on mount
+      const unsubscribe = db
+        .collection('users')
+        .doc(user.uid)
+        .onSnapshot((doc) => setUser(doc.data()));
+      return () => unsubscribe();
+    }
+  }, []);
+
+  return {
+    user,
+    signUp,
+    signIn,
+    getUserAdditionalData,
+    signOut,
+    sendPasswordResetEmail,
+  };
 };
+
+export function AuthProvider(props: { children: ReactNode }): JSX.Element {
+  const providedAuth = useAuthProvider();
+  return <Provider value={providedAuth}>{props.children}</Provider>;
+}

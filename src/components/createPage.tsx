@@ -1,24 +1,26 @@
-import { withRouter } from "next/router";
-import styles from "../styles/Home.module.css";
-import Head from "next/head";
+import Head from 'next/head';
+import { withRouter } from 'next/router';
 
-const createPageEndpoint = "/api/createPage";
+import styles from '../styles/Home.module.css';
+
+const createPageEndpoint = '/api/createPage';
 
 const createPage = async (body) => {
   const response = await fetch(`${createPageEndpoint}`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-type": "application/json; charset=UTF-8",
+      'Content-type': 'application/json; charset=UTF-8',
     },
     body: JSON.stringify(body),
   });
   return await response.json();
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fetcher = (url, body) =>
   fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       body,
     }),
@@ -29,8 +31,9 @@ function About({ router: { query } }) {
 
   async function handleClick(e) {
     e.preventDefault();
-    console.log("whoopie");
-    let link: string = await createPage({ imageUrl: object });
+    // eslint-disable-next-line no-console
+    console.log('whoopie');
+    const link: string = await createPage({ imageUrl: object });
 
     return link;
     // const { data, error } = useSwr("/api/createPage", fetcher("test"));
@@ -44,7 +47,7 @@ function About({ router: { query } }) {
       </Head>
 
       <h1>Your Post</h1>
-      <img src={object} />
+      <img src={object} alt="Dashboard" />
 
       <button
         type="button"
