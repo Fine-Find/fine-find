@@ -1,0 +1,17 @@
+@import '../../styles/spacing.scss';
+
+.menu {
+  --side-width: 260px;
+
+  @media (min-width: 992px) {
+    --side-width: 220px;
+  }
+}
+
+.menuItems {
+  --min-height: space(3);
+
+  ::slotted(ion-label) {
+    margin-top: space(1);
+  }
+}
