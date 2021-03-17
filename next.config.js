@@ -17,4 +17,7 @@ module.exports = {
     );
     return config;
   },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles'), path.join(__dirname, 'node_modules/@ionic/core/css/')],
+  },
 };
