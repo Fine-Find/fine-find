@@ -13,10 +13,8 @@ const Loading = () => {
 
 const DashBoardPage: React.FC = () => {
   const auth = useRequireAuth();
-  // eslint-disable-next-line no-console
-  console.log('auth:', auth);
 
-  if (!auth.user) return <>{Loading()}</>;
+  if (!auth.isInitialized) return <>{Loading()}</>;
 
   return (
     <DashboardLayout>
