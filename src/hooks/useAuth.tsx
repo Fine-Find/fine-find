@@ -8,17 +8,41 @@ import React, {
 } from 'react';
 
 import { auth, db } from '../config/firebase';
+import { AuthEmission } from '../types';
 
-const authContext = createContext({ user: {} });
+const firebaseAuthProviderDefaultProps = {
+  isInitialized: false,
+  user: null,
+  signUp: () => {
+    return Promise.resolve();
+  },
+  signIn: () => {
+    return Promise.resolve();
+  },
+  getUserAdditionalData: () => {
+    return Promise.resolve();
+  },
+  signOut: () => {
+    return Promise.resolve();
+  },
+  sendPasswordResetEmail: () => {
+    return Promise.resolve();
+  },
+} as AuthEmission;
+
+const authContext = createContext<AuthEmission>(
+  firebaseAuthProviderDefaultProps
+);
 const { Provider } = authContext;
 
-export const useAuth: any = () => {
+export const useAuth = (): AuthEmission => {
   return useContext(authContext);
 };
 
-// Provider hook that creates an auth object and handles its state
-const useAuthProvider = () => {
+export // Provider hook that creates an auth object and handles its state
+const useAuthProvider = (): AuthEmission => {
   const [user, setUser] = useState(null);
+  const [isInitialized, setIsInitialized] = useState(false);
   const createUser = (createdUser) => {
     return db
       .collection('users')
@@ -61,8 +85,6 @@ const useAuthProvider = () => {
     return auth
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        setUser(response.user);
-        getUserAdditionalData(user);
         return response.user;
       })
       .catch((error) => {
@@ -82,6 +104,7 @@ const useAuthProvider = () => {
 
   const handleAuthStateChanged = (changedUser: firebase.User) => {
     setUser(changedUser);
+    setIsInitialized(true);
     if (changedUser) {
       getUserAdditionalData(changedUser);
     }
@@ -93,17 +116,20 @@ const useAuthProvider = () => {
   }, []);
 
   useEffect(() => {
-    if (user?.uid) {
+    if (user && user?.uid) {
       // Subscribe to user document on mount
       const unsubscribe = db
         .collection('users')
         .doc(user.uid)
-        .onSnapshot((doc) => setUser(doc.data()));
+        .onSnapshot((doc) => {
+          setUser(doc.data());
+        });
       return () => unsubscribe();
     }
   }, []);
 
   return {
+    isInitialized,
     user,
     signUp,
     signIn,

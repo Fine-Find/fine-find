@@ -11,16 +11,29 @@ export default function Header({ title = 'The FineFind' }: HeaderProps) {
   const router = useRouter();
   const auth = useAuth();
 
-  const button =
-    auth && !auth.user ? (
-      <button slot="end" onClick={() => router.push('/login')}>
+  let button = null;
+  if (auth.isInitialized) {
+    button = !auth.user ? (
+      <button
+        className={styles.button}
+        slot="end"
+        onClick={() => router.push('/login')}
+      >
         Sign In
       </button>
     ) : (
-      <button slot="end" onClick={() => router.push('/login')}>
+      <button
+        className={styles.button}
+        slot="end"
+        onClick={() => {
+          auth.signOut();
+          router.push('/login');
+        }}
+      >
         Sign Out
       </button>
     );
+  }
 
   return (
     <ion-header>

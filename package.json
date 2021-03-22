@@ -8,7 +8,7 @@
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write ./src && eslint ./src/**/*.{js,jsx,ts,tsx} --fix",
-    "lint": "prettier --check ./src && eslint ./src/**/*.{js,jsx,ts,tsx}",
+    "lint": "prettier --check ./src && eslint ./src/**/*.{js,jsx,ts,tsx} && npm run type-check",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch"
   },
