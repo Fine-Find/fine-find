@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from '../../hooks/useAuth';
 import Button from '../elements/Button';
 
-interface LoginData {
+export interface LoginData {
   email: string;
   password: string;
 }
@@ -20,7 +20,6 @@ const LoginForm: React.FC = () => {
   const onSubmit = (data: LoginData) => {
     setIsLoading(true);
     setError(null);
-
     return auth.signIn(data).then((response) => {
       setIsLoading(false);
       response.error ? setError(response.error) : router.push('/dashboard');

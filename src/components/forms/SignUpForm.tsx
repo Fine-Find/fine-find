@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { useAuth } from '../../hooks/useAuth';
 
-interface SignUpData {
+export interface SignUpData {
   name: string;
   email: string;
   password: string;
