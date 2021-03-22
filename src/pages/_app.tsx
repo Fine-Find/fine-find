@@ -1,5 +1,3 @@
-import 'tailwindcss/tailwind.css';
-
 import '../styles/styles.scss';
 
 import { defineCustomElements as ionDefineCustomElements } from '@ionic/core/loader';
