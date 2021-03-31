@@ -1,4 +1,7 @@
+import { useSession } from 'next-auth/client';
+
 import DashboardLayout from '../components/DashboardLayout';
+import InstagramLoginButton from '../components/Instagram/InstagramLoginButton';
 import { useRequireAuth } from '../hooks/useRequireAuth';
 
 const Loading = () => {
@@ -14,7 +17,9 @@ const Loading = () => {
 const DashBoardPage: React.FC = () => {
   const auth = useRequireAuth();
 
-  if (!auth.isInitialized) return <>{Loading()}</>;
+  const [session, loading] = useSession();
+
+  if (!auth.isInitialized || loading) return <>{Loading()}</>;
 
   return (
     <DashboardLayout>
@@ -33,6 +38,11 @@ const DashBoardPage: React.FC = () => {
             >
               Sign out
             </button>
+            {session && session.accessToken ? (
+              <p>Connected to {session.user.name}'s Instagram account</p>
+            ) : (
+              <InstagramLoginButton />
+            )}
           </div>
         </div>
       </div>
