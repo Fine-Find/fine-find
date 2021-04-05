@@ -1,32 +1,35 @@
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
 import Head from 'next/head';
 import React, { ReactElement, ReactNode } from 'react';
 
-import DashboardNav from '../DashboardNav';
 import Header from '../Header';
+import { useStyles } from './DashboardLayout.styles';
 
 type Props = {
   title?: string;
   children: ReactNode;
 };
 
-// TODO: Convert the ion-item list to something that takes up less space
 export default function Layout({
   title = 'The FineFind | Designers',
   children,
 }: Props): ReactElement {
+  const styles = useStyles();
+
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
       </Head>
-      <Header></Header>
-      <ion-content>
-        <ion-split-pane content-id="main" when="lg">
-          <DashboardNav></DashboardNav>
-          <div id="main">{children}</div>
-        </ion-split-pane>
-      </ion-content>
+      <Header drawer={true}></Header>
+      <Box component="main" className={styles.box}>
+        <div className={styles.appBarSpacer} />
+        <Container maxWidth="lg" className={styles.container}>
+          {children}
+        </Container>
+      </Box>
     </>
   );
 }
