@@ -1,7 +1,3 @@
-@import '~tailwindcss/base';
-@import '~tailwindcss/components';
-@import '~tailwindcss/utilities';
-
 html,
 body {
   padding: 0;
@@ -28,32 +24,6 @@ html,
   box-sizing: inherit;
 }
 
-:root {
-  --ion-margin: 0;
-  --ion-padding: 0;
-  --ion-grid-padding: 0;
-  --ion-grid-column-padding: 0;
-  --ion-gird-row-padding: 0;
-
-  --page-gutter: 16px;
-
-  --ion-color-instagram: #e33e5c;
-  --ion-color-instagram-rgb: 227, 62, 92;
-  --ion-color-instagram-contrast: #ffffff;
-  --ion-color-instagram-contrast-rgb: 255, 255, 255;
-  --ion-color-instagram-shade: #c83751;
-  --ion-color-instagram-tint: #e6516c;
-}
-
 :host {
   margin: inherit;
-}
-
-.ion-color-instagram {
-  --ion-color-base: var(--ion-color-instagram);
-  --ion-color-base-rgb: var(--ion-color-instagram-rgb);
-  --ion-color-contrast: var(--ion-color-instagram-contrast);
-  --ion-color-contrast-rgb: var(--ion-color-instagram-contrast-rgb);
-  --ion-color-shade: var(--ion-color-instagram-shade);
-  --ion-color-tint: var(--ion-color-instagram-tint);
 }

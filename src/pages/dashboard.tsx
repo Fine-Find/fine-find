@@ -1,20 +1,24 @@
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Skeleton from '@material-ui/lab/Skeleton';
 import { useSession } from 'next-auth/client';
 
 import DashboardLayout from '../components/DashboardLayout';
 import InstagramLoginButton from '../components/Instagram/InstagramLoginButton';
 import { useRequireAuth } from '../hooks/useRequireAuth';
+import { useStyles } from '../styles/Dashboard.styles';
 
 const Loading = () => {
   return (
     <div id="skeleton">
-      <div className="ion-padding">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </div>
+      <Skeleton variant="text" />
     </div>
   );
 };
 
 const DashBoardPage: React.FC = () => {
+  const styles = useStyles();
   const auth = useRequireAuth();
 
   const [session, loading] = useSession();
@@ -23,28 +27,33 @@ const DashBoardPage: React.FC = () => {
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen flex bg-gray-200">
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="text-center mt-24">
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      <div className={styles.root}>
+        <Grid
+          container
+          spacing={1}
+          className={`${styles.container} ${styles.headerContainer}`}
+        >
+          <Grid item xs={12}>
+            <Typography component="h2" variant="h2">
               {`Welcome ${auth.user.name}!`}
-            </h2>
-            <p className="mt-2 text-center text-md text-gray-600">
-              {`You are logged in with ${auth.user.email}`}
-            </p>
-            <button
-              onClick={() => auth.signOut()}
-              className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-            >
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <p>{`You are logged in with ${auth.user.email}`}</p>
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant="outlined" onClick={() => auth.signOut()}>
               Sign out
-            </button>
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
             {session && session.accessToken ? (
               <p>Connected to {session.user.name}'s Instagram account</p>
             ) : (
               <InstagramLoginButton />
             )}
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </div>
     </DashboardLayout>
   );

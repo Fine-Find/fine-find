@@ -1,27 +1,42 @@
+import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Link from 'next/link';
 
+import Copyright from '../components/Copyright/Copyright';
 import SignUpForm from '../components/forms/SignUpForm';
+import { useSignUpStyles } from '../styles/SignUp.styles';
 
 const SignUpPage: React.FC = () => {
+  const styles = useSignUpStyles();
+
   return (
-    <div className="min-h-screen flex bg-gray-200">
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="text-center mt-24">
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign up
-          </h2>
-          <p className="mt-2 text-center text-md text-gray-600">
-            Already have an account?{' '}
+    <Container component="main" maxWidth="xs">
+      <Box className={styles.box}>
+        <Avatar className={styles.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <SignUpForm />
+        <Grid container>
+          <Grid item>
             <Link href="/login">
-              <a className="text-blue-500">Log in</a>
+              <a>
+                <Typography variant="body2" color="primary">
+                  {'Already have an account? Sign in'}
+                </Typography>
+              </a>
             </Link>
-          </p>
-        </div>
-        <div className="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <SignUpForm />
-        </div>
-      </div>
-    </div>
+          </Grid>
+        </Grid>
+      </Box>
+      <Copyright />
+    </Container>
   );
 };
 export default SignUpPage;

@@ -8,7 +8,6 @@ type Props = {
   children: ReactNode;
 };
 
-// TODO: Convert the ion-item list to something that takes up less space
 export default function Layout({
   title = 'The FineFind | Designers',
   children,
@@ -20,9 +19,7 @@ export default function Layout({
         <meta charSet="utf-8" />
       </Head>
       <Header></Header>
-      <ion-content>
-        <div id="main">{children}</div>
-      </ion-content>
+      <div id="main">{children}</div>
     </>
   );
 }

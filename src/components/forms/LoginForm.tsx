@@ -1,47 +1,48 @@
-import Link from 'next/link';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAuth } from '../../hooks/useAuth';
-import Button from '../elements/Button';
+import { useLoginFormStyles } from './LoginForm.styles';
 
+// TODO: Accessibility of the text fields: https://material-ui.com/components/text-fields/
 export interface LoginData {
   email: string;
   password: string;
 }
 const LoginForm: React.FC = () => {
+  const styles = useLoginFormStyles();
   const { register, errors, handleSubmit } = useForm();
   const auth = useAuth();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const onSubmit = (data: LoginData) => {
-    setIsLoading(true);
     setError(null);
     return auth.signIn(data).then((response) => {
-      setIsLoading(false);
       response.error ? setError(response.error) : router.push('/dashboard');
     });
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="rounded-md">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Email address
-        </label>
-        <div className="mt-1 rounded-md">
-          <input
+    <Grid container>
+      <Box className={styles.formBox}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             id="email"
-            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm"
-            type="email"
+            label="Email Address"
             name="email"
-            ref={register({
+            error={errors.email ? true : false}
+            autoComplete="email"
+            inputRef={register({
               required: 'Please enter an email',
               pattern: {
                 value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -50,26 +51,21 @@ const LoginForm: React.FC = () => {
             })}
           />
           {errors.email && (
-            <div className="mt-2 text-xs text-red-600">
+            <FormHelperText id="email-text" error>
               {errors.email.message}
-            </div>
+            </FormHelperText>
           )}
-        </div>
-      </div>
-      <div className="mt-4">
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium leading-5 text-gray-700"
-        >
-          Password
-        </label>
-        <div className="mt-1 rounded-md">
-          <input
-            id="password"
-            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 shadow-sm"
-            type="password"
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             name="password"
-            ref={register({
+            label="Password"
+            type="password"
+            id="password"
+            error={errors.password ? true : false}
+            autoComplete="current-password"
+            inputRef={register({
               required: 'Please enter a password',
               minLength: {
                 value: 6,
@@ -78,35 +74,27 @@ const LoginForm: React.FC = () => {
             })}
           />
           {errors.password && (
-            <div className="mt-2 text-xs text-red-600">
+            <FormHelperText id="password-text" error>
               {errors.password.message}
-            </div>
+            </FormHelperText>
           )}
           {error?.message && (
-            <div className="mb-4 text-red-500 text-center border-dashed border border-red-600 p-2 rounded">
-              <span>{error.message}</span>
-            </div>
+            <FormHelperText id="form-error-text" error>
+              {errors.message}
+            </FormHelperText>
           )}
-        </div>
-        <div className="mt-4 flex items-end">
-          <div className="text-sm leading-5">
-            <Link href="/reset-password">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-              >
-                Forgot your password?
-              </a>
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className="mt-4">
-        <span className="block w-full rounded-md shadow-sm">
-          <Button title="Login" type="submit" isLoading={isLoading} />
-        </span>
-      </div>
-    </form>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={styles.submitButton}
+          >
+            Sign In
+          </Button>
+        </form>
+      </Box>
+    </Grid>
   );
 };
 export default LoginForm;
