@@ -1,16 +1,19 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import { useRouter } from 'next/router';
 import React from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
 import { useLoadInstagramMedia } from '../../hooks/useLoadInstragramMedia';
 import { InstagramMedia } from '../../types/InstagramMedia';
+import { fineFindPages } from '../../utils/urls';
 import { useStyles } from './MasonGridList.styles';
 
 const MAX_COLUMNS = 3;
 
 export default function MasonGridList() {
+  const router = useRouter();
   const {
     isLoading,
     instagramMediaList,
@@ -37,7 +40,23 @@ export default function MasonGridList() {
 
   const Card = (instagramData: InstagramMedia) => {
     return (
-      <GridListTile key={instagramData.id} cols={1} className={styles.card}>
+      <GridListTile
+        key={instagramData.id}
+        cols={1}
+        className={styles.card}
+        onClick={() => {
+          const cardQueryParameters = new URLSearchParams({
+            media_url: instagramData.media_url,
+            media_type: instagramData.media_type,
+            caption: instagramData.caption,
+            permalink: instagramData.permalink,
+            timestamp: instagramData.timestamp,
+          });
+          const manageMediaUri = `${fineFindPages.manageMedia}/${instagramData.id}?${cardQueryParameters}`;
+
+          router.push(manageMediaUri);
+        }}
+      >
         <img
           className={styles.img}
           src={instagramData.media_url}

@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: '4rem',
     marginBottom: '4rem',
+    paddingLeft: theme.spacing(40),
   },
   appBarSpacer: theme.mixins.toolbar,
 }));

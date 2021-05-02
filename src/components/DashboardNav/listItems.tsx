@@ -8,6 +8,10 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import LayersIcon from '@material-ui/icons/Layers';
 import PeopleIcon from '@material-ui/icons/People';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Link from 'next/link';
+import React from 'react';
+
+import { fineFindPages } from '../../utils/urls';
 
 export const mainListItems = (
   <div>
@@ -15,7 +19,11 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <Link href={fineFindPages.dashboard}>
+        <a>
+          <ListItemText primary="Dashboard" />
+        </a>
+      </Link>
     </ListItem>
     <ListItem button>
       <ListItemIcon>
