@@ -5,11 +5,11 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { useSession } from 'next-auth/client';
 import React from 'react';
 
-import DashboardLayout from '../components/DashboardLayout';
-import InstagramLoginButton from '../components/Instagram/InstagramLoginButton';
-import MasonGridList from '../components/MasonGridList';
-import { useRequireAuth } from '../hooks/useRequireAuth';
-import { useStyles } from '../styles/Dashboard.styles';
+import DashboardLayout from '../../components/DashboardLayout';
+import InstagramLoginButton from '../../components/Instagram/InstagramLoginButton';
+import MasonGridList from '../../components/MasonGridList';
+import { useRequireAuth } from '../../hooks/useRequireAuth';
+import { useStyles } from '../../styles/Dashboard.styles';
 
 const Loading = () => {
   return (
