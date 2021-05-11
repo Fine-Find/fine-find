@@ -9,6 +9,24 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (
+    req.query == null ||
+    req.query['mediaId'] == null ||
+    Array.isArray(req.query['mediaId'])
+  ) {
+    res.status(400).json({ error: 'Expecting query parameter of mediaId' });
+  }
+
+  const dangerousMediaId = req.query['mediaId'];
+
+  if (Array.isArray(dangerousMediaId)) {
+    res.status(400).json({ error: 'Expecting query parameter of mediaId' });
+  }
+
+  const encodedMediaId = Array.isArray(dangerousMediaId)
+    ? encodeURIComponent(dangerousMediaId[0])
+    : encodeURIComponent(dangerousMediaId);
+
   const mediaFields = [
     'id',
     'username',
@@ -24,7 +42,7 @@ export default async function handler(
     fields: `${mediaFields},children{id,media_type,media_url,permalink,timestamp}`,
   });
 
-  const meUrl = `${instagramApis.myMedia}?${queryParameters}`;
+  const meUrl = `${instagramApis.media}${encodedMediaId}?${queryParameters}`;
 
   const response = await fetch(meUrl);
   const fetchedData = await response.json();

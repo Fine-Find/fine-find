@@ -26,7 +26,7 @@ export default function Layout({
       <Header drawer={true}></Header>
       <Box component="main" className={styles.box}>
         <div className={styles.appBarSpacer} />
-        <Container maxWidth="lg" className={styles.container}>
+        <Container maxWidth="xl" className={styles.container}>
           {children}
         </Container>
       </Box>
