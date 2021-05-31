@@ -1,13 +1,13 @@
+import { fineFindPages } from '@/utils/urls';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import { useLoadInstagramMedia } from 'hooks/useLoadInstragramMedia';
 import { useRouter } from 'next/router';
 import React from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
+import { InstagramMedia } from 'types/Instagram/InstagramMedia';
 
-import { useLoadInstagramMedia } from '../../hooks/useLoadInstragramMedia';
-import { InstagramMedia } from '../../types/InstagramMedia';
-import { fineFindPages } from '../../utils/urls';
 import { useStyles } from './MasonGridList.styles';
 
 const MAX_COLUMNS = 3;

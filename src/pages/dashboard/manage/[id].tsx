@@ -28,14 +28,28 @@ function queryParameterAsString(queryParameter: string | string[]): string {
   return Array.isArray(queryParameter) ? queryParameter[0] : queryParameter;
 }
 
+function isInstagramStored(auth) {
+  return (
+    auth && auth.user && auth.user.instagram && auth.user.instagram.access_token
+  );
+}
+
+function displayInstagramLogin(auth) {
+  if (isInstagramStored(auth)) {
+    return (
+      <p>Connected to {auth.user.instagram.username}'s Instagram account</p>
+    );
+  }
+
+  return <InstagramLoginButton />;
+}
+
 const DashBoardPage: React.FC = () => {
   const router = useRouter();
   const styles = manageMediaStyles();
   const auth = useRequireAuth();
 
-  const [session, loading] = useSession();
-
-  if (!auth.isInitialized || loading) return <>{Loading()}</>;
+  if (!auth.isInitialized || !auth.user) return <>{Loading()}</>;
 
   const {
     id,
@@ -87,11 +101,7 @@ const DashBoardPage: React.FC = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} className={styles.instagramInfo}>
-            {session && session.accessToken ? (
-              <p>Connected to {session.user.name}'s Instagram account</p>
-            ) : (
-              <InstagramLoginButton />
-            )}
+            {displayInstagramLogin(auth)}
           </Grid>
         </Grid>
       </div>
