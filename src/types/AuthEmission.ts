@@ -1,11 +1,12 @@
 import firebase from 'firebase';
 
-import { LoginData } from './components/forms/LoginForm';
-import { SignUpData } from './components/forms/SignUpForm';
+import { LoginData } from '../components/forms/LoginForm';
+import { SignUpData } from '../components/forms/SignUpForm';
 
 export type AuthEmission = {
   isInitialized: boolean;
   user: any;
+  userIdToken?: string;
   signUp: ({ name, email, password }: SignUpData) => Promise<any>;
   signIn: ({
     email,

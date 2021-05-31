@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { AuthEmission } from '../types';
+import { AuthEmission } from '../types/AuthEmission';
 import { useAuth } from './useAuth';
 
 export const useRequireAuth = (): AuthEmission => {

@@ -30,12 +30,18 @@ export default NextAuth({
     async jwt(token, user, account) {
       if (account && user) {
         const longLivedToken = process.env.INSTAGRAM_LONG_TOKEN;
-        // TODO: Store the response in the above variable so we aren't pulling from process.env
+        const instagramIat = Math.floor(Date.now() / 1000);
+        const expiresIn = 5183944;
+        const instagramExp = instagramIat + expiresIn;
+        // TODO: User the real values from Facebook
         getLongLivedInstagramToken(account.access_token);
 
         return {
           ...token,
           access_token: longLivedToken,
+          instagramIat,
+          instagramExp,
+          expiresIn,
         };
       }
 
@@ -44,6 +50,9 @@ export default NextAuth({
     async session(session, token) {
       if (token) {
         session.accessToken = token.access_token;
+        session.instagramIat = token.instagramIat;
+        session.instagramExp = token.instagramExp;
+        session.expiresIn = token.expiresIn;
       }
 
       return session;

@@ -8,11 +8,12 @@ import React, {
 } from 'react';
 
 import { auth, db } from '../config/firebase';
-import { AuthEmission } from '../types';
+import { AuthEmission } from '../types/AuthEmission';
 
 const firebaseAuthProviderDefaultProps = {
   isInitialized: false,
   user: null,
+  userIdToken: null,
   signUp: () => {
     return Promise.resolve();
   },
@@ -42,14 +43,31 @@ export const useAuth = (): AuthEmission => {
 export // Provider hook that creates an auth object and handles its state
 const useAuthProvider = (): AuthEmission => {
   const [user, setUser] = useState(null);
+  const [userIdToken, setUserIdtoken] = useState(null);
   const [isInitialized, setIsInitialized] = useState(false);
+
+  const getUserIdToken = async (forceRefresh?: boolean) => {
+    try {
+      if (auth.currentUser) {
+        return await auth.currentUser.getIdToken(forceRefresh);
+      }
+      return '';
+    } catch (error) {
+      console.error(error);
+      return '';
+    }
+  };
+
   const createUser = (createdUser) => {
     return db
       .collection('users')
       .doc(createdUser.uid)
       .set(createdUser)
       .then(() => {
-        setUser(createdUser);
+        getUserIdToken().then((token) => {
+          setUser(createdUser);
+          setUserIdtoken(token);
+        });
         return createdUser;
       })
       .catch((error) => {
@@ -93,7 +111,10 @@ const useAuthProvider = (): AuthEmission => {
   };
 
   const signOut = () => {
-    return auth.signOut().then(() => setUser(false));
+    return auth.signOut().then(() => {
+      setUser(false);
+      setUserIdtoken(null);
+    });
   };
 
   const sendPasswordResetEmail = (email) => {
@@ -103,8 +124,12 @@ const useAuthProvider = (): AuthEmission => {
   };
 
   const handleAuthStateChanged = (changedUser: firebase.User) => {
-    setUser(changedUser);
-    setIsInitialized(true);
+    getUserIdToken().then((token) => {
+      setUserIdtoken(token);
+      setUser(changedUser);
+      setIsInitialized(true);
+    });
+
     if (changedUser) {
       getUserAdditionalData(changedUser);
     }
@@ -122,7 +147,10 @@ const useAuthProvider = (): AuthEmission => {
         .collection('users')
         .doc(user.uid)
         .onSnapshot((doc) => {
-          setUser(doc.data());
+          getUserIdToken().then((token) => {
+            setUser(doc.data());
+            setUserIdtoken(token);
+          });
         });
       return () => unsubscribe();
     }
@@ -131,6 +159,7 @@ const useAuthProvider = (): AuthEmission => {
   return {
     isInitialized,
     user,
+    userIdToken,
     signUp,
     signIn,
     getUserAdditionalData,

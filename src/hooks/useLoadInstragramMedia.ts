@@ -1,10 +1,10 @@
 import { useState } from 'react';
-
 import {
   InstagramMedia,
   InstagramMediaPaging,
   InstagramMediaResponse,
-} from '../types/InstagramMedia';
+} from 'types/Instagram/InstagramMedia';
+
 import { fineFindApis } from '../utils/urls';
 
 // TODO: Split this into smaller files as this one is getting big.
