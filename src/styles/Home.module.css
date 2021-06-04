@@ -57,10 +57,11 @@
 .studyPhotoContainer {
   position: relative;
   bottom: 2rem;
+  width: 50%;
 }
 
 .studyPhoto {
-  height: 900px;
+  width: 100%;
 }
 
 .studyTextCont {
@@ -69,9 +70,12 @@
 
 .studyTitle {
   font-size: 4vw;
-  font-family: serif;
+  font-family: ivypresto-display,serif;
+  font-weight: 400;
+  font-style: italic;
   color: #3b415c;
   text-align: center;
+
 }
 
 .studyText {
@@ -143,6 +147,9 @@
   text-transform: uppercase;
   color: #ebece8;
   font-size: 3vw;
+  font-family: ivypresto-display,serif;
+  font-weight: 400;
+  font-style: italic;
 }
 
 .spaceBoxText {
@@ -220,6 +227,9 @@
   font-family: serif;
   color: #3b415c;
   text-align: center;
+  font-family: ivypresto-display,serif;
+  font-weight: 400;
+  font-style: italic;
 }
 
 .lastText {
