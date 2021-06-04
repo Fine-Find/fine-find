@@ -18,6 +18,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "autoprefixer": "^10.2.4",
+    "autosuggest-highlight": "^3.1.1",
     "firebase": "^8.2.5",
     "firebase-admin": "^9.9.0",
     "instagram-web-api": "^2.2.2",

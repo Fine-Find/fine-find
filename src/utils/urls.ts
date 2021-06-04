@@ -11,4 +11,5 @@ export const fineFindApis = {
   instagramMedia: '/api/instagram/v1/media',
   createShopifyPage: '/api/createPage',
   createInstagramAccount: 'api/user/v1/instagram-account',
+  searchProducts: '/api/shopify/v1/products',
 };

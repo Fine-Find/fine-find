@@ -31,11 +31,22 @@ export const manageMediaStyles = makeStyles((theme) => ({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: 400,
+    width: '100%',
+  },
+  selectProductList: {
+    width: '100%',
+    marginTop: '5rem',
+    backgroundColor: theme.palette.background.paper,
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
+  },
+  image: {
+    width: '30px',
+    objectFit: 'cover',
+    paddingRight: '5px',
+    marginRight: '5px',
   },
   iconButton: {
     padding: 10,
