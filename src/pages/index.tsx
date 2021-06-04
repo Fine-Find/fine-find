@@ -47,20 +47,20 @@ export default function Home() {
             </div>
             <div className={styles.spaceBoxCont}>
               <div className={styles.spaceBox}>
-                <h2 className={styles.spaceBoxTitle}>A new space designed for visibility and monetization</h2>
-                <p className={styles.spaceBoxText}>The Fine Find is a digital marketplace that brings the best of design online so consumers can shop like an insider anytime and you can benefit from it. The Fine Find is a monetization mechanism that helps you get valuable time back so you grow your business and make the most of the moment when you hit a spark of creativity</p>
+                <h2 className={styles.spaceBoxTitle}>A New Space Designed for Visibility and Monetization</h2>
+                <p className={styles.spaceBoxText}>The Fine Find is a digital marketplace that lets consumers shop your designs like an insider anytime. The Fine Find is a monetization mechanism that makes you money, even if you’re short on time or busy with a creative project.</p>
               </div>
             </div>
           </div>
           <div className={styles.clientTextCont}>
             <h2 className={styles.clientTitle}>Expand your client network and <br /> propel new sales</h2>
-            <p className={styles.clientText}>Lorem ipsum dolar sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiunt ut lavore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execirarion ullamaco lavoiea nisi ut aliquip ex ea commodo conswquat.</p>
+            <p className={styles.clientText}>The Fine Find is the premier industry network that helps you monetize content, build brand awareness, and increase your visibility in order to drive sales. The Fine Find is a network of suppliers, designers, and consumers who engage in one ecosystem through a holistic design-supply chain, benefitting the designer and consumer alike.</p>
           </div>
           <div className={styles.spaceGrid}>
             <div className={styles.spaceBoxCont}>
              <div className={styles.spaceBox}>
                <h2 className={styles.spaceBoxTitle}>Earn income while you focus on growing your brand</h2>
-               <p className={styles.spaceBoxText}>Lorem ipsum dolar sit amet, consectectur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minum veniam, quis nostrud exercitation ullamaco laboris nisi ut aliquip ex ea commodo consequat.</p>
+               <p className={styles.spaceBoxText}>Leveraging your skill set through time management and creating your brand through business development take time, and there’s only so many hours in the day. With the Fine Find, you can expand your network, scale your product offering, and get your time back since your audience can discover exactly what they’re looking for directly through the Fine Find.</p>
              </div>
             </div>
             <div className={styles.spaceImage}>
@@ -69,7 +69,7 @@ export default function Home() {
           </div>
           <div className={styles.clientTextCont}>
             <h2 className={styles.clientTitle}>Maximize Earnings while you grow <br /> your core design business </h2>
-            <p className={styles.clientText}>Lorem ipsum dolar sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiunt ut lavore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execirarion ullamaco lavoiea nisi ut aliquip ex ea commodo conswquat.</p>
+            <p className={styles.clientText}>The global online home decor market is slated to grow to $82.32 billion by 2024. Your digital presence on the Fine Find gives shoppers immediate digital access to your custom products, passively growing your revenue while you manage the rest of your business. Our data-driven platform focuses on logistics and distribution while leveraging your influence and enhancing your visibility so you can do what you do best: design.</p>
           </div>
           <div className={styles.spaceGrid}>
             <div className={styles.spaceImage}>
@@ -78,7 +78,7 @@ export default function Home() {
             <div className={styles.spaceBoxCont}>
               <div className={styles.spaceBox}>
                 <h2 className={styles.spaceBoxTitle}>The most efficient to build your business</h2>
-                <p className={styles.spaceBoxText}>Lorem ipsum dolar sit amet, consectectur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minum veniam, quis nostrud exercitation ullamaco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p className={styles.spaceBoxText}>The Fine Find is a digital platform that gives shoppers quick-click access to hundreds of highly-coveted hand-selected design finds, but it originated to give designers like you connections to buyers across the globe without the overhead of a storefront studio. And all this is done while you are consulting on a project or sourcing for a concept.</p>
               </div>
             </div>
           </div>
