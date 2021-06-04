@@ -47,8 +47,8 @@ export default function Home() {
             </div>
             <div className={styles.spaceBoxCont}>
               <div className={styles.spaceBox}>
-                <h2 className={styles.spaceBoxTitle}>A New Space Designed for Visibility and Monetization</h2>
-                <p className={styles.spaceBoxText}>The Fine Find is a digital marketplace that lets consumers shop your designs like an insider anytime. The Fine Find is a monetization mechanism that makes you money, even if you’re short on time or busy with a creative project.</p>
+                <h2 className={styles.spaceBoxTitle}>A New Space in Interior Design for Visibility and Monetization</h2>
+                <p className={styles.spaceBoxText}>The Fine Find is a digital ecosystem that helps consumers shop your designs like an insider. The Fine Find is a monetization platform that enables you to grow your business through our network, even if you’re short on time or busy with a creative project.</p>
               </div>
             </div>
           </div>
