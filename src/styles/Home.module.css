@@ -125,6 +125,7 @@
 .spaceImage img {
   width: 49vw;
   height: 100%;
+  object-fit: contain;
 }
 
 .spaceBox {
