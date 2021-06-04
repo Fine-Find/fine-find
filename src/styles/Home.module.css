@@ -150,12 +150,14 @@
   font-family: ivypresto-display,serif;
   font-weight: 400;
   font-style: italic;
+  margin-left: 20px;
 }
 
 .spaceBoxText {
   color: #ebece8;
   font-size: 1.5vw;
   font-family: 'Crimson Text', serif;
+  margin-left: 20px;
 }
 
 .clientTextCont {
@@ -170,6 +172,9 @@
   text-transform: uppercase;
   font-size: 3vw;
   text-align: center;
+  font-family: ivypresto-display,serif;
+  font-weight: 400;
+  font-style: italic;
 }
 
 .clientText {
@@ -198,6 +203,9 @@
 .processTitle {
   font-size: 3vw;
   color: #222847;
+  font-family: ivypresto-display,serif;
+  font-weight: 400;
+  font-style: italic;
 }
 
 .processContent {
