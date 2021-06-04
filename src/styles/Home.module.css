@@ -9,20 +9,34 @@
 .header {
   background: #ebece8;
   width: 100%;
-  height: 100px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .headerGrid {
   display: grid;
   grid-template-columns: 1fr 3fr;
+  border-bottom: 1px solid black;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.logo img {
+  width: 200px;
 }
 
 .links {
   display: flex;
+  justify-content: center;
+  margin-top: 0;
 }
 
 .links li {
-  margin-left: 10px;
+  margin-left: 30px;
+  font-size: 1.2vw;
+  align-self: center;
 }
 
 .nav {
@@ -31,9 +45,18 @@
   justify-content: flex-end;
 }
 
+.navButtonContainer {
+  margin-left: 30px;
+}
+
+.navButton {
+  padding: 10px 40px;
+  font-size: .7vw;
+}
+
 .studyPhotoContainer {
   position: relative;
-  bottom: 3rem;
+  bottom: 2rem;
 }
 
 .studyPhoto {
