@@ -108,16 +108,24 @@ export default function Home() {
         </section>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
+        <div className={styles.footerGrid}>
+          <div className={styles.footerLogo}>
+            <a><img src="/images/icon_navy.png" /></a>
+            <div className={styles.copyrightCont}>
+              <span className={styles.copyright}>© 2021 The Fine Find <br /> All rights reserved</span>
+            </div>
+          </div>
+          <div className={styles.nav}>
+            <ul className={styles.links}>
+              <li>home</li>
+              <li>designers</li>
+              <li>the process</li>
+            </ul>
+            <div className={styles.footerButtonCont}>
+              <button className={styles.navButton}>apply now</button>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   )
