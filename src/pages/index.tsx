@@ -35,7 +35,7 @@ export default function Home() {
 
       <div className={styles.studyTextCont}>
         <h2 className={styles.studyTitle}>Lorem Ipsum Dolar <br />Sit Amet Consectetur</h2>
-        <p className={styles.studyText}>Lorem ipsum dolar sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidudent ut laborer et dolore magna aliqua. Ut enim ad minim veniam, quis bistryd execcutation yllamco</p>
+        <p className={styles.studyText}>A monetization tool built for visibility in design, The Fine Find is a platform that enables consumers to shop your designs like an insider.</p>
         <div className={styles.applyButtonCont}>
           <button className={styles.applyButton}>Apply Now</button>
         </div>
@@ -47,19 +47,20 @@ export default function Home() {
             </div>
             <div className={styles.spaceBoxCont}>
               <div className={styles.spaceBox}>
-                <h2 className={styles.spaceBoxTitle}>A New Space in Interior Design for Visibility and Monetization</h2>
-                <p className={styles.spaceBoxText}>The Fine Find is a digital ecosystem that helps consumers shop your designs like an insider. The Fine Find is a monetization platform that enables you to grow your business through our network, even if you’re short on time or busy with a creative project.</p>
+                <h2 className={styles.spaceBoxTitle}>Maximize Earnings while you <br />grow your design business</h2>
+                <p className={styles.spaceBoxText}>The global online home decor market is slated to grow to $82.32 billion by 2024. Your digital presence on the Fine Find gives new clients immediate access to your custom products, passively growing your revenue while you manage the rest of your business. Our data-driven process takes care of your distribution while leveraging your influence by enhancing your visibility so you can do what you do best: design.
+                </p>
               </div>
             </div>
           </div>
           <div className={styles.clientTextCont}>
-            <h2 className={styles.clientTitle}>Expand your client network and <br /> propel new sales</h2>
-            <p className={styles.clientText}>The Fine Find is the premier industry network that helps you monetize content, build brand awareness, and increase your visibility in order to drive sales. The Fine Find is a network of suppliers, designers, and consumers who engage in one ecosystem through a holistic design-supply chain, benefitting the designer and consumer alike.</p>
+            <h2 className={styles.clientTitle}>EXPAND YOUR CLIENT NETWORK AND PROPEL NEW SALES</h2>
+            <p className={styles.clientText}>The Fine Find is the premier industry network that helps you monetize content, build brand awareness, and increase your online presence in order to drive sales. Our goal is to create value between suppliers, designers, and consumers through our proprietary network in order to benefit the design community.</p>
           </div>
           <div className={styles.spaceGrid}>
             <div className={styles.spaceBoxCont}>
              <div className={styles.spaceBox}>
-               <h2 className={styles.spaceBoxTitle}>Earn income while you focus on growing your brand</h2>
+               <h2 className={styles.spaceBoxTitle}>EARN INCOME WHILE YOU<br />FOCUS ON GROWING YOUR BRAND</h2>
                <p className={styles.spaceBoxText}>Leveraging your skill set through time management and creating your brand through business development take time, and there’s only so many hours in the day. With the Fine Find, you can expand your network, scale your product offering, and get your time back since your audience can discover exactly what they’re looking for directly through the Fine Find.</p>
              </div>
             </div>
@@ -68,20 +69,20 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.clientTextCont}>
-            <h2 className={styles.clientTitle}>Maximize Earnings while you grow <br /> your core design business </h2>
-            <p className={styles.clientText}>The global online home decor market is slated to grow to $82.32 billion by 2024. Your digital presence on the Fine Find gives shoppers immediate digital access to your custom products, passively growing your revenue while you manage the rest of your business. Our data-driven platform focuses on logistics and distribution while leveraging your influence and enhancing your visibility so you can do what you do best: design.</p>
+            <h2 className={styles.clientTitle}>The most efficient way to build your business</h2>
+            <p className={styles.clientText}>The Fine Find is a digital platform that helps you build a new revenue channel and gives new clients quick access to custom design. Our unique platform enables easier sourcing, automated distribution, and more accessible design everywhere while you focus on your core business.</p>
           </div>
-          <div className={styles.spaceGrid}>
-            <div className={styles.spaceImage}>
-              <img src="/images/nathan.jpg"  />
-            </div>
-            <div className={styles.spaceBoxCont}>
-              <div className={styles.spaceBox}>
-                <h2 className={styles.spaceBoxTitle}>The most efficient to build your business</h2>
-                <p className={styles.spaceBoxText}>The Fine Find is a digital platform that gives shoppers quick-click access to hundreds of highly-coveted hand-selected design finds, but it originated to give designers like you connections to buyers across the globe without the overhead of a storefront studio. And all this is done while you are consulting on a project or sourcing for a concept.</p>
-              </div>
-            </div>
-          </div>
+          {/*<div className={styles.spaceGrid}>*/}
+          {/*  <div className={styles.spaceImage}>*/}
+          {/*    <img src="/images/nathan.jpg"  />*/}
+          {/*  </div>*/}
+          {/*  <div className={styles.spaceBoxCont}>*/}
+          {/*    <div className={styles.spaceBox}>*/}
+          {/*      <h2 className={styles.spaceBoxTitle}>The most efficient to build your business</h2>*/}
+          {/*      <p className={styles.spaceBoxText}>The Fine Find is a digital platform that gives shoppers quick-click access to hundreds of highly-coveted hand-selected design finds, but it originated to give designers like you connections to buyers across the globe without the overhead of a storefront studio. And all this is done while you are consulting on a project or sourcing for a concept.</p>*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </section>
         <section className={styles.processSection}>
           <div className={styles.spaceGrid}>
@@ -91,7 +92,7 @@ export default function Home() {
             <div className={styles.processTextCont}>
               <div className={styles.processText}>
                 <h2 className={styles.processTitle}>the process</h2>
-                <p className={styles.processContent}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis notstrud exercitation ullamco</p>
+                <p className={styles.processContent}>Excited by what you’re reading? Come see how to up-level your brand as we show you how the process works:</p>
               </div>
               <div className={styles.worksButtonCont}>
                 <button className={styles.worksButton}>see how it works</button>
@@ -100,8 +101,8 @@ export default function Home() {
           </div>
         </section>
         <section className={styles.lastSection}>
-          <h2 className={styles.lastTitle}>lorem ipsum dolor <br /> sit amet consectetur</h2>
-          <p className={styles.lastText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et doloare magna aliqua. Ut enim ad minim veniam, quis notstrud execritation ullamco laboris</p>
+          <h2 className={styles.lastTitle}>Ready to _____?</h2>
+          {/*<p className={styles.lastText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et doloare magna aliqua. Ut enim ad minim veniam, quis notstrud execritation ullamco laboris</p>*/}
           <div className={styles.startedButtonCont}>
             <button className={styles.startedButton}>get started</button>
           </div>
