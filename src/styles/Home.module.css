@@ -1,5 +1,6 @@
 .container {
   min-height: 100vh;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,22 +10,40 @@
 .header {
   background: #ebece8;
   width: 100%;
-  height: 125px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+@media only screen and (min-width: 767px) {
+  .header {
+    height: 125px;
+  }
+}
+
 .headerGrid {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  border-bottom: 1px solid black;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
 }
 
+@media only screen and (min-width: 767px) {
+  .headerGrid {
+    width: 90%;
+    border-bottom: 1px solid black;
+  }
+}
+
 .logo img {
-  width: 200px;
+  width: 150px;
+}
+
+@media only screen and (min-width: 767px) {
+  .logo img {
+    width: 200px;
+  }
 }
 
 .links {
@@ -40,9 +59,15 @@
 }
 
 .nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  display: none;
+}
+
+@media only screen and (min-width: 767px) {
+  .nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
 }
 
 .navButtonContainer {
@@ -51,13 +76,33 @@
 
 .navButton {
   padding: 10px 40px;
-  font-size: .7vw;
+  font-size: 0.7vw;
+}
+
+.mobileMenu {
+  justify-self: end;
+  margin-right: 2vw;
+}
+
+@media only screen and (min-width: 767px) {
+  .mobileMenu {
+    display: none;
+  }
 }
 
 .studyPhotoContainer {
-  position: relative;
-  bottom: 2rem;
-  width: 50%;
+  padding-top: 50px;
+  position: static;
+  width: 75vw;
+}
+
+@media only screen and (min-width: 767px) {
+  .studyPhotoContainer {
+    padding-top: 0;
+    position: relative;
+    bottom: 2rem;
+    width: 50%;
+  }
 }
 
 .studyPhoto {
@@ -65,25 +110,51 @@
 }
 
 .studyTextCont {
-  padding-bottom: 8rem;
+  padding-bottom: 3rem;
+}
+
+@media only screen and (min-width: 767px) {
+  .studyTextCont {
+    padding-bottom: 8rem;
+  }
 }
 
 .studyTitle {
-  font-size: 4vw;
-  font-family: ivypresto-display,serif;
+  font-size: 6vw;
+  font-family: ivypresto-display, serif;
   font-weight: 400;
   font-style: italic;
   color: #3b415c;
   text-align: center;
+}
 
+@media only screen and (min-width: 767px) {
+  .studyTitle {
+    font-size: 4vw;
+    font-family: ivypresto-display, serif;
+    font-weight: 400;
+    font-style: italic;
+    color: #3b415c;
+    text-align: center;
+  }
 }
 
 .studyText {
-  width: 40%;
+  width: 75vw;
   text-align: center;
   margin: 0 auto;
-  font-size: 1.2vw;
-  font-family: 'Crimson Text', serif;
+  font-size: 3vw;
+  font-family: "Crimson Text", serif;
+}
+
+@media only screen and (min-width: 767px) {
+  .studyText {
+    width: 40%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.2vw;
+    font-family: "Crimson Text", serif;
+  }
 }
 
 .applyButtonCont {
@@ -93,12 +164,23 @@
 }
 
 .applyButton {
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-transform: uppercase;
-  padding: 15px 50px;
+  padding: 10px 30px;
   background: #737d92;
   color: #fff;
   border: none;
+}
+
+@media only screen and (min-width: 767px) {
+  .applyButton {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 15px 50px;
+    background: #737d92;
+    color: #fff;
+    border: none;
+  }
 }
 
 .main {
@@ -118,23 +200,52 @@
 
 .spaceGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  grid-template-columns: 1fr;
   padding-bottom: 8rem;
 }
 
+@media only screen and (min-width: 767px) {
+  .spaceGrid {
+    display: grid;
+    justify-items: stretch;
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 8rem;
+  }
+}
+
 .spaceImage img {
-  width: 49vw;
+  width: 75vw;
   height: 100%;
   object-fit: contain;
 }
 
+@media only screen and (min-width: 767px) {
+  .spaceImage img {
+    width: 49vw;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
 .spaceBox {
-  width: 49vw;
+  width: 75vw;
   background: #737d92;
-  height: 700px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+@media only screen and (min-width: 767px) {
+  .spaceBox {
+    width: 49vw;
+    background: #737d92;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .spaceBoxCont {
@@ -147,18 +258,41 @@
 .spaceBoxTitle {
   text-transform: uppercase;
   color: #ebece8;
-  font-size: 3vw;
-  font-family: ivypresto-display,serif;
+  font-size: 5vw;
+  font-family: ivypresto-display, serif;
   font-weight: 400;
   font-style: italic;
-  margin-left: 20px;
+  text-align: center;
+}
+
+@media only screen and (min-width: 767px) {
+  .spaceBoxTitle {
+    text-transform: uppercase;
+    color: #ebece8;
+    font-size: 3vw;
+    font-family: ivypresto-display, serif;
+    font-weight: 400;
+    font-style: italic;
+    text-align: unset;
+    margin-left: 20px;
+  }
 }
 
 .spaceBoxText {
   color: #ebece8;
-  font-size: 1.5vw;
-  font-family: 'Crimson Text', serif;
-  margin-left: 20px;
+  font-size: 3vw;
+  font-family: "Crimson Text", serif;
+  text-align: center;
+}
+
+@media only screen and (min-width: 767px) {
+  .spaceBoxText {
+    color: #ebece8;
+    font-size: 1.5vw;
+    font-family: "Crimson Text", serif;
+    margin-left: 20px;
+    text-align: unset;
+  }
 }
 
 .clientTextCont {
@@ -167,25 +301,66 @@
   flex-direction: column;
   align-items: center;
   padding-bottom: 10rem;
+  width: 75vw;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 767px) {
+  .clientTextCont {
+    color: #ebece8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10rem;
+    margin: 0;
+    width: 100%;
+  }
 }
 
 .clientTitle {
   text-transform: uppercase;
-  font-size: 3vw;
+  font-size: 5vw;
   text-align: center;
-  font-family: ivypresto-display,serif;
+  font-family: ivypresto-display, serif;
   font-weight: 400;
   font-style: italic;
 }
 
+@media only screen and (min-width: 767px) {
+  .clientTitle {
+    text-transform: uppercase;
+    font-size: 3vw;
+    text-align: center;
+    font-family: ivypresto-display, serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+}
+
 .clientText {
-  font-size: 1.5vw;
-  width: 60%;
-  font-family: 'Crimson Text', serif;
+  font-size: 3vw;
+  width: 75vw;
+  font-family: "Crimson Text", serif;
+}
+
+@media only screen and (min-width: 767px) {
+  .clientText {
+    font-size: 1.5vw;
+    width: 60%;
+    font-family: "Crimson Text", serif;
+  }
 }
 
 .processSection {
-  padding-top: 8rem;
+  padding-top: 4rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+@media only screen and (min-width: 767px) {
+  .processSection {
+    padding-top: 8rem;
+  }
 }
 
 .processTextCont {
@@ -193,26 +368,66 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  width: 70%;
+  width: 75%;
+  align-items: center;
+}
+
+@media only screen and (min-width: 767px) {
+  .processTextCont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 70%;
+    align-items: unset;
+  }
 }
 
 .processText {
   margin-left: 4vw;
-  font-family: 'Crimson Text', serif;
+  font-family: "Crimson Text", serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+@media only screen and (min-width: 767px) {
+  .processText {
+    display: block;
+    text-align: unset;
+  }
 }
 
 .processTitle {
-  font-size: 3vw;
+  font-size: 6vw;
   color: #222847;
-  font-family: ivypresto-display,serif;
+  font-family: ivypresto-display, serif;
   font-weight: 400;
   font-style: italic;
+  margin-bottom: 0;
+}
+
+@media only screen and (min-width: 767px) {
+  .processTitle {
+    font-size: 3vw;
+    color: #222847;
+    font-family: ivypresto-display, serif;
+    font-weight: 400;
+    font-style: italic;
+  }
 }
 
 .processContent {
-  font-size: 1.5vw;
+  font-size: 3vw;
   color: #222847;
+}
 
+@media only screen and (min-width: 767px) {
+  .processContent {
+    font-size: 1.5vw;
+    color: #222847;
+  }
 }
 
 .worksButtonCont {
@@ -220,33 +435,71 @@
 }
 
 .worksButton {
-  padding: 15px 40px;
-  font-size: 1.2vw;
+  padding: 10px 30px;
+  font-size: 1rem;
   background: #222847;
   color: #fff;
   border: none;
 }
 
+@media only screen and (min-width: 767px) {
+  .worksButton {
+    padding: 15px 40px;
+    font-size: 1.2vw;
+    background: #222847;
+    color: #fff;
+    border: none;
+  }
+}
+
 .lastSection {
-  padding-bottom: 8rem;
+  padding-bottom: 4rem;
+}
+
+@media only screen and (min-width: 767px) {
+  .lastSection {
+    padding-bottom: 8rem;
+  }
 }
 
 .lastTitle {
-  font-size: 4vw;
+  font-size: 6vw;
   font-family: serif;
   color: #3b415c;
   text-align: center;
-  font-family: ivypresto-display,serif;
+  font-family: ivypresto-display, serif;
   font-weight: 400;
   font-style: italic;
 }
 
+@media only screen and (min-width: 767px) {
+  .lastTitle {
+    font-size: 4vw;
+    font-family: serif;
+    color: #3b415c;
+    text-align: center;
+    font-family: ivypresto-display, serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+}
+
 .lastText {
-  width: 40%;
+  width: 75vw;
   text-align: center;
   margin: 0 auto;
-  font-size: 1.2vw;
-  font-family: 'Crimson Text', serif;
+  font-size: 3vw;
+  font-family: "Crimson Text", serif;
+}
+
+@media only screen and (min-width: 767px) {
+  .lastText {
+    width: 40%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 1.2vw;
+    font-family: "Crimson Text", serif;
+  }
 }
 
 .startedButtonCont {
@@ -256,11 +509,21 @@
 }
 
 .startedButton {
-  font-size: 1.5rem;
-  padding: 15px 50px;
+  font-size: 1rem;
+  padding: 10px 30px;
   background: #cabeb8;
   color: #fff;
   border: none;
+}
+
+@media only screen and (min-width: 767px) {
+  .startedButton {
+    font-size: 1.5rem;
+    padding: 15px 50px;
+    background: #cabeb8;
+    color: #fff;
+    border: none;
+  }
 }
 
 .footer {
@@ -288,16 +551,14 @@
 }
 
 .copyright {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .footerButtonCont {
   margin-left: 30px;
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
-
-
 
 .title a {
   color: #0070f3;
