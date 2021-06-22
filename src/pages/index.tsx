@@ -76,16 +76,14 @@ export default function Home() {
           <h2 className={styles.clientTitle}>The most efficient way to build your business</h2>
           <p className={styles.clientText}>The Fine Find is a digital platform that helps you build a new revenue channel and gives new clients quick access to custom design. Our unique platform enables easier sourcing, automated distribution, and more accessible design everywhere while you focus on your core business.</p>
         </div>
-        <div className={styles.spaceGrid}>*/
+        <div className={styles.spaceGrid}>
           <div id="mobile-padding" className={styles.spaceImage}>
-            <div className={styles.spaceImage}>
-              <img src="/images/nathan.jpg" />
-            </div>
-            <div className={styles.spaceBoxCont}>
-              <div className={styles.spaceBox}>
-                <h2 className={styles.spaceBoxTitle}>The most efficient to build your business</h2>
-                <p className={styles.spaceBoxText}>The Fine Find is a digital platform that gives shoppers quick-click access to hundreds of highly-coveted hand-selected design finds, but it originated to give designers like you connections to buyers across the globe without the overhead of a storefront studio. And all this is done while you are consulting on a project or sourcing for a concept.</p>
-              </div>
+            <img src="/images/nathan.jpg" />
+          </div>
+          <div className={styles.spaceBoxCont}>
+            <div className={styles.spaceBox}>
+              <h2 className={styles.spaceBoxTitle}>The most efficient to build your business</h2>
+              <p className={styles.spaceBoxText}>The Fine Find is a digital platform that gives shoppers quick-click access to hundreds of highly-coveted hand-selected design finds, but it originated to give designers like you connections to buyers across the globe without the overhead of a storefront studio. And all this is done while you are consulting on a project or sourcing for a concept.</p>
             </div>
           </div>
         </div>
