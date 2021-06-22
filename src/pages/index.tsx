@@ -46,14 +46,14 @@ export default function Home() {
       </div>
       <section className={styles.mainSection}>
         <div className={styles.spaceGrid}>
-          <div className={styles.spaceImage}>
+          <div id="mobile-padding" className={styles.spaceImage}>
             <img src="/images/toa.jpg" />
           </div>
           <div className={styles.spaceBoxCont}>
             <div className={styles.spaceBox}>
               <h2 className={styles.spaceBoxTitle}>Maximize Earnings while you <br />grow your design business</h2>
               <p className={styles.spaceBoxText}>The global online home decor market is slated to grow to $82.32 billion by 2024. Your digital presence on the Fine Find gives new clients immediate access to your custom products, passively growing your revenue while you manage the rest of your business. Our data-driven process takes care of your distribution while leveraging your influence by enhancing your visibility so you can do what you do best: design.
-                </p>
+              </p>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function Home() {
           <p className={styles.clientText}>The Fine Find is the premier industry network that helps you monetize content, build brand awareness, and increase your online presence in order to drive sales. Our goal is to create value between suppliers, designers, and consumers through our proprietary network in order to benefit the design community.</p>
         </div>
         <div className={styles.spaceGrid}>
-          <div className={styles.spaceBoxCont}>
+          <div id="mobile-padding" className={styles.spaceBoxCont}>
             <div className={styles.spaceBox}>
               <h2 className={styles.spaceBoxTitle}>EARN INCOME WHILE YOU<br />FOCUS ON GROWING YOUR BRAND</h2>
               <p className={styles.spaceBoxText}>Leveraging your skill set through time management and creating your brand through business development take time, and there’s only so many hours in the day. With the Fine Find, you can expand your network, scale your product offering, and get your time back since your audience can discover exactly what they’re looking for directly through the Fine Find.</p>
@@ -76,17 +76,19 @@ export default function Home() {
           <h2 className={styles.clientTitle}>The most efficient way to build your business</h2>
           <p className={styles.clientText}>The Fine Find is a digital platform that helps you build a new revenue channel and gives new clients quick access to custom design. Our unique platform enables easier sourcing, automated distribution, and more accessible design everywhere while you focus on your core business.</p>
         </div>
-        {/*<div className={styles.spaceGrid}>*/}
-        {/*  <div className={styles.spaceImage}>*/}
-        {/*    <img src="/images/nathan.jpg"  />*/}
-        {/*  </div>*/}
-        {/*  <div className={styles.spaceBoxCont}>*/}
-        {/*    <div className={styles.spaceBox}>*/}
-        {/*      <h2 className={styles.spaceBoxTitle}>The most efficient to build your business</h2>*/}
-        {/*      <p className={styles.spaceBoxText}>The Fine Find is a digital platform that gives shoppers quick-click access to hundreds of highly-coveted hand-selected design finds, but it originated to give designers like you connections to buyers across the globe without the overhead of a storefront studio. And all this is done while you are consulting on a project or sourcing for a concept.</p>*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
+        <div className={styles.spaceGrid}>*/
+          <div id="mobile-padding" className={styles.spaceImage}>
+            <div className={styles.spaceImage}>
+              <img src="/images/nathan.jpg" />
+            </div>
+            <div className={styles.spaceBoxCont}>
+              <div className={styles.spaceBox}>
+                <h2 className={styles.spaceBoxTitle}>The most efficient to build your business</h2>
+                <p className={styles.spaceBoxText}>The Fine Find is a digital platform that gives shoppers quick-click access to hundreds of highly-coveted hand-selected design finds, but it originated to give designers like you connections to buyers across the globe without the overhead of a storefront studio. And all this is done while you are consulting on a project or sourcing for a concept.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
       <section className={styles.processSection}>
         <div className={styles.spaceGrid}>
