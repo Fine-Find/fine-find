@@ -104,7 +104,7 @@ const DashBoardPage: React.FC = () => {
         >
           <Grid item xs={12}>
             <Typography component="h2" variant="h2">
-              {`Welcome ${auth.user.name}!`}
+              Welcome to the Fine Find
             </Typography>
           </Grid>
           <Grid item xs={12}>
