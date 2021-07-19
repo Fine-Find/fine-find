@@ -5,6 +5,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PersonIcon from '@material-ui/icons/Person';
 import Link from 'next/link';
 import React from 'react';
+import PersonIcon from '@material-ui/icons/Person';
 
 import { fineFindPages } from '../../utils/urls';
 
