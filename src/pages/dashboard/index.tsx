@@ -108,14 +108,6 @@ const DashBoardPage: React.FC = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <p>{`You are logged in with ${auth.user.email}`}</p>
-          </Grid>
-          <Grid item xs={12}>
-            <Button variant="outlined" onClick={() => auth.signOut()}>
-              Sign out
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
             {displayInstagramLogin(session, auth)}
           </Grid>
         </Grid>
