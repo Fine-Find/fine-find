@@ -17,7 +17,11 @@ export interface LoginData {
 }
 const LoginForm: React.FC = () => {
   const styles = useLoginFormStyles();
-  const { register, errors, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const auth = useAuth();
   const router = useRouter();
   const [error, setError] = useState(null);
@@ -42,7 +46,7 @@ const LoginForm: React.FC = () => {
             name="email"
             error={errors.email ? true : false}
             autoComplete="email"
-            inputRef={register({
+            {...register('email',{
               required: 'Please enter an email',
               pattern: {
                 value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -65,7 +69,7 @@ const LoginForm: React.FC = () => {
             id="password"
             error={errors.password ? true : false}
             autoComplete="current-password"
-            inputRef={register({
+            {...register('password',{
               required: 'Please enter a password',
               minLength: {
                 value: 6,

@@ -1,5 +1,5 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-declare module '@material-ui/core/styles/createMuiTheme' {
+import { createTheme } from '@material-ui/core/styles';
+declare module '@material-ui/core/styles/createTheme' {
   interface Theme {
     instagram: {
       backgroundColor: React.CSSProperties['color'];
@@ -24,7 +24,7 @@ declare module '@material-ui/core/styles/createPalette' {
 }
 
 // Create a theme instance.
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: '#737D93',

@@ -17,7 +17,11 @@ export interface SignUpData {
 
 const SignUpForm: React.FC = () => {
   const styles = useSignUpFormStyles();
-  const { register, errors, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const auth = useAuth();
   const router = useRouter();
   const onSubmit = (data: SignUpData) => {
@@ -40,7 +44,7 @@ const SignUpForm: React.FC = () => {
               id="name"
               label="Name"
               error={errors.name ? true : false}
-              inputRef={register({
+              {...register('name',{
                 required: 'Please enter an name',
               })}
             />
@@ -59,7 +63,7 @@ const SignUpForm: React.FC = () => {
               name="email"
               autoComplete="email"
               error={errors.email ? true : false}
-              inputRef={register({
+              {...register('email',{
                 required: 'Please enter an email',
                 pattern: {
                   value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -83,7 +87,7 @@ const SignUpForm: React.FC = () => {
               id="password"
               autoComplete="current-password"
               error={errors.password ? true : false}
-              inputRef={register({
+              {...register('password',{
                 required: 'Please enter a password',
                 minLength: {
                   value: 6,
