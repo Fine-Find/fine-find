@@ -30,7 +30,7 @@
     "react-dom": "17.0.2",
     "react-hook-form": "^7.11.1",
     "react-infinite-scroll-hook": "^4.0.1",
-    "shopify-api-node": "^3.6.13",
+    "shopify-api-node": "^3.6.14",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
