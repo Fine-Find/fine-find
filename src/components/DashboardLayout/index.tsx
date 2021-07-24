@@ -4,7 +4,7 @@ import Head from 'next/head';
 import React, { ReactElement, ReactNode } from 'react';
 
 import Header from '../Header';
-import { useStyles } from './DashboardLayout.styles';
+import styles from './DashboardLayout.module.scss';
 
 type Props = {
   title?: string;
@@ -15,8 +15,6 @@ export default function Layout({
   title = 'The FineFind | Designers',
   children,
 }: Props): ReactElement {
-  const styles = useStyles();
-
   return (
     <>
       <Head>

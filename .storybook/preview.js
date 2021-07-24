@@ -1,17 +1,20 @@
 import '../src/styles/styles.scss';
 
-import React from 'react';
-import * as nextImage from 'next/image'
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
+import * as nextImage from 'next/image';
+import React from 'react';
+
 import { theme } from '../src/styles/theme'; // whereever you have defined your material ui theme
 
 export const decorators = [
-  Story => (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Story />
-    </ThemeProvider>
+  (Story) => (
+    <StylesProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Story />
+      </ThemeProvider>
+    </StylesProvider>
   ),
 ];
 
@@ -50,20 +53,21 @@ export const parameters = {
       },
     },
   },
-}
+};
 
 // Replace next/image for Storybook
 Object.defineProperty(nextImage, 'default', {
   configurable: true,
   value: (props) => {
-    const { width, height } = props
-    const ratio = (height / width) * 100
+    const { width, height } = props;
+    const ratio = (height / width) * 100;
     return (
       <div
         style={{
           paddingBottom: `${ratio}%`,
           position: 'relative',
-        }}>
+        }}
+      >
         <img
           style={{
             objectFit: 'cover',
@@ -74,6 +78,6 @@ Object.defineProperty(nextImage, 'default', {
           {...props}
         />
       </div>
-    )
+    );
   },
-})
+});

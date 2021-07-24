@@ -7,10 +7,9 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import { useAuth } from '../../hooks/useAuth';
-import { useResetPasswordFormStyles } from './ResetPasswordForm.styles';
+import styles from './ResetPasswordForm.module.scss';
 
 const ResetPasswordForm: React.FC = () => {
-  const styles = useResetPasswordFormStyles();
   const {
     register,
     formState: { errors },
@@ -35,10 +34,11 @@ const ResetPasswordForm: React.FC = () => {
               name="email"
               autoComplete="email"
               error={errors.email ? true : false}
-              {...register('email',{
+              {...register('email', {
                 required: 'Please enter an email',
                 pattern: {
-                  value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  value:
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   message: 'Not a valid email',
                 },
               })}

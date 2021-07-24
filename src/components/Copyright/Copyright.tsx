@@ -1,10 +1,9 @@
 import Typography from '@material-ui/core/Typography';
 import Link from 'next/link';
 
-import { useCopyrightStyles } from './Copyright.styles';
+import styles from './Copyright.module.scss';
 
 export default function Copyright(props) {
-  const styles = useCopyrightStyles();
   return (
     <Typography
       variant="body2"
@@ -15,7 +14,7 @@ export default function Copyright(props) {
     >
       {'Copyright © '}
       <Link href="https://thefinefind.com/">
-        <a>The Fine Find</a>
+        <a>The FineFind</a>
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

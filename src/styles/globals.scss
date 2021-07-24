@@ -28,6 +28,29 @@ html,
   margin: inherit;
 }
 
+:root {
+  // Color Palette
+  --main-primary-color: #737d93;
+  --light-primary-color: #8f97a8;
+  --dark-primary-color: #505766;
+  --contrast-primary-text-color: #ffffff;
+  --main-secondary-color: #ab978d;
+  --light-secondary-color: #bbaba3;
+  --dark-secondary-color: #776962;
+  --contrast-secondary--text-color: #ffffff;
+  --main-instagram-color: #e33e5c;
+  --light-instagram-color: #e6516c;
+  --dark-instagram-color: #c83751;
+  --contrast-instagram-text-color: #ffffff;
+  --main-platinum-color: #e9e9e9;
+  --light-platinum-color: #ededed;
+  --dark-platinum-color: #a3a3a3;
+  --contrast-platinum-text-color: #000;
+
+  // Z-index
+  --z-index-drawer: 1200;
+}
+
 .grid {
   display: grid;
   grid-gap: 10px;

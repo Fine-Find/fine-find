@@ -10,7 +10,7 @@ import DashboardLayout from '../../components/DashboardLayout';
 import InstagramLoginButton from '../../components/Instagram/InstagramLoginButton';
 import MasonGridList from '../../components/MasonGridList';
 import { useRequireAuth } from '../../hooks/useRequireAuth';
-import { useStyles } from '../../styles/Dashboard.styles';
+import styles from './dashboard.module.scss';
 
 const Loading = () => {
   return (
@@ -72,7 +72,6 @@ function displayInstagramLogin(session, auth) {
 
 // TODO: Navigating to the page takes some time due to the facebook API call and loading all of the images. How can we improve this performance?
 const DashBoardPage: React.FC = () => {
-  const styles = useStyles();
   const auth = useRequireAuth();
 
   const [session, loading] = useSession();

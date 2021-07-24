@@ -8,19 +8,14 @@ import React from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { InstagramMedia } from 'types/Instagram/InstagramMedia';
 
-import { useStyles } from './MasonGridList.styles';
+import styles from './MasonGridList.module.scss';
 
 const MAX_COLUMNS = 3;
 
 export default function MasonGridList() {
   const router = useRouter();
-  const {
-    isLoading,
-    instagramMediaList,
-    hasNextPage,
-    error,
-    loadMore,
-  } = useLoadInstagramMedia();
+  const { isLoading, instagramMediaList, hasNextPage, error, loadMore } =
+    useLoadInstagramMedia();
 
   const [infiniteRef] = useInfiniteScroll({
     loading: isLoading,
@@ -35,8 +30,6 @@ export default function MasonGridList() {
     // TODO: Get this working properly so that the images load prior to the intersection event occurring
     rootMargin: '0px 0px 400px 0px',
   });
-
-  const styles = useStyles();
 
   const Card = (instagramData: InstagramMedia) => {
     return (

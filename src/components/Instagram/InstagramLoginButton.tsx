@@ -3,11 +3,9 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import { signIn } from 'next-auth/client';
 import React from 'react';
 
-import { useStyles } from './InstagramLoginButton.styles';
+import styles from './InstagramLoginButton.module.scss';
 
 export default function InstagramLoginButton() {
-  const styles = useStyles();
-
   return (
     <Button
       variant="contained"

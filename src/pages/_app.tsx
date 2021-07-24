@@ -1,7 +1,7 @@
 import '../styles/styles.scss';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { Provider } from 'next-auth/client';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -28,13 +28,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <AuthProvider>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Provider session={pageProps.session}>
-            <Component {...pageProps} />
-          </Provider>
-        </ThemeProvider>
+        <StylesProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Provider session={pageProps.session}>
+              <Component {...pageProps} />
+            </Provider>
+          </ThemeProvider>
+        </StylesProvider>
       </AuthProvider>
     </>
   );

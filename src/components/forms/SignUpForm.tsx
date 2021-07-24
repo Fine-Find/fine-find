@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import { useAuth } from '../../hooks/useAuth';
-import { useSignUpFormStyles } from './SignUpForm.styles';
+import styles from './SignupForm.module.scss';
 
 export interface SignUpData {
   name: string;
@@ -16,7 +16,6 @@ export interface SignUpData {
 }
 
 const SignUpForm: React.FC = () => {
-  const styles = useSignUpFormStyles();
   const {
     register,
     formState: { errors },
@@ -44,7 +43,7 @@ const SignUpForm: React.FC = () => {
               id="name"
               label="Name"
               error={errors.name ? true : false}
-              {...register('name',{
+              {...register('name', {
                 required: 'Please enter an name',
               })}
             />
@@ -63,10 +62,11 @@ const SignUpForm: React.FC = () => {
               name="email"
               autoComplete="email"
               error={errors.email ? true : false}
-              {...register('email',{
+              {...register('email', {
                 required: 'Please enter an email',
                 pattern: {
-                  value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  value:
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   message: 'Not a valid email',
                 },
               })}
@@ -87,7 +87,7 @@ const SignUpForm: React.FC = () => {
               id="password"
               autoComplete="current-password"
               error={errors.password ? true : false}
-              {...register('password',{
+              {...register('password', {
                 required: 'Please enter a password',
                 minLength: {
                   value: 6,
