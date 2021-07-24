@@ -11,7 +11,11 @@ import { useResetPasswordFormStyles } from './ResetPasswordForm.styles';
 
 const ResetPasswordForm: React.FC = () => {
   const styles = useResetPasswordFormStyles();
-  const { register, errors, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const auth = useAuth();
   const router = useRouter();
   const onSubmit = (data: { email: string }) => {
@@ -31,7 +35,7 @@ const ResetPasswordForm: React.FC = () => {
               name="email"
               autoComplete="email"
               error={errors.email ? true : false}
-              inputRef={register({
+              {...register('email',{
                 required: 'Please enter an email',
                 pattern: {
                   value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
