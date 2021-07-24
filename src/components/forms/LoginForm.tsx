@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAuth } from '../../hooks/useAuth';
-import { useLoginFormStyles } from './LoginForm.styles';
+import styles from './LoginForm.module.scss';
 
 // TODO: Accessibility of the text fields: https://material-ui.com/components/text-fields/
 export interface LoginData {
@@ -16,7 +16,6 @@ export interface LoginData {
   password: string;
 }
 const LoginForm: React.FC = () => {
-  const styles = useLoginFormStyles();
   const {
     register,
     formState: { errors },
@@ -46,10 +45,11 @@ const LoginForm: React.FC = () => {
             name="email"
             error={errors.email ? true : false}
             autoComplete="email"
-            {...register('email',{
+            {...register('email', {
               required: 'Please enter an email',
               pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                value:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: 'Not a valid email',
               },
             })}
@@ -69,7 +69,7 @@ const LoginForm: React.FC = () => {
             id="password"
             error={errors.password ? true : false}
             autoComplete="current-password"
-            {...register('password',{
+            {...register('password', {
               required: 'Please enter a password',
               minLength: {
                 value: 6,

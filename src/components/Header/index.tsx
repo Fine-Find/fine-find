@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 import { useAuth } from '../../hooks/useAuth';
 import DashboardNav from '../DashboardNav';
-import { useStyles } from './Header.styles';
+import styles from './Header.module.scss';
 
 export interface HeaderProps {
   title?: string;
@@ -23,7 +23,6 @@ export default function Header({
   const router = useRouter();
   const auth = useAuth();
 
-  const styles = useStyles();
   const [open, setOpen] = useState(drawer);
   const toggleDrawer = () => {
     setOpen(!open);

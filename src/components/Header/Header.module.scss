@@ -1,0 +1,31 @@
+$drawerWidth: 240;
+
+.appBarTypography {
+  flex-grow: 1;
+}
+.appBar {
+  color: var(--main-primary-color);
+  background-color: #fff;
+  z-index: calc(var(--z-index-drawer) + 1);
+  transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,
+    margin 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+.appBarShift {
+  margin-left: 240;
+  width: calc(100% - 240px);
+  transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,
+    margin 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+.button {
+  color: white;
+}
+
+.menuButton {
+  margin-right: 36;
+}
+.menuButtonHidden {
+  display: none;
+}
+.toolbar {
+  padding-right: 24; // keep right padding when drawer closed
+}

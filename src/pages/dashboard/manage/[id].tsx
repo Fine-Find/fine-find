@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
+import DashboardLayout from '@/components/DashboardLayout';
+import InstagramLoginButton from '@/components/Instagram/InstagramLoginButton';
+import { useRequireAuth } from '@/hooks/useRequireAuth';
 import { ShopifyProduct } from '@/types/shopify/Products';
+import { fineFindApis, fineFindPages } from '@/utils/urls';
 import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,11 +23,7 @@ import throttle from 'lodash/throttle';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-import DashboardLayout from '../../../components/DashboardLayout';
-import InstagramLoginButton from '../../../components/Instagram/InstagramLoginButton';
-import { useRequireAuth } from '../../../hooks/useRequireAuth';
-import { manageMediaStyles } from '../../../styles/dashboard/manage/ManageMedia.styles';
-import { fineFindApis, fineFindPages } from '../../../utils/urls';
+import styles from './manage.module.scss';
 
 const Loading = () => {
   return (
@@ -56,7 +57,6 @@ function displayInstagramLogin(auth) {
 // TODO: Completely refactor this page to be simpler
 const ManageImagePage: React.FC = () => {
   const router = useRouter();
-  const styles = manageMediaStyles();
   const auth = useRequireAuth();
   const [value, setValue] = React.useState<ShopifyProduct | null>(null);
   const [selectedProducts, setSelectedProducts] = useState<ShopifyProduct[]>(
@@ -65,14 +65,8 @@ const ManageImagePage: React.FC = () => {
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState<ShopifyProduct[]>([]);
 
-  const {
-    id,
-    media_url,
-    caption,
-    timestamp,
-    permalink,
-    username,
-  } = router.query;
+  const { id, media_url, caption, timestamp, permalink, username } =
+    router.query;
 
   const fetchData = React.useMemo(
     () =>

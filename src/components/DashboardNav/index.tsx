@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-import { useStyles } from './DashboardNav.styles';
+import styles from './DashboardNav.module.scss';
 import { mainListItems } from './listItems';
 
 type Props = {
@@ -15,25 +15,22 @@ type Props = {
 // TODO: Convert this to a responsive Drawer that changes based on media queries https://material-ui.com/components/drawers/#responsive-drawer
 // TODO: Update the navigation with true links
 export default function DashboardNav({ toggleDrawer, open }: Props) {
-  const classes = useStyles();
-
   return (
     <>
       <Drawer
         variant="permanent"
         classes={{
-          paper: `${classes.drawerPaper} ${!open && classes.drawerPaperClose}`,
+          paper: `${styles.drawerPaper} ${!open && styles.drawerPaperClose}`,
         }}
         open={open}
       >
-        <div className={classes.toolbarIcon}>
+        <div className={styles.toolbarIcon}>
           <IconButton onClick={toggleDrawer}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
         <List>{mainListItems}</List>
-        
       </Drawer>
     </>
   );

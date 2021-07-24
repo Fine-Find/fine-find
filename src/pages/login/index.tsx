@@ -1,3 +1,6 @@
+import Copyright from '@/components/Copyright/Copyright';
+import LoginForm from '@/components/forms/LoginForm';
+import { useAuth } from '@/hooks/useAuth';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -7,13 +10,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Copyright from '../components/Copyright/Copyright';
-import LoginForm from '../components/forms/LoginForm';
-import { useAuth } from '../hooks/useAuth';
-import { useLoginStyles } from '../styles/Login.styles';
+import styles from './login.module.scss';
 
 const LoginPage: React.FC = () => {
-  const styles = useLoginStyles();
   const auth = useAuth();
   const router = useRouter();
 

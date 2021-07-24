@@ -1,0 +1,49 @@
+.root {
+  flex-grow: 1;
+}
+.container {
+  flex-direction: row;
+}
+.headerContainer {
+  //alignItems: center;
+  justify-content: center;
+}
+.instagramInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.imageGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.instagramImage {
+  object-fit: contain;
+  //width: 100%;
+  max-height: 75vh;
+}
+.paperRoot {
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.selectProductList {
+  width: 100%;
+  margin-top: 5rem;
+  background-color: white;
+}
+.input {
+  margin-left: 1rem;
+  flex: 1;
+}
+.image {
+  width: 30px;
+  object-fit: cover;
+  padding-right: 5px;
+  margin-right: 5px;
+}
+.iconButton {
+  padding: 10;
+}
