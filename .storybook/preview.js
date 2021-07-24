@@ -1,3 +1,5 @@
+import '../src/styles/styles.scss';
+
 import React from 'react';
 import * as nextImage from 'next/image'
 import CssBaseline from '@material-ui/core/CssBaseline';

@@ -12,8 +12,8 @@
     "lint": "prettier --check ./src && eslint ./src/**/*.{js,jsx,ts,tsx} && npm run type-check",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 6006 --modern -s public/",
+    "build-storybook": "build-storybook --modern -s public/"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -36,14 +36,14 @@
   "devDependencies": {
     "@babel/core": "^7.13.10",
     "@next/eslint-plugin-next": "^10.0.8",
-    "@storybook/addon-actions": "^6.3.4",
-    "@storybook/addon-essentials": "^6.3.4",
+    "@storybook/addon-actions": "^6.3.5",
+    "@storybook/addon-essentials": "^6.3.5",
     "@storybook/addon-links": "^6.3.5",
     "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/builder-webpack5": "^6.3.4",
-    "@storybook/manager-webpack5": "^6.3.4",
+    "@storybook/builder-webpack5": "^6.3.5",
+    "@storybook/manager-webpack5": "^6.3.5",
     "@storybook/preset-scss": "^1.0.3",
-    "@storybook/react": "^6.3.4",
+    "@storybook/react": "^6.3.5",
     "@testing-library/react": "^11.2.5",
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.1",
