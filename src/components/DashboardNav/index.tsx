@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { useStyles } from './DashboardNav.styles';
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems } from './listItems';
 
 type Props = {
   toggleDrawer;
@@ -33,8 +33,7 @@ export default function DashboardNav({ toggleDrawer, open }: Props) {
         </div>
         <Divider />
         <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
+        
       </Drawer>
     </>
   );
