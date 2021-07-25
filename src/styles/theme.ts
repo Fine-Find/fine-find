@@ -16,12 +16,12 @@ declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
     instagram?: Palette['primary'];
     platinum?: Palette['primary'];
-    tertiary?: Palette['primary']; 
+    tertiary?: Palette['primary'];
   }
   interface PaletteOptions {
     instagram?: PaletteOptions['primary'];
     tertiary?: PaletteOptions['primary'];
-    platinum?: PaletteOptions['primary']; 
+    platinum?: PaletteOptions['primary'];
   }
 }
 

@@ -5,7 +5,7 @@ import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import * as nextImage from 'next/image';
 import React from 'react';
 
-import { theme } from '../src/styles/theme'; // whereever you have defined your material ui theme
+import { theme } from '../src/styles/theme';
 
 export const decorators = [
   (Story) => (

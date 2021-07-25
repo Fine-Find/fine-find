@@ -1,38 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+$font-stack: 'Montserrat', sans-serif;
+
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--main-platinum-color);
+  background-attachment: fixed;
 }
 
 .main {
-  padding: 5rem 0;
   flex: 1;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-attachment: fixed;
+}
+
+.header {
+  // margin: 16px;
+  padding: 50px;
+  font-family: $font-stack;
+}
+
+.process {
+  font-family: $font-stack;
+  flex-grow: 1;
+  width: 100%;
+  margin-top: 50px;
+  margin-inline-end: 150px;
+  padding-inline-end: 150px;
+  color: var(--main-platinum-color);
+  background-color: var(--main-primary-color);
+}
+
+.processtext {
+  margin-top: 40px;
+  margin-bottom: 50px;
+  margin-left: 40px;
+  font-family: $font-stack;
+}
+
+.processbutton {
+  margin-top: 30px;
+}
+
+.blocktext {
+  font-family: $font-stack;
+  display: block;
+  text-align: start;
+  padding-top: 10px;
+  margin-block-end: 1em;
+  margin-inline-start: 100px;
+  margin-inline-end: 100px;
+  margin-left: 100px;
+  margin-right: 100px;
+  /* align-content: center; */
 }
 
 .footer {
   width: 100%;
-  height: 100px;
   border-top: 1px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding-bottom: 60px;
+  padding-top: 50px;
+  display: 'flex';
+  text-align: 'center';
+  flex-direction: 'column';
+  background-color: var(--main-platinum-color);
 }
 
 .footer img {
   margin-left: 0.5rem;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .title a {
@@ -47,6 +85,8 @@
 }
 
 .title {
+  font-family: $font-stack;
+
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
@@ -55,6 +95,7 @@
 .title,
 .description {
   text-align: center;
+  font-family: $font-stack;
 }
 
 .description {
@@ -62,56 +103,33 @@
   font-size: 1.5rem;
 }
 
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
 .grid {
+  margin-top: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-  margin-top: 3rem;
+  background-color: var(--main-platinum-color);
+  font-family: $font-stack;
 }
 
-.card {
-  margin: 1rem;
-  flex-basis: 45%;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+.leftspace {
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-top: 30px;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h3 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
+.rightspace {
+  padding-bottom: 30px;
+  padding-top: 30px;
+  padding-left: 30px;
 }
 
 .logo {
-  height: 1em;
+  padding-top: 10px;
+  height: 2.5em;
+  padding-left: 40px;
+  margin-top: 20px;
 }
 
 @media (max-width: 600px) {

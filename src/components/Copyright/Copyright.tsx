@@ -7,17 +7,15 @@ export default function Copyright(props) {
   return (
     <Typography
       variant="body2"
-      color="textSecondary"
-      align="center"
       {...props}
       className={styles.copyright}
     >
-      {'Copyright © '}
+      {`© ${new Date().getFullYear()} `}
       <Link href="https://thefinefind.com/">
         <a>The FineFind</a>
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
+      </Link>
+      <br />
+      {`All rights reserved.`}
     </Typography>
   );
 }
