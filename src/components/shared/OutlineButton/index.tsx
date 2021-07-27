@@ -43,7 +43,7 @@ Button.propTypes = {
   backgroundColor: PropTypes.string,
   borderWidth: PropTypes.oneOf(['thin', 'medium', 'thick']),
   cellPadding: PropTypes.oneOf(['small', 'medium', 'large']),
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired
 };
 
 
