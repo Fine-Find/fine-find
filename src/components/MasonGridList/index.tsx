@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { InstagramMedia } from 'types/Instagram/InstagramMedia';
+import { Button, ButtonProps } from '../shared/OutlineButton';
 
 import styles from './MasonGridList.module.scss';
 

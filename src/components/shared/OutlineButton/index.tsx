@@ -1,15 +1,22 @@
-import PropTypes from 'prop-types';
 import { action } from "@storybook/addon-actions";
 
+export type ButtonProps = {
+  textColor?: string; // you don't have to provide a text color
+  borderColor?: string;
+  backgroundColor?: string;
+  borderWidth?: 'thin' | 'medium' | 'thick';
+  cellPadding?: 'small' | 'medium' | 'large';
+  label: string;
+};
+
 export const Button = ({
-  
   label,
-  borderWidth = 'medium',
+  borderWidth = 'medium', // if you don't provide a borderWidth, I'll default to medium
   cellPadding = 'medium',
   textColor = 'white',
   borderColor = '#494866',
   backgroundColor = '#a6a5b8',
-}) => {
+}: ButtonProps) => {
 
   const cellPaddingMap = {
     small: '3px',
@@ -37,13 +44,6 @@ export const Button = ({
   );
 };
 
-Button.propTypes = {
-  textColor: PropTypes.string,
-  borderColor: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  borderWidth: PropTypes.oneOf(['thin', 'medium', 'thick']),
-  cellPadding: PropTypes.oneOf(['small', 'medium', 'large']),
-  label: PropTypes.string.isRequired
-};
+
 
 
