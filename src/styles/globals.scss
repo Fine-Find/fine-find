@@ -30,21 +30,25 @@ html,
 
 :root {
   // Color Palette
-  --main-primary-color: #737d93;
-  --light-primary-color: #8f97a8;
-  --dark-primary-color: #505766;
+  --main-primary-color: #222847;
+  --light-primary-color: #4e536b;
+  --dark-primary-color: #171c31;
   --contrast-primary-text-color: #ffffff;
-  --main-secondary-color: #ab978d;
-  --light-secondary-color: #bbaba3;
-  --dark-secondary-color: #776962;
-  --contrast-secondary--text-color: #ffffff;
+  --main-secondary-color: #CABEB8;
+  --light-secondary-color: #d4cbc6;
+  --dark-secondary-color: #8d8580;
+  --contrast-secondary--text-color: black;
+  --main-tertiary-color: #737D92;
+  --light-tertiary-color: #8f97a7;
+  --dark-tertiary-color: #505766;
+  --contrast-tertiary-text-color: #ffffff;
   --main-instagram-color: #e33e5c;
   --light-instagram-color: #e6516c;
   --dark-instagram-color: #c83751;
   --contrast-instagram-text-color: #ffffff;
-  --main-platinum-color: #e9e9e9;
-  --light-platinum-color: #ededed;
-  --dark-platinum-color: #a3a3a3;
+  --main-platinum-color: #E8E8E8;
+  --light-platinum-color: #ececec;
+  --dark-platinum-color: #a2a2a2;
   --contrast-platinum-text-color: #000;
 
   // Z-index
