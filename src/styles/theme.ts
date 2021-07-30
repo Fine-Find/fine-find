@@ -16,10 +16,12 @@ declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
     instagram?: Palette['primary'];
     platinum?: Palette['primary'];
+    tertiary?: Palette['primary']; 
   }
   interface PaletteOptions {
     instagram?: PaletteOptions['primary'];
-    platinum?: PaletteOptions['primary'];
+    tertiary?: PaletteOptions['primary'];
+    platinum?: PaletteOptions['primary']; 
   }
 }
 
@@ -27,15 +29,21 @@ declare module '@material-ui/core/styles/createPalette' {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#737D93',
-      light: '#8f97a8',
-      dark: '#505766',
+      main: '#222847',
+      light: '#4e536b',
+      dark: '#171c31',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#AB978D',
-      light: '#bbaba3',
-      dark: '#776962',
+      main: '#CABEB8',
+      light: '#d4cbc6',
+      dark: '#8d8580',
+      contrastText: '#000',
+    },
+    tertiary: {
+      main: '#737D92',
+      light: '#8f97a7',
+      dark: '#505766',
       contrastText: '#ffffff',
     },
     instagram: {
@@ -45,9 +53,9 @@ const theme = createTheme({
       contrastText: '#ffffff',
     },
     platinum: {
-      main: '#e9e9e9',
-      light: '#ededed',
-      dark: '#a3a3a3',
+      main: '#E8E8E8',
+      light: '#ececec',
+      dark: '#a2a2a2',
       contrastText: '#000',
     },
   },
