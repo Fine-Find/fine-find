@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: var(--main-primary-color);
 }
 
 a {
@@ -34,11 +35,11 @@ html,
   --light-primary-color: #4e536b;
   --dark-primary-color: #171c31;
   --contrast-primary-text-color: #ffffff;
-  --main-secondary-color: #CABEB8;
+  --main-secondary-color: #cabeb8;
   --light-secondary-color: #d4cbc6;
   --dark-secondary-color: #8d8580;
   --contrast-secondary--text-color: black;
-  --main-tertiary-color: #737D92;
+  --main-tertiary-color: #737d92;
   --light-tertiary-color: #8f97a7;
   --dark-tertiary-color: #505766;
   --contrast-tertiary-text-color: #ffffff;
@@ -46,7 +47,7 @@ html,
   --light-instagram-color: #e6516c;
   --dark-instagram-color: #c83751;
   --contrast-instagram-text-color: #ffffff;
-  --main-platinum-color: #E8E8E8;
+  --main-platinum-color: #e8e8e8;
   --light-platinum-color: #ececec;
   --dark-platinum-color: #a2a2a2;
   --contrast-platinum-text-color: #000;

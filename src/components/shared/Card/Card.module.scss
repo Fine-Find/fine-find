@@ -1,0 +1,56 @@
+.root {
+  padding: 2em;
+  margin: auto;
+  border: 2px solid var(--main-primary-color);
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  height: 100%;
+  width: 100%;
+  padding-left: 60px;
+  padding-top: 30px;
+}
+.grid {
+  padding: 2em;
+  padding-top: 30px;
+  display: flex;
+  transform: none;
+}
+.text {
+  padding-right: 50px;
+  width: 25%;
+}
+
+.title {
+  font: 2.5em bolder;
+}
+
+.paragraph {
+  font-size: 1em;
+}
+
+.icon {
+  margin-top: 30px;
+}
+.button {
+  align-self: flex-end;
+}
+
+.background {
+  background: var(--main-platinum-color);
+}
+
+.rotateLeft {
+  transform: rotateY(360deg);
+}
+
+.rotateRight {
+  transform: rotateY(180deg);
+}
+
+.leftToRight {
+  direction: ltr;
+}
+
+.rightToLeft {
+  direction: rtl;
+}

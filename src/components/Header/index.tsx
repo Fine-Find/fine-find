@@ -27,6 +27,7 @@ export default function Header({
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
   let button = null;
   if (auth.isInitialized) {
     button = !auth.user ? (
