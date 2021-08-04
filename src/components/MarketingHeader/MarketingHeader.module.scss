@@ -26,6 +26,11 @@
 }
 .toolbar {
   padding-right: 24; // keep right padding when drawer closed
+//   @media (max-width: 767px) {
+//     flex-direction: column;
+//     overflow: hidden;
+//     max-height: 0;
+// }
 }
 
 .link {
@@ -35,5 +40,19 @@
   &:hover {
     text-decoration: underline;
     color: var(--light-primary-color);
+  }
+}
+
+.bigNavBar {
+  display: none;
+  @media (min-width: 600px) {
+    display: block;
+  }
+  }
+
+.hamburgerNavBar {
+  display: none;
+  @media (max-width: 600px) {
+    display: block;
   }
 }

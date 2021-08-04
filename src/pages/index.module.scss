@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 $font-stack: 'Montserrat', sans-serif;
 
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -8,6 +9,11 @@ $font-stack: 'Montserrat', sans-serif;
   align-items: center;
   background-color: var(--main-platinum-color);
   background-attachment: fixed;
+  // @media (max-width: 600px) {
+  //   font-size: 50%;
+  //   width: 100%;
+  // }
+  
 }
 
 .main {
@@ -15,14 +21,45 @@ $font-stack: 'Montserrat', sans-serif;
   justify-content: center;
   align-items: center;
   background-attachment: fixed;
+  @media (max-width: 600px) {
+    // font-size: 50%;
+    width: 50%;
+  }
 }
 
 .header {
   // margin: 16px;
-  padding: 50px;
+  padding: 0 0 0 40px;
   font-family: $font-stack;
+  @media (max-width: 600px) {
+    text-align: center;
+    // box-sizing: 50%;
+    // font-size: 1em;
+    width: 100%;
+    // text-size-adjust: 50%;
+    padding: 0;
+  }
 }
 
+.headerbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 600px) {
+    font-size: 50% ;
+    // width: 50%;
+  }
+}
+.h2 {
+  font-size: 2.5rem;
+  @media (max-width: 600px) {
+    font-size: 1.5rem ;
+    width: 50%;
+    padding: 0;
+    // text-size-adjust: 50%;
+    padding: 10px;
+  }
+}
 .process {
   font-family: $font-stack;
   flex-grow: 1;
@@ -32,6 +69,14 @@ $font-stack: 'Montserrat', sans-serif;
   padding-inline-end: 150px;
   color: var(--main-platinum-color);
   background-color: var(--main-primary-color);
+  // @media (max-width: 600px) {
+  //   font-size: 1.5rem ;
+    
+  //   // padding: 0;
+  //   // text-size-adjust: 50%;
+  //   padding: 10px;
+  //   // font-size: 50%;
+  // }
 }
 
 .processtext {
@@ -39,10 +84,26 @@ $font-stack: 'Montserrat', sans-serif;
   margin-bottom: 50px;
   margin-left: 40px;
   font-family: $font-stack;
+  // @media (max-width: 600px) {
+  //   font-size: 1.5rem ;
+    
+  //   // padding: 0;
+  //   // text-size-adjust: 50%;
+  //   padding: 10px;
+  //   font-size: 50%;
+  //   width: 50%;
+  //   height: 50%;
+  // }
 }
 
 .processbutton {
   margin-top: 30px;
+  @media (max-width: 900px) {
+    font-size: 50%;
+    margin: 0;
+    padding: 0;
+    // width: 200%;
+  }
 }
 
 .blocktext {
@@ -55,6 +116,12 @@ $font-stack: 'Montserrat', sans-serif;
   margin-inline-end: 100px;
   margin-left: 100px;
   margin-right: 100px;
+  @media (max-width: 600px) {
+    font-size: 1rem;
+    margin: 0;
+    padding: 20px 0 0 0;
+    // width: 50%;
+  }
   /* align-content: center; */
 }
 
@@ -111,18 +178,40 @@ $font-stack: 'Montserrat', sans-serif;
   justify-content: center;
   background-color: var(--main-platinum-color);
   font-family: $font-stack;
+  @media (max-width: 600px) {
+    font-size: 50%;
+    width: 50%;
+    height: 50%;
+  }
 }
 
 .leftspace {
   padding-right: 30px;
   padding-bottom: 30px;
   padding-top: 30px;
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px 0;
+
+    // font-size: 50%;
+    // width: 50%;
+    // height: 100%;
+  }
 }
 
 .rightspace {
   padding-bottom: 30px;
   padding-top: 30px;
   padding-left: 30px;
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px 0;
+    // font-size: 50%;
+    // width: 50%;
+    // height: 100%;
+  }
 }
 
 .logo {
@@ -138,3 +227,25 @@ $font-stack: 'Montserrat', sans-serif;
     flex-direction: column;
   }
 }
+
+@mixin respond-phone {
+  @media (max-width: 600px) {@content};
+    
+  }
+
+@mixin repond ($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {@content};
+  }
+  @if $breakpoint == tab-port {
+    @media (max-width: 900px) {@content};
+  }
+  @if $breakpoint == tab-land {
+    @media (max-width: 1200px) {@content};
+  }
+  @if $breakpoint == big-desktop {
+    @media (min-width: 1800px) {@content};
+  }
+};
+
+

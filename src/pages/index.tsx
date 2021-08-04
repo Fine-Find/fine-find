@@ -11,6 +11,8 @@ import Image from 'next/image';
 import Layout from '../components/Layout';
 import styles from './index.module.scss';
 
+
+
 const image = [
   '/nathan-oakley.jpg',
   '/toa-heftiba.jpg',
@@ -56,13 +58,15 @@ export default function Home() {
             <div>
               <Grid container className={styles.header}>
                 {/* <Grid> */}
-                <Grid item xs={6}>
-                  <Typography variant="h2" gutterBottom>
+                <Grid item xs={12} sm={6} className={styles.h2} >
+                  <h2>
+                  {/* <Typography variant="h2" gutterBottom> */}
                     Lorem Ipsum Dolor
-                  </Typography>
+                  {/* </Typography> */}
+                  </h2>
                 </Grid>
-                <Grid item xs={6}>
-                  <Button label="Apply now" textSize="2.5em" width="35%" />
+                <Grid item xs={12} sm={6} className={styles.headerbutton}>
+                  <Button label="Apply now" textSize="2.5em"  />
                 </Grid>
                 <Box ml={6} mr={6}>
                   <Typography
@@ -79,7 +83,7 @@ export default function Home() {
             </div>
             <div className={styles.grid}>
               <Grid container>
-                <Grid item xs={8} className={styles.leftspace}>
+                <Grid item xs={12} sm={8} className={styles.leftspace}>
                   <Card
                     title={monetization.title}
                     icon={monetization.icon}
@@ -87,13 +91,13 @@ export default function Home() {
                     direction="left"
                   />
                 </Grid>
-                <Grid item xs={4} className={styles.rightspace}>
+                <Grid item xs={12} sm={4} className={styles.rightspace}>
                   <Card image={image[0]} direction="right" />
                 </Grid>
-                <Grid item xs={4} className={styles.leftspace}>
+                <Grid item xs={12} sm={4}className={styles.leftspace}>
                   <Card image={image[1]} direction="left" />
                 </Grid>
-                <Grid item xs={8} className={styles.rightspace}>
+                <Grid item xs={12} sm={8}className={styles.rightspace}>
                   <Card
                     title={earn.title}
                     icon={earn.icon}
@@ -101,7 +105,7 @@ export default function Home() {
                     direction="right"
                   />
                 </Grid>
-                <Grid item xs={8} className={styles.leftspace}>
+                <Grid item xs={12} sm={8}className={styles.leftspace}>
                   <Card
                     title={network.title}
                     paragraph={network.paragraph}
@@ -109,13 +113,13 @@ export default function Home() {
                     direction="left"
                   />
                 </Grid>
-                <Grid item xs={4} className={styles.rightspace}>
+                <Grid item xs={12} sm={4} className={styles.rightspace}>
                   <Card image={image[2]} direction="right" />
                 </Grid>
-                <Grid item xs={4} className={styles.leftspace}>
+                <Grid item xs={12} sm={4}className={styles.leftspace}>
                   <Card image={image[3]} direction="left" />
                 </Grid>
-                <Grid item xs={8} className={styles.rightspace}>
+                <Grid item xs={12} sm={8}className={styles.rightspace}>
                   <Card
                     title={efficient.title}
                     icon={efficient.icon}
@@ -129,14 +133,14 @@ export default function Home() {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm container className={styles.processtext}>
                   <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs>
-                      <Typography gutterBottom variant="h2">
+                    <Grid item xs className={styles.h2}>
+                      <h2>
                         Lorem Ipsum Dolor
-                      </Typography>
-                      <Typography variant="h4" gutterBottom>
+                      </h2>
+                      <h4>
                         lorem ipsum amet. consetetur ing elitr, sed amet,
                         consetetur ing elitr, sed
-                      </Typography>
+                      </h4>
                     </Grid>
                     <Grid item className={styles.processbutton}>
                       <Button
@@ -145,7 +149,6 @@ export default function Home() {
                         borderColor="#E8E8E8"
                         textColor="#E8E8E8"
                         backgroundColor="#222847"
-                        width="20%"
                       />
                     </Grid>
                   </Grid>
