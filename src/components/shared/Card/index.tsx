@@ -41,7 +41,7 @@ export const Card = ({
               {title}
             </Typography>
             <Grid container className={`${styles.grid} ${textDirection}`}>
-              <Grid item xs={1}>
+              <Grid item xs={3}>
                 <Typography
                   variant="body2"
                   gutterBottom
@@ -50,7 +50,7 @@ export const Card = ({
                   {icon}
                 </Typography>
               </Grid>
-              <Grid item xs={11} className={styles.text}>
+              <Grid item xs={9} className={styles.text}>
                 <Typography className={styles.paragraph}>
                   {paragraph}
                 </Typography>

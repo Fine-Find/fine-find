@@ -12,35 +12,35 @@ import Layout from '../components/Layout';
 import styles from './index.module.scss';
 
 const image = [
-  '/nathan-oakley.jpg',
-  '/toa-heftiba.jpg',
-  '/tijana-drndarski1.jpg',
-  '/banner.jpg',
+  '/JacobSnavely.jpeg',
+  '/bringdesignhome.jpg',
+  '/annie-spratt.jpg',
+  '/kelly-sikkema.jpg',
 ];
 
 const efficient = {
   title: '.The most efficient way to build your business',
   paragraph:
     'The Fine Find is a digital marketplace that brings the best of design online so consumers can shop like an insider anytime and you can benefit from it. The Fine Find is a monetization mechanism that helps you get valueable time back so you can grow your business and make the most of the moment when you hit a spark of creativity',
-  icon: <DomainIcon />,
+  icon: <img src='/Icons_finefind-12.png' alt='Fine Find Icon' width='125px' height='125px'/>,
 };
 const monetization = {
   title: 'A new space designed for visibility and monetization.',
   paragraph:
     'The Fine Find is a digital marketplace that brings the best of design online so consumers can shop like an insider anytime and you can benefit from it. The Fine Find is a monetization mechanism that helps you get valueable time back so you can grow your business and make the most of the moment when you hit a spark of creativity',
-  icon: <ApartmentIcon />,
+  icon: <img src='/Icons_finefind-09.png' alt='Fine Find Icon' width='125px' height='125px'/>,
 };
 const network = {
   title: 'Expand your client network and propel new sales.',
   paragraph:
     'The Fine Find is a digital marketplace that brings the best of design online so consumers can shop like an insider anytime and you can benefit from it. The Fine Find is a monetization mechanism that helps you get valueable time back so you can grow your business and make the most of the moment when you hit a spark of creativity',
-  icon: <AssignmentIcon />,
+  icon: <img src='/Icons_finefind-11.png' alt='Fine Find Icon' width='125px' height='125px'/>,
 };
 const earn = {
   title: '.Earn income while you focus',
   paragraph:
     'The Fine Find is a digital marketplace that brings the best of design online so consumers can shop like an insider anytime and you can benefit from it. The Fine Find is a monetization mechanism that helps you get valueable time back so you can grow your business and make the most of the moment when you hit a spark of creativity',
-  icon: <DevicesIcon />,
+  icon: <img src='/Icons_finefind-10.png' alt='Fine Find Icon' width='125px' height='125px'/>,
 };
 export default function Home() {
   return (
@@ -62,7 +62,7 @@ export default function Home() {
                   </Typography>
                 </Grid>
                 <Grid item xs={6}>
-                  <Button label="Apply now" textSize="2.5em" width="35%" />
+                  <Button label="Apply now" textSize="2.5em" />
                 </Grid>
                 <Box ml={6} mr={6}>
                   <Typography
@@ -130,10 +130,10 @@ export default function Home() {
                 <Grid item xs={12} sm container className={styles.processtext}>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      <Typography gutterBottom variant="h2">
+                      <Typography gutterBottom variant="h2" className={styles.font}>
                         Lorem Ipsum Dolor
                       </Typography>
-                      <Typography variant="h4" gutterBottom>
+                      <Typography variant="h4" gutterBottom className={styles.font}>
                         lorem ipsum amet. consetetur ing elitr, sed amet,
                         consetetur ing elitr, sed
                       </Typography>
@@ -156,7 +156,7 @@ export default function Home() {
         </div>
         <footer className={styles.footer}>
           <img
-            src="/icon_grullo.svg"
+            src="/icon_navy.svg"
             alt="Fine Find Logo"
             className={styles.logo}
           />

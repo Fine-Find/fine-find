@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+$font-stack: 'Montserrat', sans-serif;
+
 .root {
   padding: 2em;
   margin: auto;
@@ -8,6 +11,7 @@
   width: 100%;
   padding-left: 60px;
   padding-top: 30px;
+  font-family: $font-stack;
 }
 .grid {
   padding: 2em;
@@ -16,16 +20,19 @@
   transform: none;
 }
 .text {
-  padding-right: 50px;
+  // padding-right: 50px;
   width: 25%;
 }
 
 .title {
+  padding-top: 30px;
   font: 2.5em bolder;
+  font-family: $font-stack;
 }
 
 .paragraph {
   font-size: 1em;
+  font-family: $font-stack;
 }
 
 .icon {

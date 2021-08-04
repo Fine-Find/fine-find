@@ -23,6 +23,10 @@ $font-stack: 'Montserrat', sans-serif;
   font-family: $font-stack;
 }
 
+.font{
+  font-family: $font-stack;
+}
+
 .process {
   font-family: $font-stack;
   flex-grow: 1;
@@ -114,12 +118,14 @@ $font-stack: 'Montserrat', sans-serif;
 }
 
 .leftspace {
+  background-size: cover;
   padding-right: 30px;
   padding-bottom: 30px;
   padding-top: 30px;
 }
 
 .rightspace {
+  background-size: cover;
   padding-bottom: 30px;
   padding-top: 30px;
   padding-left: 30px;
