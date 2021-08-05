@@ -2,10 +2,6 @@ import Copyright from '@/components/Copyright/Copyright';
 import { Card } from '@/components/shared/Card/index';
 import { Button } from '@/components/shared/OutlineButton';
 import { Box, Grid, Typography } from '@material-ui/core';
-import ApartmentIcon from '@material-ui/icons/Apartment';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import DevicesIcon from '@material-ui/icons/Devices';
-import DomainIcon from '@material-ui/icons/Domain';
 import Image from 'next/image';
 
 import Layout from '../components/Layout';
@@ -22,25 +18,25 @@ const efficient = {
   title: '.The most efficient way to build your business',
   paragraph:
     'The Fine Find is a digital marketplace that brings the best of design online so consumers can shop like an insider anytime and you can benefit from it. The Fine Find is a monetization mechanism that helps you get valueable time back so you can grow your business and make the most of the moment when you hit a spark of creativity',
-  icon: <img src='/Icons_finefind-12.png' alt='Fine Find Icon' width='125px' height='125px'/>,
+  icon: <Image src='/Icons_finefind-12.png' alt='Fine Find Icon' width='125px' height='125px'/>,
 };
 const monetization = {
   title: 'A new space designed for visibility and monetization.',
   paragraph:
     'The Fine Find is a digital marketplace that brings the best of design online so consumers can shop like an insider anytime and you can benefit from it. The Fine Find is a monetization mechanism that helps you get valueable time back so you can grow your business and make the most of the moment when you hit a spark of creativity',
-  icon: <img src='/Icons_finefind-09.png' alt='Fine Find Icon' width='125px' height='125px'/>,
+  icon: <Image src='/Icons_finefind-09.png' alt='Fine Find Icon' width='125px' height='125px'/>,
 };
 const network = {
   title: 'Expand your client network and propel new sales.',
   paragraph:
     'The Fine Find is a digital marketplace that brings the best of design online so consumers can shop like an insider anytime and you can benefit from it. The Fine Find is a monetization mechanism that helps you get valueable time back so you can grow your business and make the most of the moment when you hit a spark of creativity',
-  icon: <img src='/Icons_finefind-11.png' alt='Fine Find Icon' width='125px' height='125px'/>,
+  icon: <Image src='/Icons_finefind-11.png' alt='Fine Find Icon' width='125px' height='125px'/>,
 };
 const earn = {
   title: '.Earn income while you focus',
   paragraph:
     'The Fine Find is a digital marketplace that brings the best of design online so consumers can shop like an insider anytime and you can benefit from it. The Fine Find is a monetization mechanism that helps you get valueable time back so you can grow your business and make the most of the moment when you hit a spark of creativity',
-  icon: <img src='/Icons_finefind-10.png' alt='Fine Find Icon' width='125px' height='125px'/>,
+  icon: <Image src='/Icons_finefind-10.png' alt='Fine Find Icon' width='125px' height='125px'/>,
 };
 export default function Home() {
   return (
