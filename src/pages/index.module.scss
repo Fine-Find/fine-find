@@ -17,14 +17,19 @@ $font-stack: 'Montserrat', sans-serif;
   background-attachment: fixed;
 }
 
+.headerbutton {
+  align-self: center;
+  padding-left: 10px;
+}
+
 .header {
-  // margin: 16px;
-  padding: 50px;
   font-family: $font-stack;
 }
 
-.font{
+.processtitle{
   font-family: $font-stack;
+  font-size: 3.5em;
+  letter-spacing: .08em;
 }
 
 .process {
@@ -39,14 +44,16 @@ $font-stack: 'Montserrat', sans-serif;
 }
 
 .processtext {
-  margin-top: 40px;
   margin-bottom: 50px;
   margin-left: 40px;
   font-family: $font-stack;
 }
 
+.processfont {
+  font-size: 2.4em;
+}
 .processbutton {
-  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .blocktext {
@@ -55,11 +62,8 @@ $font-stack: 'Montserrat', sans-serif;
   text-align: start;
   padding-top: 10px;
   margin-block-end: 1em;
-  margin-inline-start: 100px;
-  margin-inline-end: 100px;
-  margin-left: 100px;
-  margin-right: 100px;
-  /* align-content: center; */
+  margin-inline-start: 20px;
+  margin-inline-end: 20px;
 }
 
 .footer {
@@ -77,34 +81,11 @@ $font-stack: 'Montserrat', sans-serif;
   margin-left: 0.5rem;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
 .title {
   font-family: $font-stack;
-
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
-  font-family: $font-stack;
-}
-
-.description {
-  line-height: 1.5;
-  font-size: 1.5rem;
+  font-size: 3.5em;
+  padding-left: 40px;
+  letter-spacing: .08em;
 }
 
 .grid {

@@ -53,11 +53,11 @@ export default function Home() {
               <Grid container className={styles.header}>
                 {/* <Grid> */}
                 <Grid item xs={6}>
-                  <Typography variant="h2" gutterBottom>
+                  <h2 className={styles.title}>
                     Lorem Ipsum Dolor
-                  </Typography>
+                  </h2>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} className={styles.headerbutton}>
                   <Button label="Apply now" textSize="2.5em" />
                 </Grid>
                 <Box ml={6} mr={6}>
@@ -126,13 +126,13 @@ export default function Home() {
                 <Grid item xs={12} sm container className={styles.processtext}>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                      <Typography gutterBottom variant="h2" className={styles.font}>
+                      <h2 className={styles.processtitle}>
                         Lorem Ipsum Dolor
-                      </Typography>
-                      <Typography variant="h4" gutterBottom className={styles.font}>
+                      </h2>
+                      <h4 className={styles.processfont}>
                         lorem ipsum amet. consetetur ing elitr, sed amet,
                         consetetur ing elitr, sed
-                      </Typography>
+                      </h4>
                     </Grid>
                     <Grid item className={styles.processbutton}>
                       <Button
