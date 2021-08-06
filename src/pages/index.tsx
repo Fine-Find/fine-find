@@ -45,7 +45,7 @@ export default function Home() {
         <div className={styles.container}>
           <main className={styles.main}>
             <div
-              style={{ position: 'relative', width: '100vw', height: '50vw' }}
+              style={{ position: 'relative', width: '98.8vw', height: '40vw', maxHeight: "auto", maxWidth: 'auto'  }}
             >
               <Image src={'/tina.jpeg'} layout="fill" objectFit="cover" />
             </div>

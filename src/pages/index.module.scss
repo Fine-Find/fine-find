@@ -62,15 +62,15 @@ $font-stack: 'Montserrat', sans-serif;
   text-align: start;
   padding-top: 10px;
   margin-block-end: 1em;
-  margin-inline-start: 20px;
-  margin-inline-end: 20px;
+  margin-inline-start: 70px;
+  margin-inline-end: 70px;
 }
 
 .footer {
   width: 100%;
   border-top: 1px solid #eaeaea;
-  padding-bottom: 60px;
-  padding-top: 50px;
+  padding-bottom: 110px;
+  padding-top: 100px;
   display: 'flex';
   text-align: 'center';
   flex-direction: 'column';
@@ -114,7 +114,7 @@ $font-stack: 'Montserrat', sans-serif;
 
 .logo {
   padding-top: 10px;
-  height: 2.5em;
+  height: 3.5em;
   padding-left: 40px;
   margin-top: 20px;
 }
