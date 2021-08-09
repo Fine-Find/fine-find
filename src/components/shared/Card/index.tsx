@@ -25,6 +25,9 @@ export const Card = ({
   const textDirection =
     direction === 'left' ? styles.leftToRight : styles.rightToLeft;
 
+  const iconDirection =
+    direction === 'left' ? styles.iconLeft : styles.iconRight;
+
   return (
     <Paper
       className={`${styles.root} ${rotation}`}
@@ -41,16 +44,16 @@ export const Card = ({
               {title}
             </Typography>
             <Grid container className={`${styles.grid} ${textDirection}`}>
-              <Grid item xs={3}>
+              <Grid item xs={1}>
                 <Typography
                   variant="body2"
                   gutterBottom
-                  className={styles.icon}
+                  className={iconDirection}
                 >
                   {icon}
                 </Typography>
               </Grid>
-              <Grid item xs={9} className={styles.text}>
+              <Grid item xs={11} className={styles.text}>
                 <Typography className={styles.paragraph}>
                   {paragraph}
                 </Typography>
@@ -71,107 +74,3 @@ export const Card = ({
     </Paper>
   );
 };
-
-// import React from 'react';
-// import { Grid, Typography, Box, Paper, Button } from '@material-ui/core';
-// import LanguageIcon from '@material-ui/icons/Language';
-// // import styles from './Card.module.scss';
-// // import LanguageIcon from '@material-ui/icons/Language';
-// import { makeStyles } from '@material-ui/core'
-
-// const useStyle = makeStyles((theme) => ({
-//   root: {
-//     padding: theme.spacing(4),
-//     margin: 'auto',
-//     border: `3px solid plum`,
-//     borderTopRightRadius: 50,
-//     borderBottomRightRadius: 50,
-//     maxWidth: '700px',
-//     width: '100%',
-//     paddingLeft: '90px',
-//   },
-//   grid: {
-//     padding: theme.spacing(2),
-//     paddingTop: '20px',
-//     display: 'flex',
-//     transform: 'none'
-//   },
-//   text: {
-//     paddingRight: '50px',
-//     width: '25%'
-//   },
-//   button: {
-//     paddingLeft: '500px'
-//   },
-// }));
-
-// export type CardProps = {
-
-//   title: string;
-//   paragraph: string;
-//   orientation?: 'left' | 'right';
-// }
-
-// const leftside = {
-//   transform: 'rotateY(360deg)',
-//   direction: 'ltr'
-// }
-// const rightside = {
-//   transform: 'rotateY(180deg)',
-//   direction: 'rtl',
-// }
-// function changeOrientation (orientationOption: 'left' | 'right'): string {
-//   if (orientationOption === 'left') {
-//     return 'leftside';
-//   }
-//   return 'rightside';
-// }
-
-// export const Card= ({
-//   title,
-//   paragraph,
-//   orientation = 'left',
-
-// }:CardProps) => {
-
-//   // const orientationMap =
-
-//   const classes = useStyle();
-
-//   return (
-//     <Paper className={`${classes.root} ${changeOrientation(orientation)}`}
-//           style={{
-//             borderTopRightRadius: 50,
-//             borderBottomRightRadius: 50,
-//             // transform: orientationMap[orientation]
-//           }}
-//         >
-//           <Grid container className={`${changeOrientation(orientation)}`}>
-//             <Grid item xs={12} sm container>
-//               <Grid item xs container direction="column" spacing={2}>
-//                 <Typography className={classes.title}>
-//                 {title}
-//                 </Typography>
-//                     <Grid container className={classes.grid}>
-//                         <Grid item xs={1}>
-//                           <Typography variant="body2" gutterBottom>
-//                               <LanguageIcon />
-//                           </Typography>
-//                         </Grid>
-//                         <Grid item xs={11} spacing={2} className={classes.text}>
-//                           <Typography>
-//                             {paragraph}
-//                           </Typography>
-//                         </Grid>
-//                     </Grid>
-//               </Grid>
-//             </Grid>
-//             <Grid item className={classes.button}>
-//               <Button >
-//                   Apply now
-//               </Button>
-//             </Grid>
-//           </Grid>
-//       </Paper>
-//   );
-// };
