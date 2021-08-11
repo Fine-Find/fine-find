@@ -17,7 +17,6 @@ export const Card = ({
   title,
   paragraph,
   src,
-  alt,
   icon,
   direction = 'left',
 }: CardProps) => {

@@ -83,10 +83,10 @@ export default function Home() {
                   />
                 </Grid>
                 <Grid item xs={4} className={styles.rightspace}>
-                  <Card src={image[0]} alt='The Fine Find' direction="right" />
+                  <Card src={image[0]} direction="right" />
                 </Grid>
                 <Grid item xs={4} className={styles.leftspace}>
-                  <Card src={image[1]} alt='The Fine Find' direction="left" />
+                  <Card src={image[1]} direction="left" />
                 </Grid>
                 <Grid item xs={8} className={styles.rightspace}>
                   <Card
@@ -105,10 +105,10 @@ export default function Home() {
                   />
                 </Grid>
                 <Grid item xs={4} className={styles.rightspace}>
-                  <Card src={image[2]} alt='The Fine Find' direction="right" />
+                  <Card src={image[2]} direction="right" />
                 </Grid>
                 <Grid item xs={4} className={styles.leftspace}>
-                  <Card src={image[3]} alt='The Fine Find' direction="left" />
+                  <Card src={image[3]} direction="left" />
                 </Grid>
                 <Grid item xs={8} className={styles.rightspace}>
                   <Card
