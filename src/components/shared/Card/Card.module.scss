@@ -5,14 +5,19 @@ $font-stack: 'Montserrat', sans-serif;
   padding: 2em;
   margin: auto;
   border: 2px solid var(--main-primary-color);
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-top-right-radius: 70px;
+  border-bottom-right-radius: 70px;
   height: 100%;
   // width: 100%;
   padding-left: 60px;
   padding-top: 30px;
   font-family: $font-stack;
+  // margin-inline: 30px;
 }
+.container {
+  margin-inline: 20px;
+}
+
 .grid {
   // padding: 2em;
   padding: 30px 0 20px 15px;
@@ -20,18 +25,21 @@ $font-stack: 'Montserrat', sans-serif;
   transform: none;
 }
 .text {
+  // position: absolute;
   padding-right: 50px;
   width: 25%;
 }
 
 .title {
   padding-top: 30px;
-  font: 2.5em bolder;
+  font: 2.2em bolder;
+  font-weight: 600;
   font-family: $font-stack;
 }
 
 .paragraph {
   font-size: 1em;
+  font-weight: 600;
   font-family: $font-stack;
   transform: translateX(10px);
 }
@@ -43,7 +51,7 @@ $font-stack: 'Montserrat', sans-serif;
 }
 
 .iconRight {
-  transform: translateX(20px);
+  transform: translateX(10px);
   width: 100px;
   height: 100px;
 }
@@ -58,16 +66,25 @@ $font-stack: 'Montserrat', sans-serif;
 
 .rotateLeft {
   transform: rotateY(360deg);
+  // unicode-bidi: bidi-override;
+
 }
 
 .rotateRight {
   transform: rotateY(180deg);
+  // unicode-bidi: bidi-override;
+
 }
 
 .leftToRight {
   direction: ltr;
+  // unicode-bidi: bidi-override;
+
 }
 
 .rightToLeft {
   direction: rtl;
+  // unicode-bidi: ;
+  // unicode-bidi: bidi-override;
+
 }

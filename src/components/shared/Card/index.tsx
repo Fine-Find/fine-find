@@ -5,7 +5,8 @@ import { Button } from '../OutlineButton';
 import styles from './Card.module.scss';
 
 export type CardProps = {
-  image?: any;
+  src?: any;
+  alt?: string;
   icon?: any;
   title?: string;
   paragraph?: string;
@@ -15,11 +16,14 @@ export type CardProps = {
 export const Card = ({
   title,
   paragraph,
-  image,
+  src,
+  alt,
   icon,
   direction = 'left',
 }: CardProps) => {
-  const bg = image ? `url(${image})` : '#E8E8E8';
+  
+  const bg = src ? `url(${src})` : '#E8E8E8';
+  
   const rotation =
     direction === 'left' ? styles.rotateLeft : styles.rotateRight;
   const textDirection =
@@ -39,9 +43,9 @@ export const Card = ({
     >
       <Grid container className={rotation}>
         <Grid item xs={12} sm container>
-          <Grid container direction="column" spacing={2}>
+          <Grid container direction="column" spacing={2} className={styles.container}>
             <Typography className={`${styles.title} ${textDirection}`}>
-              {title}
+              <bdi>{title}</bdi>
             </Typography>
             <Grid container className={`${styles.grid} ${textDirection}`}>
               <Grid item xs={1}>
@@ -55,11 +59,11 @@ export const Card = ({
               </Grid>
               <Grid item xs={11} className={styles.text}>
                 <Typography className={styles.paragraph}>
-                  {paragraph}
+                  <bdi>{paragraph}</bdi>
                 </Typography>
               </Grid>
             </Grid>
-            {!image && (
+            {!src && (
               <Grid item className={styles.button}>
                 <Button
                   label="Apply now"

@@ -52,7 +52,7 @@ export const Button = ({
         borderRadius: 100,
         fontSize: textSize,
         width: width,
-        marginRight: marginRight ? '75px' : '0px',
+        marginRight: marginRight ? '30px' : '0px',
       }}
     >
       {label}
