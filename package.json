@@ -78,7 +78,7 @@
     "sass": "^1.37.0",
     "sass-loader": "^12.1.0",
     "typescript": "^4.1.3",
-    "webpack": "^5.47.1"
+    "webpack": "^5.50.0"
   },
   "husky": {
     "hooks": {
