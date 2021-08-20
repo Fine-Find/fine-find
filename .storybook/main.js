@@ -14,6 +14,14 @@ module.exports = {
     '@storybook/addon-knobs',
     "@storybook/addon-essentials",
     {
+      name: '@storybook/preset-scss',
+      options: {
+        cssLoaderOptions: {
+           modules: true,
+        }
+      }
+    },
+    {
       name: '@storybook/addon-postcss',
       options: {
         postcssLoaderOptions: {
@@ -26,13 +34,6 @@ module.exports = {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.
     // 'PRODUCTION' is used when building the static version of storybook.
-
-    // Make whatever fine-grained changes you need
-    config.module.rules.push({
-      test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
-      include: path.resolve(__dirname, '../src/'),
-    });
 
     // Return the altered config
     return config;
