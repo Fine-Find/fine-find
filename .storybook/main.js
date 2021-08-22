@@ -35,6 +35,12 @@ module.exports = {
     // You can change the configuration based on that.
     // 'PRODUCTION' is used when building the static version of storybook.
 
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+      include: path.resolve(__dirname, '../src/'),
+    });
+
     // Return the altered config
     return config;
   },
