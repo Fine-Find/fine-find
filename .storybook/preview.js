@@ -2,7 +2,7 @@ import '../src/styles/styles.scss';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
-import * as nextImage from 'next/image';
+import * as NextImage from 'next/image';
 import React from 'react';
 
 import { theme } from '../src/styles/theme';
@@ -55,29 +55,16 @@ export const parameters = {
   },
 };
 
-// Replace next/image for Storybook
-Object.defineProperty(nextImage, 'default', {
+const OriginalNextImage = NextImage.default;
+
+Object.defineProperty(NextImage, "default", {
   configurable: true,
-  value: (props) => {
-    const { width, height } = props;
-    const ratio = (height / width) * 100;
-    return (
-      <div
-        style={{
-          paddingBottom: `${ratio}%`,
-          position: 'relative',
-        }}
-      >
-        <img
-          style={{
-            objectFit: 'cover',
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-          }}
-          {...props}
-        />
-      </div>
-    );
-  },
+  value: (props) => (
+    <OriginalNextImage
+      {...props}
+      unoptimized
+      // this is new!
+      blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAADAAQDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAbEAADAAMBAQAAAAAAAAAAAAABAgMABAURUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAECEf/aAAwDAQACEQMRAD8Anz9voy1dCI2mectSE5ioFCqia+KCwJ8HzGMZPqJb1oPEf//Z"
+    />
+  ),
 });
