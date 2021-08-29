@@ -11,7 +11,7 @@ import { FirebaseNextApiRequest } from 'types/FirebaseNextApiRequest';
 const withAuthMiddleware =
   (handler) => async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
     const authHeader = req.headers.authorization;
-    if (!authHeader) {
+    if (!authHeader || authHeader === undefined || authHeader === null) {
       res.status(401).end('Not authenticated. No Auth header');
     }
 

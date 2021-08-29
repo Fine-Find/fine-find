@@ -76,7 +76,11 @@ const ManageImagePage: React.FC = () => {
         });
         const productsUrl = `${fineFindApis.searchProducts}?${queryParameters}`;
 
-        fetch(productsUrl).then((response) => {
+        fetch(productsUrl, {
+          headers: {
+            authorization: `bearer ${auth.userIdToken}`,
+          },
+        }).then((response) => {
           response.json().then((products) => {
             let newOptions = [] as ShopifyProduct[];
             if (value) {

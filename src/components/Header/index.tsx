@@ -38,7 +38,7 @@ export default function Header({
       <Button
         color="inherit"
         onClick={() => {
-          auth.signOut();
+          auth.firestoreSignOut();
           router.push('/login');
         }}
       >

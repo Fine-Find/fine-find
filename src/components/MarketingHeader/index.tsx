@@ -26,7 +26,7 @@ export default function MarketingHeader() {
       <Button
         label="Sign Out"
         onClick={() => {
-          auth.signOut();
+          auth.firestoreSignOut();
           router.push('/login');
         }}
       />
