@@ -1,8 +1,10 @@
-import { ProfileFormCard } from './';
+import { FormProvider, useForm } from 'react-hook-form';
+
+import { ProfileFormCard as Card } from './';
 
 export default {
-  title: 'Profile/ProfileFormCard',
-  component: ProfileFormCard,
+  title: 'Profile/Profile Form Card',
+  component: Card,
   argTypes: {
     title: { control: 'text' },
     subTitle: { control: 'text' },
@@ -12,16 +14,21 @@ export default {
   },
 };
 
-const Template = (args) => (
-  <ProfileFormCard {...args}>
-    <div>
-      <p>This is some sample content</p>
-    </div>
-  </ProfileFormCard>
-);
+const Template = (args) => {
+  const methods = useForm();
+  return (
+    <FormProvider {...methods}>
+      <Card {...args}>
+        <div>
+          <p>This is some sample content</p>
+        </div>
+      </Card>
+    </FormProvider>
+  );
+};
 
-export const Default = Template.bind({});
-Default.args = {
+export const ProfileFormCard = Template.bind({});
+ProfileFormCard.args = {
   title: 'Title',
   subTitle: 'Lorem ipsum..............',
   buttonText: 'Save',
