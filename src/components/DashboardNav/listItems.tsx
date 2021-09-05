@@ -24,7 +24,11 @@ export const mainListItems = (
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Profile" />
+      <Link href={fineFindPages.manageProfile}>
+        <a>
+          <ListItemText primary="Profile" />
+        </a>
+      </Link>
     </ListItem>
   </div>
 );

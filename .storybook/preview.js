@@ -2,15 +2,18 @@ import '../src/styles/styles.scss';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import * as NextImage from 'next/image';
 import React from 'react';
 
 import { theme } from '../src/styles/theme';
 
+const muTheme = createTheme(theme);
+
 export const decorators = [
   (Story) => (
     <StylesProvider injectFirst>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={muTheme}>
         <CssBaseline />
         <Story />
       </ThemeProvider>
@@ -57,7 +60,7 @@ export const parameters = {
 
 const OriginalNextImage = NextImage.default;
 
-Object.defineProperty(NextImage, "default", {
+Object.defineProperty(NextImage, 'default', {
   configurable: true,
   value: (props) => (
     <OriginalNextImage

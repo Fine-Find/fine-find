@@ -1,6 +1,7 @@
 export const fineFindPages = {
   dashboard: '/dashboard',
   manageMedia: '/dashboard/manage',
+  manageProfile: '/dashboard/profile',
   login: '/login',
   forgotPassword: '/reset-password',
   signUp: '/signUp',

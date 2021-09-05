@@ -1,4 +1,3 @@
-import { createTheme } from '@material-ui/core/styles';
 declare module '@material-ui/core/styles/createTheme' {
   interface Theme {
     instagram: {
@@ -26,7 +25,7 @@ declare module '@material-ui/core/styles/createPalette' {
 }
 
 // Create a theme instance.
-const theme = createTheme({
+export const theme = {
   palette: {
     primary: {
       main: '#222847',
@@ -66,6 +65,4 @@ const theme = createTheme({
   instagram: {
     backgroundColor: '#e33e5c',
   },
-});
-
-export default theme;
+};
