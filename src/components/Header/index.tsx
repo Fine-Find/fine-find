@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useAuth } from '../../hooks/useAuth';
 import DashboardNav from '../DashboardNav';
@@ -13,20 +13,19 @@ import styles from './Header.module.scss';
 
 export interface HeaderProps {
   title?: string;
-  drawer?: boolean;
+  open: boolean;
+  onDrawerToggled: () => void;
 }
 
+// TODO: Refactor to support true responsive design. On mobile the side drawer should be hidden
+//      and then when opened it appears as an expanded drawer.
 export default function Header({
   title = 'The FineFind',
-  drawer = false,
+  open,
+  onDrawerToggled,
 }: HeaderProps) {
   const router = useRouter();
   const auth = useAuth();
-
-  const [open, setOpen] = useState(drawer);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
 
   let button = null;
   if (auth.isInitialized) {
@@ -47,7 +46,7 @@ export default function Header({
     );
   }
 
-  const appBarStyle = drawer && open ? styles.appBarShift : '';
+  const appBarStyle = open ? styles.appBarShift : '';
   const menuButtonStyle = `${styles.menuButton} ${
     open && styles.menuButtonHidden
   }`;
@@ -56,7 +55,7 @@ export default function Header({
     <>
       <AppBar position="absolute" className={`${styles.appBar} ${appBarStyle}`}>
         <Toolbar className={styles.toolbar}>
-          {MenuDrawer(drawer, toggleDrawer, menuButtonStyle)}
+          {MenuDrawer(onDrawerToggled, menuButtonStyle)}
           <Typography
             component="h1"
             variant="h6"
@@ -69,18 +68,12 @@ export default function Header({
           {button}
         </Toolbar>
       </AppBar>
-      {drawer && (
-        <DashboardNav open={open} toggleDrawer={toggleDrawer}></DashboardNav>
-      )}
+      <DashboardNav open={open} toggleDrawer={onDrawerToggled} />
     </>
   );
 }
 
-function MenuDrawer(drawer: boolean, toggleDrawer, menuButtonStyle) {
-  if (!drawer) {
-    return null;
-  }
-
+function MenuDrawer(toggleDrawer, menuButtonStyle) {
   return (
     <IconButton
       edge="start"

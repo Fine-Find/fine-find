@@ -1,7 +1,9 @@
 import * as Yup from 'yup';
 
 // eslint-disable-next-line no-useless-escape
-const urlRegex = /^(https?:\/\/)?(www\.)?([-a-zA-Z0-9@:%._\+~#=]{1,256}\.)[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
+const urlRegex =
+  // eslint-disable-next-line no-useless-escape
+  /^(https?:\/\/)?(www\.)?([-a-zA-Z0-9@:%._\+~#=]{1,256}\.)[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
 
 export const businessProfileValidation = Yup.object().shape({
   companyName: Yup.string().required(`Please enter your company's name`),
@@ -10,7 +12,9 @@ export const businessProfileValidation = Yup.object().shape({
   ),
   website: Yup.lazy((value) => {
     if (value !== '') {
-      return Yup.string().matches(urlRegex, 'Please provide a valid url').required();
+      return Yup.string()
+        .matches(urlRegex, 'Please provide a valid url')
+        .required();
     }
     return Yup.string().notRequired();
   }),
