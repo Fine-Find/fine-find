@@ -41,14 +41,18 @@ async function postInstagramAccount(session, userIdToken) {
   });
 }
 
+// TODO: Re-enable instagram by un-commenting out code
 function isInstagramStored(auth) {
   return (
-    auth && auth.user && auth.user.instagram && auth.user.instagram.access_token
+    auth && auth.user //&& auth.user.instagram && auth.user.instagram.access_token
   );
 }
 
+// TODO: Re-enable instagram by un-commenting out code
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function isLoggedIntoInstagram(session) {
-  return session && session.accessToken;
+  // return session && session.accessToken;
+  return true;
 }
 
 function displayGrid(session, auth) {
@@ -59,15 +63,11 @@ function displayGrid(session, auth) {
 }
 
 function displayInstagramLogin(session, auth) {
-  if (isInstagramStored(auth)) {
-    return (
-      <p>Connected to {auth.user.instagram.username}'s Instagram account</p>
-    );
-  } else if (isLoggedIntoInstagram(session)) {
-    return <p>Connected to {session.user.name}'s Instagram account</p>;
+  if (!isInstagramStored(auth) || !isLoggedIntoInstagram(session)) {
+    return <InstagramLoginButton />;
   }
 
-  return <InstagramLoginButton />;
+  return <> </>;
 }
 
 // TODO: Navigating to the page takes some time due to the facebook API call and loading all of the images. How can we improve this performance?

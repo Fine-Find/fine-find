@@ -270,7 +270,10 @@ const ManageImagePage: React.FC = () => {
             </Grid>
           </Grid>
           <Grid item xs={12} className={styles.instagramInfo}>
-            {displayInstagramLogin(auth)}
+            {
+              // TODO: Renable instagram
+              //displayInstagramLogin(auth)
+            }
           </Grid>
         </Grid>
       </div>

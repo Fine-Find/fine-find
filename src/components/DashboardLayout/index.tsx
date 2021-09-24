@@ -32,9 +32,7 @@ export default function Layout({
       <div className={`${styles.wrapper} ${containerStyle}`}>
         <div className={`${styles.container} `}>
           <div className={styles.content}>
-            <Box className={styles.box}>
-              {children}
-            </Box>
+            <Box className={styles.box}>{children}</Box>
           </div>
         </div>
       </div>

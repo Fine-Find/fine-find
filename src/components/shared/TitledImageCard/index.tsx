@@ -22,7 +22,7 @@ type TitledImageCardProps = {
   children?: ReactNode;
   className?: string;
   isAvatar?: boolean;
-  alt?: string
+  alt?: string;
 };
 
 const renderButtonSection = (buttonText: string, onClick: () => void) => {
@@ -88,7 +88,7 @@ export const TitledImageCard = ({
   onClick,
   className,
   isAvatar = false,
-  alt = "placeholder"
+  alt = 'placeholder',
 }: TitledImageCardProps) => {
   return (
     <Card className={className} elevation={0}>
