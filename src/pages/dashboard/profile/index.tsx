@@ -2,15 +2,14 @@ import DashboardLayout from '@/components/DashboardLayout';
 import { BasicProfileForm } from '@/components/Profile/BasicProfileForm';
 import { BusinessProfileForm } from '@/components/Profile/BusinessProfileForm';
 import { TitledImageCard } from '@/components/shared/TitledImageCard';
-// import { useRequireAuth } from '@/hooks/useRequireAuth';
+import { useRequireAuth } from '@/hooks/useRequireAuth';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-// import Skeleton from '@material-ui/lab/Skeleton';
+import Skeleton from '@material-ui/lab/Skeleton';
 import React from 'react';
 
 import styles from './profile.module.scss';
 
-/*
 const Loading = () => {
   return (
     <div id="skeleton">
@@ -18,12 +17,11 @@ const Loading = () => {
     </div>
   );
 };
-*/
 
 const DashBoardPage: React.FC = () => {
-  // const auth = useRequireAuth();
+  const auth = useRequireAuth();
 
-  // if (!auth.isInitialized || !auth.user) return <>{Loading()}</>;
+  if (!auth.isInitialized || !auth.user) return <>{Loading()}</>;
 
   return (
     <DashboardLayout>
@@ -35,6 +33,8 @@ const DashBoardPage: React.FC = () => {
                 title="Jane Doe"
                 subTitle="SomethingAbout the person"
                 buttonText="Change Profile Picture"
+                isAvatar
+                imgSrc="/img/undraw_female_avatar_w3jk.svg"
               />
             </Grid>
             <Grid item lg={8} md={6} xs={12}>

@@ -1,7 +1,6 @@
 .tileImageSection {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -10,11 +9,27 @@
 }
 
 .avatar {
-  margin-top: 1rem;
+  border-radius: 100%;
+  object-position: center;
+  object-fit: contain;
+  width: 150px;
+  padding-top: 1rem;
 }
 
 .buttonSection {
   margin: 1em;
   display: flex;
   justify-content: center;
+}
+
+.imageBox {
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  width: 100%;
+}
+
+.image {
+  object-position: top center;
+  object-fit: fill;
 }

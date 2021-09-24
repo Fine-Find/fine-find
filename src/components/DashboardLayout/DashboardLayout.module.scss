@@ -1,29 +1,36 @@
+.root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 .box {
-  flex-grow: 1;
-  height: 100vh;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  min-height: 100%;
 }
 .container {
   display: flex;
   flex: 1 1 auto;
   overflow: hidden;
-  padding-right: 24px;
-  padding-left: 24px;
 }
 
 .content {
   flex: 1 1 auto;
   height: 100%;
+  overflow: auto;
 }
 
 .open {
-  padding-left: 264px;
+  padding-left: 240px;
 }
 
 .closed {
-  margin-left: 56px;
+  padding-left: 56px;
 
   @media (min-width: 600px) {
-    margin-left: 72px;
+    padding-left: 72px;
   }
 }
 
@@ -32,11 +39,11 @@
   flex: 1 1 auto;
   overflow: hidden;
 
-  padding-top: 72px;
+  padding-top: 56px;
   @media (min-width: 0px), (orientation: landscape) {
-    padding-top: 64px;
+    padding-top: 48px;
   }
   @media (min-width: 600px) {
-    padding-top: 80px;
+    padding-top: 64px;
   }
 }

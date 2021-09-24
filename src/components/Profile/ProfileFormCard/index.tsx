@@ -31,7 +31,7 @@ export const ProfileFormCard = ({
   const { handleSubmit } = methods;
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Card className={className}>
+      <Card className={className} elevation={0}>
         <CardHeader title={title} subheader={subTitle} />
         <Divider variant="middle" />
         {children}

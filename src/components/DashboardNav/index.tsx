@@ -21,6 +21,7 @@ export default function DashboardNav({ toggleDrawer, open }: Props) {
           paper: `${styles.drawerPaper} ${!open && styles.drawerPaperClose}`,
         }}
         open={open}
+        PaperProps={{ elevation: 0 }}
       >
         <div className={styles.toolbarIcon}>
           <IconButton onClick={toggleDrawer}>
@@ -28,7 +29,7 @@ export default function DashboardNav({ toggleDrawer, open }: Props) {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List className={styles.list}>{mainListItems}</List>
       </Drawer>
     </>
   );
