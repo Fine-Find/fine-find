@@ -1,8 +1,7 @@
+/* eslint-disable no-useless-escape */
 import * as Yup from 'yup';
 
-// eslint-disable-next-line no-useless-escape
 const urlRegex =
-  // eslint-disable-next-line no-useless-escape
   /^(https?:\/\/)?(www\.)?([-a-zA-Z0-9@:%._\+~#=]{1,256}\.)[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/;
 
 export const businessProfileValidation = Yup.object().shape({

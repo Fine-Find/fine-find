@@ -23,19 +23,21 @@ export default function Layout({
   const containerStyle = open ? styles.open : styles.closed;
 
   return (
-    <>
+    <div className={styles.root}>
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
       </Head>
       <Header onDrawerToggled={toggleDrawer} open={open}></Header>
-      <Box component="main" className={styles.box}>
-        <div className={styles.wrapper}>
-          <div className={`${styles.container} ${containerStyle}`}>
-            <div className={styles.content}>{children}</div>
+      <div className={`${styles.wrapper} ${containerStyle}`}>
+        <div className={`${styles.container} `}>
+          <div className={styles.content}>
+            <Box className={styles.box}>
+              {children}
+            </Box>
           </div>
         </div>
-      </Box>
-    </>
+      </div>
+    </div>
   );
 }

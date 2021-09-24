@@ -7,10 +7,11 @@ import Link from 'next/link';
 import React from 'react';
 
 import { fineFindPages } from '../../utils/urls';
+import styles from './ListItems.module.scss';
 
 export const mainListItems = (
-  <div>
-    <ListItem button>
+  <div className={styles.container}>
+    <ListItem button className={styles.item}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
@@ -20,7 +21,7 @@ export const mainListItems = (
         </a>
       </Link>
     </ListItem>
-    <ListItem button>
+    <ListItem button className={`${styles.item} ${styles.itemEnd}`}>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
