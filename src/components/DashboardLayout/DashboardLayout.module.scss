@@ -1,20 +1,42 @@
 .box {
   flex-grow: 1;
   height: 100vh;
-  overflow: auto;
 }
 .container {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-  padding-left: 15rem;
+  display: flex;
+  flex: 1 1 auto;
+  overflow: hidden;
+  padding-right: 24px;
+  padding-left: 24px;
 }
 
-.appBarSpacer {
-  min-height: 56;
+.content {
+  flex: 1 1 auto;
+  height: 100%;
+}
+
+.open {
+  padding-left: 264px;
+}
+
+.closed {
+  margin-left: 56px;
+
+  @media (min-width: 600px) {
+    margin-left: 72px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  overflow: hidden;
+
+  padding-top: 72px;
   @media (min-width: 0px), (orientation: landscape) {
-    min-height: 48;
+    padding-top: 64px;
   }
   @media (min-width: 600px) {
-    min-height: 64;
+    padding-top: 80px;
   }
 }

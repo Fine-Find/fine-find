@@ -1,9 +1,9 @@
+import { usaStates } from '@/utils/usaStates';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CardContent, Grid, TextField } from '@material-ui/core';
 import React from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-import { usaStates } from '@/utils/usaStates';
 
 import { ProfileFormCard } from '../ProfileFormCard';
 import { basicProfileValidation } from './BasicProfileFormValidation';

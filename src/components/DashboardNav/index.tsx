@@ -12,8 +12,6 @@ type Props = {
   open: boolean;
 };
 
-// TODO: Convert this to a responsive Drawer that changes based on media queries https://material-ui.com/components/drawers/#responsive-drawer
-// TODO: Update the navigation with true links
 export default function DashboardNav({ toggleDrawer, open }: Props) {
   return (
     <>
