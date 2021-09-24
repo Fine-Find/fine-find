@@ -31,7 +31,7 @@ const DashBoardPage: React.FC = () => {
             <Grid item lg={4} md={6} xs={12}>
               <TitledImageCard
                 title="Jane Doe"
-                subTitle="SomethingAbout the person"
+                subTitle=""
                 buttonText="Change Profile Picture"
                 isAvatar
                 imgSrc="/img/undraw_female_avatar_w3jk.svg"
@@ -44,8 +44,8 @@ const DashBoardPage: React.FC = () => {
           <Grid container spacing={3}>
             <Grid item lg={4} md={6} xs={12}>
               <TitledImageCard
-                title="The FineFind"
-                subTitle=""
+                title="Lighthouse Designs"
+                subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                 buttonText="Change Company Logo"
               />
             </Grid>

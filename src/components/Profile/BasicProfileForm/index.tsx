@@ -12,9 +12,9 @@ import { basicProfileValidation } from './BasicProfileFormValidation';
 export const BasicProfileForm = () => {
   // TODO: Pull this from Firebase
   const values = {
-    firstName: '',
-    lastName: '',
-    email: 'example@example.com',
+    firstName: 'Jane',
+    lastName: 'Doe',
+    email: 'jane@ld.co',
     phone: '+15555555555',
     state: '',
     country: 'USA',

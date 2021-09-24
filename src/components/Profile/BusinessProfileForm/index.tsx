@@ -11,10 +11,11 @@ import { businessProfileValidation } from './BusinessProfileFormValidation';
 export const BusinessProfileForm = () => {
   // TODO: Pull this from Firebase
   const values = {
-    companyName: '',
-    description: '',
-    website: 'https://www.google.com',
-    hourlyRate: '',
+    companyName: 'Lighthouse Designs',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    website: 'https://www.ld.co',
+    hourlyRate: '200',
   };
 
   const methods = useForm({

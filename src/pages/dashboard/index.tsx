@@ -1,8 +1,10 @@
+import { TitledImageCard } from '@/components/shared/TitledImageCard';
 import { fineFindApis } from '@/utils/urls';
+import { Card, CardHeader, Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { CreateInstagramAccountRequest } from 'types/Instagram/client/CreateInstagramAccountRequest';
 
@@ -73,6 +75,7 @@ function displayInstagramLogin(session, auth) {
 // TODO: Navigating to the page takes some time due to the facebook API call and loading all of the images. How can we improve this performance?
 const DashBoardPage: React.FC = () => {
   const auth = useRequireAuth();
+  const router = useRouter();
 
   const [session, loading] = useSession();
 
@@ -95,21 +98,37 @@ const DashBoardPage: React.FC = () => {
   return (
     <DashboardLayout>
       <div className={styles.root}>
-        <Grid
-          container
-          spacing={1}
-          className={`${styles.container} ${styles.headerContainer}`}
-        >
-          <Grid item xs={12}>
-            <Typography component="h2" variant="h2">
-              Welcome to the Fine Find
-            </Typography>
+        <Container maxWidth="xl">
+          <Grid
+            container
+            spacing={3}
+            className={`${styles.container} ${styles.headerContainer}`}
+          >
+            <Grid item xs={12}>
+              {displayInstagramLogin(session, auth)}
+            </Grid>
+            <Grid container className={`${styles.moodRow}`} spacing={3}>
+              <Grid item md={4} xs={12} className={`${styles.moodRow}`}>
+                <TitledImageCard
+                  title="Lighthouse Designs"
+                  subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                  buttonText="Update your profile"
+                  imgSrc="/img/undraw_Lighthouse_frb8.svg"
+                  className={`${styles.moodRow} ${styles.profile}`}
+                  onClick={() => {
+                    router.push('/dashboard/profile');
+                  }}
+                />
+              </Grid>
+              <Grid item md={8} xs={12}>
+                <Card elevation={0}>
+                  <CardHeader title="Your Instagram Feed" />
+                  {displayGrid(session, auth)}
+                </Card>
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            {displayInstagramLogin(session, auth)}
-          </Grid>
-        </Grid>
-        {displayGrid(session, auth)}
+        </Container>
       </div>
     </DashboardLayout>
   );

@@ -1,6 +1,6 @@
 import { fineFindPages } from '@/utils/urls';
+import { ImageList, ImageListItem } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { useLoadInstagramMedia } from 'hooks/useLoadInstragramMedia';
 import { useRouter } from 'next/router';
@@ -33,7 +33,7 @@ export default function MasonGridList() {
 
   const Card = (instagramData: InstagramMedia) => {
     return (
-      <GridListTile
+      <ImageListItem
         key={instagramData.id}
         cols={1}
         className={styles.card}
@@ -55,7 +55,7 @@ export default function MasonGridList() {
           src={instagramData.media_url}
           alt={instagramData.caption || instagramData.id}
         />
-      </GridListTile>
+      </ImageListItem>
     );
   };
 
@@ -77,7 +77,7 @@ export default function MasonGridList() {
   // TODO: Need to adjust the height based on the device type?
   return (
     <div className={styles.masonic}>
-      <GridList cellHeight={200} className={styles.gridList} cols={MAX_COLUMNS}>
+      <ImageList cols={MAX_COLUMNS} gap={16}>
         {instagramMediaList == null && isLoading && CircularLoader(MAX_COLUMNS)}
         {instagramMediaList && instagramMediaList.map((tile) => Card(tile))}
         {/* 
@@ -90,7 +90,7 @@ export default function MasonGridList() {
               and leave "Loading" without this ref.
           */}
         {hasNextPage && CircularLoader(1)}
-      </GridList>
+      </ImageList>
     </div>
   );
 }

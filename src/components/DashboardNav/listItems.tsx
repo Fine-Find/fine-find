@@ -2,7 +2,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import PersonIcon from '@material-ui/icons/Person';
+import EditIcon from '@material-ui/icons/Edit';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Link from 'next/link';
 import React from 'react';
 
@@ -21,9 +24,39 @@ export const mainListItems = (
         </a>
       </Link>
     </ListItem>
+    <ListItem button className={styles.item}>
+      <ListItemIcon>
+        <EditIcon />
+      </ListItemIcon>
+      <Link href={fineFindPages.collections}>
+        <a>
+          <ListItemText primary="Collections" />
+        </a>
+      </Link>
+    </ListItem>
+    <ListItem button className={styles.item}>
+      <ListItemIcon>
+        <MenuBookIcon />
+      </ListItemIcon>
+      <Link href={fineFindPages.products}>
+        <a>
+          <ListItemText primary="Products" />
+        </a>
+      </Link>
+    </ListItem>
+    <ListItem button className={styles.item}>
+      <ListItemIcon>
+        <ShoppingCartIcon />
+      </ListItemIcon>
+      <Link href={fineFindPages.orders}>
+        <a>
+          <ListItemText primary="Orders" />
+        </a>
+      </Link>
+    </ListItem>
     <ListItem button className={`${styles.item} ${styles.itemEnd}`}>
       <ListItemIcon>
-        <PersonIcon />
+        <SettingsIcon />
       </ListItemIcon>
       <Link href={fineFindPages.manageProfile}>
         <a>
