@@ -5,6 +5,9 @@ export const fineFindPages = {
   login: '/login',
   forgotPassword: '/reset-password',
   signUp: '/signUp',
+  products: '/dashboard/products',
+  collections: '/dashboard/collections',
+  orders: '/dashboard/orders',
 };
 
 export const fineFindApis = {

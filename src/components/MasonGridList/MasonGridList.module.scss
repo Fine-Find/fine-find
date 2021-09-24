@@ -5,12 +5,13 @@
   text-align: center;
 }
 .masonic {
-  padding: 8px;
+  padding: 1rem;
   margin: 0 auto 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 600px;
 }
 .centerCircleLoader {
   display: flex;
