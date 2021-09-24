@@ -32,6 +32,7 @@ const BasicApplyForm: React.FC = () => {
   });
   const {
     register,
+    watch,
     formState: { errors },
     control,
   } = methods;
@@ -41,10 +42,11 @@ const BasicApplyForm: React.FC = () => {
     location: '',
   });
 
-  const handleChange = event => {
-    setChar({ ...char, [event.target.name]: event.target.value });
-  };
+  const currentLocation = watch('location'); 
 
+  const errorMessage = errors.location?.message;
+  const characterLimit = `${currentLocation ? currentLocation.length : 0} / ${CHARACTER_LIMIT}`;
+  
   return (
     <Layout>
       <div className={styles.main}>
@@ -107,9 +109,8 @@ const BasicApplyForm: React.FC = () => {
                     name="location"
                     label="Location"
                     inputProps={{
-                      maxlength: CHARACTER_LIMIT
+                      maxLength: CHARACTER_LIMIT
                     }}
-                    onChange={(event)=>handleChange(event)}
                     defaultValue={values.location}
                     type="text"
                     autoComplete="on"
@@ -118,8 +119,8 @@ const BasicApplyForm: React.FC = () => {
                     fullWidth
                     error={errors.location ? true : false}
                     helperText=
-                    {`${char.location?.length}/${CHARACTER_LIMIT}`}
-                    // {...register('location')}
+                    {errorMessage ? errorMessage : characterLimit}
+                    {...register('location')}
                   />
                 </Grid>
                 <Grid item md={6} xs={12}>
