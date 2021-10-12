@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import { User } from 'firebase/auth';
 
 import { LoginData } from '../components/forms/LoginForm';
 import { SignUpData } from '../components/forms/SignUpForm';
@@ -11,10 +11,10 @@ export type AuthEmission = {
   signIn: ({
     email,
     password,
-  }: LoginData) => Promise<firebase.User | { error: any } | any>;
-  getUserAdditionalData: (userToGet: firebase.User) => Promise<void>;
-  signOut: () => Promise<void>;
-  sendPasswordResetEmail: (email: string) => Promise<void>;
+  }: LoginData) => Promise<User | { error: any } | any>;
+  getUserAdditionalData: (userToGet: User) => Promise<void>;
+  firestoreSignOut: () => Promise<void>;
+  sendFirestorePasswordResetEmail: (email: string) => Promise<void>;
 };
 
 export type FirebaseAuthProviderState = AuthEmission;

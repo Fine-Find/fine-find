@@ -18,7 +18,7 @@ const ResetPasswordForm: React.FC = () => {
   const auth = useAuth();
   const router = useRouter();
   const onSubmit = (data: { email: string }) => {
-    auth.sendPasswordResetEmail(data.email);
+    auth.sendFirestorePasswordResetEmail(data.email);
     router.push('/login');
   };
   return (

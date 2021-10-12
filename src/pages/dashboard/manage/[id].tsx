@@ -5,6 +5,7 @@ import InstagramLoginButton from '@/components/Instagram/InstagramLoginButton';
 import { useRequireAuth } from '@/hooks/useRequireAuth';
 import { ShopifyProduct } from '@/types/shopify/Products';
 import { fineFindApis, fineFindPages } from '@/utils/urls';
+import { Container } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -75,8 +76,11 @@ const ManageImagePage: React.FC = () => {
           title,
         });
         const productsUrl = `${fineFindApis.searchProducts}?${queryParameters}`;
-
-        fetch(productsUrl).then((response) => {
+        fetch(productsUrl, {
+          headers: {
+            authorization: `bearer ${auth.userIdToken}`,
+          },
+        }).then((response) => {
           response.json().then((products) => {
             let newOptions = [] as ShopifyProduct[];
             if (value) {
@@ -145,130 +149,137 @@ const ManageImagePage: React.FC = () => {
   return (
     <DashboardLayout>
       <div className={styles.root}>
-        <Grid
-          container
-          spacing={1}
-          className={`${styles.container} ${styles.headerContainer}`}
-        >
-          <Grid item xs={12} md={8} xl={10} className={styles.imageGrid}>
-            <img
-              src={mediaUrl}
-              alt={mediaCaption || imageId}
-              className={styles.instagramImage}
-            />
-          </Grid>
-          <Grid item xs={12} md={4} xl={2}>
-            <Autocomplete
-              id="fine-find-products"
-              options={options}
-              getOptionLabel={(option) =>
-                typeof option === 'string' ? option : option.title
-              }
-              filterSelectedOptions
-              filterOptions={(x) => x}
-              value={value}
-              getOptionSelected={(optionToTest, valueToCompare) => {
-                return optionToTest.id === valueToCompare.id;
-              }}
-              onChange={(event: any, newValue: ShopifyProduct | null) => {
-                setOptions(newValue ? [newValue, ...options] : options);
-                setValue(newValue);
-                addSelectedProduct(newValue);
-              }}
-              onInputChange={(event, newInputValue) => {
-                setInputValue(newInputValue);
-              }}
-              renderInput={(params) => (
-                <Paper component="form" className={styles.paperRoot}>
-                  <IconButton
-                    type="submit"
-                    className={styles.iconButton}
-                    aria-label="search"
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                  <TextField
-                    {...params}
-                    className={styles.input}
-                    label="Search Fine Find"
-                    fullWidth
-                  />
-                </Paper>
-              )}
-              renderOption={(option) => {
-                return (
-                  <Grid container alignItems="center">
-                    <Grid item>
-                      {option.originalSrc && (
-                        <img
-                          className={styles.image}
-                          src={option.originalSrc}
-                          alt={option.title}
-                        />
-                      )}
-                    </Grid>
-                    <Grid item xs>
-                      {option.title}
-                      <Typography variant="body2" color="textSecondary">
-                        {option.description.substr(
-                          0,
-                          option.description.indexOf('Product Details')
-                        )}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                );
-              }}
-            />
-            <Grid item>
-              {selectedProducts.length > 0 && (
-                <>
-                  <List className={styles.selectProductList}>
-                    {selectedProducts.map((product) => {
-                      return (
-                        <ListItem key={product.id}>
-                          <ListItemAvatar>
-                            <img
-                              className={styles.image}
-                              src={product.originalSrc}
-                              alt={product.title}
-                            />
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary={product.title}
-                            secondary={product.description}
+        <Container maxWidth="xl">
+          <h2>Create a new Collection</h2>
+          <Grid
+            container
+            spacing={3}
+            className={`${styles.container} ${styles.headerContainer}`}
+          >
+            <Grid item xs={12} md={8} xl={10} className={styles.imageGrid}>
+              <img
+                src={mediaUrl}
+                alt={mediaCaption || imageId}
+                className={styles.instagramImage}
+              />
+            </Grid>
+            <Grid item xs={12} md={4} xl={2}>
+              <Autocomplete
+                id="fine-find-products"
+                options={options}
+                getOptionLabel={(option) =>
+                  typeof option === 'string' ? option : option.title
+                }
+                filterSelectedOptions
+                filterOptions={(x) => x}
+                value={value}
+                getOptionSelected={(optionToTest, valueToCompare) => {
+                  return optionToTest.id === valueToCompare.id;
+                }}
+                onChange={(event: any, newValue: ShopifyProduct | null) => {
+                  setOptions(newValue ? [newValue, ...options] : options);
+                  setValue(newValue);
+                  addSelectedProduct(newValue);
+                }}
+                onInputChange={(event, newInputValue) => {
+                  setInputValue(newInputValue);
+                }}
+                renderInput={(params) => (
+                  <Paper component="form" className={styles.paperRoot}>
+                    <IconButton
+                      type="submit"
+                      className={styles.iconButton}
+                      aria-label="search"
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                    <TextField
+                      {...params}
+                      className={styles.input}
+                      label="Search"
+                      fullWidth
+                    />
+                  </Paper>
+                )}
+                renderOption={(option) => {
+                  return (
+                    <Grid container alignItems="center">
+                      <Grid item>
+                        {option.originalSrc && (
+                          <img
+                            className={styles.image}
+                            src={option.originalSrc}
+                            alt={option.title}
                           />
+                        )}
+                      </Grid>
+                      <Grid item xs>
+                        {option.title}
+                        <Typography variant="body2" color="textSecondary">
+                          {option.description.substr(
+                            0,
+                            option.description.indexOf('Product Details')
+                          )}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  );
+                }}
+              />
+              <Grid item>
+                {selectedProducts.length > 0 && (
+                  <>
+                    <List className={styles.selectProductList}>
+                      {selectedProducts.map((product) => {
+                        return (
+                          <ListItem key={product.id}>
+                            <ListItemAvatar>
+                              <img
+                                className={styles.image}
+                                src={product.originalSrc}
+                                alt={product.title}
+                              />
+                            </ListItemAvatar>
+                            <ListItemText
+                              primary={product.title}
+                              //secondary={product.description}
+                            />
 
-                          <IconButton
-                            type="submit"
-                            className={styles.iconButton}
-                            aria-label="remove"
-                            onClick={() => {
-                              removeSelectedProduct(product.id);
-                            }}
-                          >
-                            <CloseOutlined />
-                          </IconButton>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    fullWidth
-                    onClick={() => createShopifyPage()}
-                  >
-                    Create Shopify Page
-                  </Button>
-                </>
-              )}
+                            <IconButton
+                              type="submit"
+                              className={styles.iconButton}
+                              aria-label="remove"
+                              onClick={() => {
+                                removeSelectedProduct(product.id);
+                              }}
+                            >
+                              <CloseOutlined />
+                            </IconButton>
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      fullWidth
+                      onClick={() => createShopifyPage()}
+                      className={styles.button}
+                    >
+                      SAVE
+                    </Button>
+                  </>
+                )}
+              </Grid>
+            </Grid>
+            <Grid item xs={12} className={styles.instagramInfo}>
+              {
+                // TODO: Renable instagram
+                //displayInstagramLogin(auth)
+              }
             </Grid>
           </Grid>
-          <Grid item xs={12} className={styles.instagramInfo}>
-            {displayInstagramLogin(auth)}
-          </Grid>
-        </Grid>
+        </Container>
       </div>
     </DashboardLayout>
   );

@@ -4,29 +4,25 @@ import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useAuth } from '../../hooks/useAuth';
 import DashboardNav from '../DashboardNav';
 import styles from './Header.module.scss';
 
 export interface HeaderProps {
-  title?: string;
-  drawer?: boolean;
+  open: boolean;
+  onDrawerToggled: () => void;
 }
 
-export default function Header({
-  title = 'The FineFind',
-  drawer = false,
-}: HeaderProps) {
+// TODO: Refactor to support true responsive design. On mobile the side drawer should be hidden
+//      and then when opened it appears as an expanded drawer.
+export default function Header({ open, onDrawerToggled }: HeaderProps) {
   const router = useRouter();
   const auth = useAuth();
-
-  const [open, setOpen] = useState(drawer);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
 
   let button = null;
   if (auth.isInitialized) {
@@ -38,7 +34,7 @@ export default function Header({
       <Button
         color="inherit"
         onClick={() => {
-          auth.signOut();
+          auth.firestoreSignOut();
           router.push('/login');
         }}
       >
@@ -47,40 +43,35 @@ export default function Header({
     );
   }
 
-  const appBarStyle = drawer && open ? styles.appBarShift : '';
+  const appBarStyle = open ? styles.appBarShift : '';
   const menuButtonStyle = `${styles.menuButton} ${
     open && styles.menuButtonHidden
   }`;
 
   return (
     <>
-      <AppBar position="absolute" className={`${styles.appBar} ${appBarStyle}`}>
+      <AppBar
+        position="absolute"
+        className={`${styles.appBar} ${appBarStyle}`}
+        elevation={0}
+      >
         <Toolbar className={styles.toolbar}>
-          {MenuDrawer(drawer, toggleDrawer, menuButtonStyle)}
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={styles.appBarTypography}
-          >
-            {title}
-          </Typography>
+          {MenuDrawer(onDrawerToggled, menuButtonStyle)}
+          <Link href="/dashboard">
+            <a>
+              <Image src="/main_navy.png" width={100} height={25} />
+            </a>
+          </Link>
+          <Typography className={styles.appBarTypography} />
           {button}
         </Toolbar>
       </AppBar>
-      {drawer && (
-        <DashboardNav open={open} toggleDrawer={toggleDrawer}></DashboardNav>
-      )}
+      <DashboardNav open={open} toggleDrawer={onDrawerToggled} />
     </>
   );
 }
 
-function MenuDrawer(drawer: boolean, toggleDrawer, menuButtonStyle) {
-  if (!drawer) {
-    return null;
-  }
-
+function MenuDrawer(toggleDrawer, menuButtonStyle) {
   return (
     <IconButton
       edge="start"

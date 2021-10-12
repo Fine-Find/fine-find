@@ -5,11 +5,7 @@ import styles from './Copyright.module.scss';
 
 export default function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      {...props}
-      className={styles.copyright}
-    >
+    <Typography variant="body2" {...props} className={styles.copyright}>
       {`© ${new Date().getFullYear()} `}
       <Link href="https://thefinefind.com/">
         <a>The FineFind</a>

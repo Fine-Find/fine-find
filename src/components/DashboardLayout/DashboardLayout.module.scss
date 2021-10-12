@@ -1,20 +1,49 @@
-.box {
-  flex-grow: 1;
-  height: 100vh;
-  overflow: auto;
-}
-.container {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-  padding-left: 15rem;
+.root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
-.appBarSpacer {
-  min-height: 56;
+.box {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  min-height: 100%;
+}
+.container {
+  display: flex;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.content {
+  flex: 1 1 auto;
+  height: 100%;
+  overflow: auto;
+}
+
+.open {
+  padding-left: 240px;
+}
+
+.closed {
+  padding-left: 56px;
+
+  @media (min-width: 600px) {
+    padding-left: 72px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  overflow: hidden;
+
+  padding-top: 56px;
   @media (min-width: 0px), (orientation: landscape) {
-    min-height: 48;
+    padding-top: 48px;
   }
   @media (min-width: 600px) {
-    min-height: 64;
+    padding-top: 64px;
   }
 }

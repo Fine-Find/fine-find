@@ -1,10 +1,15 @@
 .root {
   flex-grow: 1;
 }
-.container {
-  flex-direction: column;
-}
+
 .headerContainer {
-  align-items: center;
   justify-content: center;
+}
+
+.moodRow {
+  max-height: 600px;
+}
+
+.profile {
+  overflow-y: auto;
 }

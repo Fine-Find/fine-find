@@ -1,4 +1,18 @@
-import firebase from 'firebase';
+import {
+  User,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+import {
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  setDoc,
+} from 'firebase/firestore';
 import React, {
   ReactNode,
   createContext,
@@ -23,10 +37,10 @@ const firebaseAuthProviderDefaultProps = {
   getUserAdditionalData: () => {
     return Promise.resolve();
   },
-  signOut: () => {
+  firestoreSignOut: () => {
     return Promise.resolve();
   },
-  sendPasswordResetEmail: () => {
+  sendFirestorePasswordResetEmail: () => {
     return Promise.resolve();
   },
 } as AuthEmission;
@@ -59,10 +73,10 @@ const useAuthProvider = (): AuthEmission => {
   };
 
   const createUser = (createdUser) => {
-    return db
-      .collection('users')
-      .doc(createdUser.uid)
-      .set(createdUser)
+    const userCollection = collection(db, 'users');
+    const userDoc = doc(userCollection, createdUser.uid);
+
+    return setDoc(userDoc, createdUser)
       .then(() => {
         getUserIdToken().then((token) => {
           setUser(createdUser);
@@ -76,10 +90,9 @@ const useAuthProvider = (): AuthEmission => {
   };
 
   const signUp = ({ name, email, password }) => {
-    return auth
-      .createUserWithEmailAndPassword(email, password)
+    return createUserWithEmailAndPassword(auth, email, password)
       .then((response) => {
-        auth.currentUser.sendEmailVerification();
+        sendEmailVerification(auth.currentUser);
         return createUser({ uid: response.user.uid, email, name });
       })
       .catch((error) => {
@@ -87,21 +100,18 @@ const useAuthProvider = (): AuthEmission => {
       });
   };
 
-  const getUserAdditionalData = (userToGet: firebase.User) => {
-    return db
-      .collection('users')
-      .doc(userToGet.uid)
-      .get()
-      .then((userData) => {
-        if (userData.data()) {
-          setUser(userData.data());
-        }
-      });
+  const getUserAdditionalData = (userToGet: User) => {
+    const userCollection = collection(db, 'users');
+    const userDoc = doc(userCollection, userToGet.uid);
+    return getDoc(userDoc).then((userData) => {
+      if (userData.data()) {
+        setUser(userData.data());
+      }
+    });
   };
 
   const signIn = ({ email, password }) => {
-    return auth
-      .signInWithEmailAndPassword(email, password)
+    return signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
         return response.user;
       })
@@ -110,20 +120,20 @@ const useAuthProvider = (): AuthEmission => {
       });
   };
 
-  const signOut = () => {
-    return auth.signOut().then(() => {
+  const firestoreSignOut = () => {
+    return signOut(auth).then(() => {
       setUser(false);
       setUserIdtoken(null);
     });
   };
 
-  const sendPasswordResetEmail = (email) => {
-    return auth.sendPasswordResetEmail(email).then((response) => {
+  const sendFirestorePasswordResetEmail = (email) => {
+    return sendPasswordResetEmail(auth, email).then((response) => {
       return response;
     });
   };
 
-  const handleAuthStateChanged = (changedUser: firebase.User) => {
+  const handleAuthStateChanged = (changedUser: User) => {
     getUserIdToken().then((token) => {
       setUserIdtoken(token);
       setUser(changedUser);
@@ -142,16 +152,15 @@ const useAuthProvider = (): AuthEmission => {
 
   useEffect(() => {
     if (user && user?.uid) {
+      const userCollection = collection(db, 'users');
+      const userDoc = doc(userCollection, user.uid);
       // Subscribe to user document on mount
-      const unsubscribe = db
-        .collection('users')
-        .doc(user.uid)
-        .onSnapshot((doc) => {
-          getUserIdToken().then((token) => {
-            setUser(doc.data());
-            setUserIdtoken(token);
-          });
+      const unsubscribe = onSnapshot(userDoc, (docSnapshot) => {
+        getUserIdToken().then((token) => {
+          setUser(docSnapshot.data());
+          setUserIdtoken(token);
         });
+      });
       return () => unsubscribe();
     }
   }, []);
@@ -163,8 +172,8 @@ const useAuthProvider = (): AuthEmission => {
     signUp,
     signIn,
     getUserAdditionalData,
-    signOut,
-    sendPasswordResetEmail,
+    firestoreSignOut,
+    sendFirestorePasswordResetEmail,
   };
 };
 
