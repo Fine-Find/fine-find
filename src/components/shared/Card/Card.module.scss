@@ -1,36 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+$font-stack: 'Montserrat', sans-serif;
+
 .root {
   padding: 2em;
   margin: auto;
   border: 2px solid var(--main-primary-color);
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-top-right-radius: 70px;
+  border-bottom-right-radius: 70px;
   height: 100%;
-  width: 100%;
+  // width: 100%;
   padding-left: 60px;
   padding-top: 30px;
+  font-family: $font-stack;
+  // margin-inline: 30px;
 }
+.container {
+  margin-inline: 20px;
+}
+
 .grid {
-  padding: 2em;
-  padding-top: 30px;
+  // padding: 2em;
+  padding: 30px 0 20px 15px;
   display: flex;
   transform: none;
 }
 .text {
+  // position: absolute;
   padding-right: 50px;
   width: 25%;
 }
 
 .title {
-  font: 2.5em bolder;
+  padding-top: 30px;
+  font: 2.2em bolder;
+  font-weight: 600;
+  font-family: $font-stack;
 }
 
 .paragraph {
   font-size: 1em;
+  font-weight: 600;
+  font-family: $font-stack;
+  transform: translateX(10px);
 }
 
-.icon {
-  margin-top: 30px;
+.iconLeft {
+  transform: translateX(-30px);
+  width: 100px;
+  height: 100px;
 }
+
+.iconRight {
+  transform: translateX(10px);
+  width: 100px;
+  height: 100px;
+}
+
 .button {
   align-self: flex-end;
 }
@@ -41,16 +66,25 @@
 
 .rotateLeft {
   transform: rotateY(360deg);
+  // unicode-bidi: bidi-override;
+
 }
 
 .rotateRight {
   transform: rotateY(180deg);
+  // unicode-bidi: bidi-override;
+
 }
 
 .leftToRight {
   direction: ltr;
+  // unicode-bidi: bidi-override;
+
 }
 
 .rightToLeft {
   direction: rtl;
+  // unicode-bidi: ;
+  // unicode-bidi: bidi-override;
+
 }

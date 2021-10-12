@@ -17,10 +17,19 @@ $font-stack: 'Montserrat', sans-serif;
   background-attachment: fixed;
 }
 
+.headerbutton {
+  align-self: center;
+  padding-left: 10px;
+}
+
 .header {
-  // margin: 16px;
-  padding: 50px;
   font-family: $font-stack;
+}
+
+.processtitle{
+  font-family: $font-stack;
+  font-size: 3.2em;
+  letter-spacing: .08em;
 }
 
 .process {
@@ -35,34 +44,36 @@ $font-stack: 'Montserrat', sans-serif;
 }
 
 .processtext {
-  margin-top: 40px;
   margin-bottom: 50px;
   margin-left: 40px;
   font-family: $font-stack;
 }
 
+.processfont {
+  font-size: 2.2em;
+}
 .processbutton {
-  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .blocktext {
   font-family: $font-stack;
+  font-weight: 600;
+  font-size: 2em;
+  letter-spacing: .05em;
   display: block;
   text-align: start;
   padding-top: 10px;
   margin-block-end: 1em;
-  margin-inline-start: 100px;
-  margin-inline-end: 100px;
-  margin-left: 100px;
-  margin-right: 100px;
-  /* align-content: center; */
+  margin-inline-start: 70px;
+  margin-inline-end: 70px;
 }
 
 .footer {
   width: 100%;
   border-top: 1px solid #eaeaea;
-  padding-bottom: 60px;
-  padding-top: 50px;
+  padding-bottom: 110px;
+  padding-top: 100px;
   display: 'flex';
   text-align: 'center';
   flex-direction: 'column';
@@ -73,34 +84,11 @@ $font-stack: 'Montserrat', sans-serif;
   margin-left: 0.5rem;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
 .title {
   font-family: $font-stack;
-
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
-  font-family: $font-stack;
-}
-
-.description {
-  line-height: 1.5;
-  font-size: 1.5rem;
+  font-size: 3.2em;
+  padding-left: 40px;
+  letter-spacing: .08em;
 }
 
 .grid {
@@ -114,12 +102,15 @@ $font-stack: 'Montserrat', sans-serif;
 }
 
 .leftspace {
+  background-size: cover;
   padding-right: 30px;
   padding-bottom: 30px;
   padding-top: 30px;
 }
 
 .rightspace {
+  // unicode-bidi: bidi-override;
+  background-size: cover;
   padding-bottom: 30px;
   padding-top: 30px;
   padding-left: 30px;
@@ -127,7 +118,7 @@ $font-stack: 'Montserrat', sans-serif;
 
 .logo {
   padding-top: 10px;
-  height: 2.5em;
+  height: 3.5em;
   padding-left: 40px;
   margin-top: 20px;
 }

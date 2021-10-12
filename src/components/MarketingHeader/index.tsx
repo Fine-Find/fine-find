@@ -39,7 +39,7 @@ export default function MarketingHeader() {
         <Toolbar className={styles.toolbar}>
           <Link href="/">
             <a>
-              <Image src="/main_navy.png" width={100} height={25} />
+              <Image src="/main_navy.png" width={125} height={25} />
             </a>
           </Link>
           <Typography className={styles.appBarTypography}> </Typography>

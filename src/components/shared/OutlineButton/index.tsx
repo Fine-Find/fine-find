@@ -1,3 +1,6 @@
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+// $font-family: 'Montserrat', sans-serif;
+
 export type ButtonProps = {
   textColor?: string;
   borderColor?: string;
@@ -42,13 +45,14 @@ export const Button = ({
       onClick={onClick}
       style={{
         color: textColor,
+        fontFamily: 'Montserrat',
         padding: cellPaddingMap[cellPadding],
         backgroundColor: backgroundColor,
         border: `${borderWidthMap[borderWidth]} solid ${borderColor}`,
         borderRadius: 100,
         fontSize: textSize,
         width: width,
-        marginRight: marginRight ? '75px' : '0px',
+        marginRight: marginRight ? '30px' : '0px',
       }}
     >
       {label}
