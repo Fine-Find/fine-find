@@ -3,7 +3,7 @@ $font-stack: 'Montserrat', sans-serif;
 
 .root {
   padding: 2em;
-  margin: auto;
+  // margin: auto;
   border: 2px solid var(--main-primary-color);
   border-top-right-radius: 70px;
   border-bottom-right-radius: 70px;
@@ -13,6 +13,9 @@ $font-stack: 'Montserrat', sans-serif;
   padding-top: 30px;
   font-family: $font-stack;
   // margin-inline: 30px;
+  @media (max-width: 600px) {
+    all: unset;
+  }
 }
 .container {
   margin-inline: 20px;
@@ -28,6 +31,7 @@ $font-stack: 'Montserrat', sans-serif;
   // position: absolute;
   padding-right: 50px;
   width: 25%;
+  color: #303455;
 }
 
 .title {
@@ -35,6 +39,8 @@ $font-stack: 'Montserrat', sans-serif;
   font: 2.2em bolder;
   font-weight: 600;
   font-family: $font-stack;
+  color: #303455;
+
 }
 
 .paragraph {
@@ -42,6 +48,8 @@ $font-stack: 'Montserrat', sans-serif;
   font-weight: 600;
   font-family: $font-stack;
   transform: translateX(10px);
+  color: #303455;
+
 }
 
 .iconLeft {

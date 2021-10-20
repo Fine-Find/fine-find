@@ -38,6 +38,7 @@ export const Card = ({
         background: bg,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        borderLeft: 'none',
       }}
     >
       <Grid container className={rotation}>
