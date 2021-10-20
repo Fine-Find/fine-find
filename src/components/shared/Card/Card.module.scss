@@ -15,6 +15,7 @@ $font-stack: 'Montserrat', sans-serif;
   // margin-inline: 30px;
   @media (max-width: 600px) {
     all: unset;
+
   }
 }
 .container {
@@ -30,8 +31,13 @@ $font-stack: 'Montserrat', sans-serif;
 .text {
   // position: absolute;
   padding-right: 50px;
-  width: 25%;
+  // width: 25%;
   color: #303455;
+  // @media (max-width: 600px) {
+  //   padding-left: 20px;
+  //   padding-right: 30px;
+
+  // }
 }
 
 .title {
@@ -56,12 +62,22 @@ $font-stack: 'Montserrat', sans-serif;
   transform: translateX(-30px);
   width: 100px;
   height: 100px;
+  // @media (max-width: 600px) {
+  //   padding-left: 20px;
+  //   padding-right: 30px;
+
+  // }
 }
 
 .iconRight {
   transform: translateX(10px);
   width: 100px;
   height: 100px;
+  // @media (max-width: 600px) {
+  //   padding-left: 20px;
+  //   padding-right: 70px;
+
+  // }
 }
 
 .button {

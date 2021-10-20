@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 $font-stack: 'Montserrat', sans-serif;
 
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -163,22 +164,19 @@ $font-stack: 'Montserrat', sans-serif;
         // font-size: 50%;
         width: 50%;
         height: 50%;
-//         #third {order: 4;}
-//         #fourth {order: 3;}
-//         #seventh {order: 8;}
-// #eigth {order: 7;}
+        .first {order: 1;}
+        .second {order: 2;}
+        .third {order: 4;}
+        .fourth {order: 3;}
+        .fifth {order: 5;}
+        .sixth {order: 6;}
+        .seventh {order: 8;}
+        .eighth {order: 7;}
       }
-  // #third {order:4}
+  
 }
 
-#first {order: 1;}
-#second {order: 2;}
-#third {order: 4;}
-#fourth {order: 3;}
-#fifth {order: 5;}
-#sixth {order: 6;}
-#seventh {order: 8;}
-#eigth {order: 7;}
+
 
 
 // .grid:nth-of-type(3) {order: 4;}
@@ -215,7 +213,7 @@ $font-stack: 'Montserrat', sans-serif;
         display: flex;
         flex-direction: column;
         padding: 0 0 20px 0;
-        order: 1;
+        // order: 1;
         // font-size: 50%;
         // width: 50%;
         // height: 100%;

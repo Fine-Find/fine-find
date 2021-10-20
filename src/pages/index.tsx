@@ -79,20 +79,20 @@ export default function Home() {
             </div>
             <div className={styles.grid}>
               <Grid container>
-                <Grid item xs={12} sm={8} className={styles.leftspace} id='first'>
+                <Grid item xs={12} sm={8} className={`${styles.leftspace} ${styles.first}`}>
                   <Card
                     title={monetization.title}
                     icon={monetization.icon}
                     paragraph={monetization.paragraph}
                   />
                 </Grid>
-                <Grid item xs={12} sm={4} className={styles.rightspace} id='second'>
+                <Grid item xs={12} sm={4} className={`${styles.rightspace} ${styles.second}`}>
                   <Card src={image[0]} direction="right" />
                 </Grid>
-                <Grid item xs={12} sm={4} className={styles.leftspace} id='third'>
+                <Grid item xs={12} sm={4} className={`${styles.leftspace} ${styles.third}`}>
                   <Card src={image[1]} direction="left" />
                 </Grid>
-                <Grid item xs={12} sm={8} className={styles.rightspace} id='fourth'>
+                <Grid item xs={12} sm={8} className={`${styles.rightspace} ${styles.fourth}`}>
                   <Card
                     title={network.title}
                     icon={network.icon}
@@ -100,7 +100,7 @@ export default function Home() {
                     direction="right"
                   />
                 </Grid>
-                <Grid item xs={12} sm={8} className={styles.leftspace} id='fifth'>
+                <Grid item xs={12} sm={8} className={`${styles.leftspace} ${styles.fifth}`}>
                   <Card
                     title={earn.title}
                     paragraph={earn.paragraph}
@@ -108,13 +108,13 @@ export default function Home() {
                     direction="left"
                   />
                 </Grid>
-                <Grid item xs={12} sm={4} className={styles.rightspace} id='sixth'>
+                <Grid item xs={12} sm={4} className={`${styles.rightspace} ${styles.sixth}`}>
                   <Card src={image[2]} direction="right" />
                 </Grid>
-                <Grid item xs={12} sm={4} className={styles.leftspace} id='seventh'>
+                <Grid item xs={12} sm={4} className={`${styles.leftspace} ${styles.seventh}`}>
                   <Card src={image[3]} direction="left" />
                 </Grid>
-                <Grid item xs={12} sm={8} className={styles.rightspace} id='eight'>
+                <Grid item xs={12} sm={8} className={`${styles.rightspace} ${styles.eighth}`}>
                   <Card
                     title={efficient.title}
                     icon={efficient.icon}
