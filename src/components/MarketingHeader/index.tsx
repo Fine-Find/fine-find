@@ -58,44 +58,44 @@ export default function MarketingHeader() {
           <Typography className={styles.appBarTypography}> </Typography>
 
           <div className={styles.bigNavBar}>
-          <Link href="/">
-            <a className={styles.link}>HOME</a>
-          </Link>
+            <Link href="/">
+              <a className={styles.link}>HOME</a>
+            </Link>
 
-          <Link href="/faq">
-            <a className={styles.link}>FAQ</a>
-          </Link>
-          {button}
+            <Link href="/faq">
+              <a className={styles.link}>FAQ</a>
+            </Link>
+            {button}
           </div>
           <div className={styles.hamburgerNavBar}>
             <button aria-controls="simple-menu" aria-haspopup="true" onClick={(e) => handleClick(e)}>
-             <MenuIcon />
+              <MenuIcon />
             </button>
-           <Menu
-             id="simple-menu"
-             anchorEl={anchorEl}
-             keepMounted
-             open={Boolean(anchorEl)}
-             onClose={handleClose}
-           >
-             <MenuItem onClick={handleClose}>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
                 <Link href="/">
                   <a className={styles.link}>HOME</a>
                 </Link>
-             </MenuItem>
-             <MenuItem onClick={handleClose}>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
                 <Link href="/faq">
                   <a className={styles.link}>FAQ</a>
                 </Link>
-             </MenuItem>
-             <MenuItem onClick={handleClose}>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
                 <Link href="/signup">
                   <a className={styles.link}>APPLY NOW</a>
                 </Link>
-             </MenuItem>
+              </MenuItem>
 
-           </Menu>
-        </div>
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
     </>

@@ -20,6 +20,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Skeleton from '@material-ui/lab/Skeleton';
 import throttle from 'lodash/throttle';
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 import styles from './products.module.scss';
 
@@ -160,7 +161,7 @@ const ProductsPage: React.FC = () => {
                     <Grid container alignItems="center">
                       <Grid item>
                         {option.originalSrc && (
-                          <img
+                          <Image
                             className={styles.image}
                             src={option.originalSrc}
                             alt={option.title}
@@ -188,7 +189,7 @@ const ProductsPage: React.FC = () => {
                         return (
                           <ListItem key={product.id}>
                             <ListItemAvatar>
-                              <img
+                              <Image
                                 className={styles.image}
                                 src={product.originalSrc}
                                 alt={product.title}

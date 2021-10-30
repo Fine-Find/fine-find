@@ -23,6 +23,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import throttle from 'lodash/throttle';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 import styles from './manage.module.scss';
 
@@ -157,7 +158,7 @@ const ManageImagePage: React.FC = () => {
             className={`${styles.container} ${styles.headerContainer}`}
           >
             <Grid item xs={12} md={8} xl={10} className={styles.imageGrid}>
-              <img
+              <Image
                 src={mediaUrl}
                 alt={mediaCaption || imageId}
                 className={styles.instagramImage}
@@ -206,7 +207,7 @@ const ManageImagePage: React.FC = () => {
                     <Grid container alignItems="center">
                       <Grid item>
                         {option.originalSrc && (
-                          <img
+                          <Image
                             className={styles.image}
                             src={option.originalSrc}
                             alt={option.title}
@@ -234,7 +235,7 @@ const ManageImagePage: React.FC = () => {
                         return (
                           <ListItem key={product.id}>
                             <ListItemAvatar>
-                              <img
+                              <Image
                                 className={styles.image}
                                 src={product.originalSrc}
                                 alt={product.title}
