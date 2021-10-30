@@ -11,3 +11,4 @@ updates:
       - dependency-type: "production"
     reviewers:
       - "bcg00ding"
+    open-pull-requests-limit: 0
