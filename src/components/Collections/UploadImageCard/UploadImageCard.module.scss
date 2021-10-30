@@ -1,0 +1,32 @@
+.icon {
+  font-size: 10rem;
+  margin: 5rem 0;
+  @media (max-width: 1200px) {
+    font-size: 8rem;
+  }
+  @media (max-width: 800px) {
+    font-size: 5rem;
+  }
+}
+
+.input {
+  display: none;
+}
+
+.highlight {
+  background-color: var(--main-platinum-color);
+}
+
+.card {
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container {
+  text-align: center;
+}
+
+.text {
+  margin-top: 1rem;
+}

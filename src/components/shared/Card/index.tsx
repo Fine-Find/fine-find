@@ -20,9 +20,8 @@ export const Card = ({
   icon,
   direction = 'left',
 }: CardProps) => {
-  
   const bg = src ? `url(${src})` : '#E8E8E8';
-  
+
   const rotation =
     direction === 'left' ? styles.rotateLeft : styles.rotateRight;
   const textDirection =
@@ -42,7 +41,12 @@ export const Card = ({
     >
       <Grid container className={rotation}>
         <Grid item xs={12} sm container>
-          <Grid container direction="column" spacing={2} className={styles.container}>
+          <Grid
+            container
+            direction="column"
+            spacing={2}
+            className={styles.container}
+          >
             <Typography className={`${styles.title} ${textDirection}`}>
               <bdi>{title}</bdi>
             </Typography>
