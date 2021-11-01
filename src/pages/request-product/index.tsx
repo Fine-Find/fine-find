@@ -1,18 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { CardContent, Grid, TextField, InputLabel, MenuItem } from '@material-ui/core';
+import { CardContent, Grid, TextField, MenuItem } from '@material-ui/core';
 import React from 'react';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
-import InputMask from 'react-input-mask';
-import { usaStates } from '@/utils/usaStates';
+import { FormProvider, useForm } from 'react-hook-form';
 import Layout from 'components/Layout';
 
 import { ProfileFormCard } from 'components/Profile/ProfileFormCard';
-import { basicRequestValidation } from './requestFormValidation';
+import { basicRequestValidation } from '../../utils/requestFormValidation';
 import styles from './request.module.scss';
 
 
 // TODO: Remove the mask prior to storing the phone number in the DB
-const BasicRequestForm: React.FC = () => {
+const BasicRequestForm = () => {
   // TODO: Pull this from Firebase
   const values = {
     productType: '',
@@ -30,11 +28,9 @@ const BasicRequestForm: React.FC = () => {
     register,
     watch,
     formState: { errors },
-    control,
   } = methods;
 
   const products = ['Fabric', 'Trim', 'Wallcovering', 'Upholstered Furniture', 'Casegoods', 'Lighting', 'Rugs', 'Other'];
-  const [product, setProduct] = React.useState('');
 
   const selectProductType = watch('productType'); 
 
@@ -44,7 +40,7 @@ const BasicRequestForm: React.FC = () => {
         <FormProvider {...methods}>
           <ProfileFormCard
             title="Request Product"
-            // subTitle="All about you"
+            subTitle=""
             buttonText="Submit"
             className={styles.paper}
           >
@@ -55,7 +51,7 @@ const BasicRequestForm: React.FC = () => {
                     select
                     name={selectProductType}
                     label="Product type"
-                    defaultValue={product}
+                    defaultValue={values.productType}
                     type="text"
                     autoComplete="on"
                     aria-required
@@ -64,12 +60,12 @@ const BasicRequestForm: React.FC = () => {
                     error={errors.productType ? true : false}
                     helperText={errors.productType?.message}
                     {...register('productType')}
-                    >
-                        {products.map((option) => (
-                          <MenuItem key={option} value={option}>
-                            {option}
-                          </MenuItem>
-                        ))} 
+                  >
+                    {products.map((option) => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))} 
                   </TextField>
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -153,8 +149,8 @@ const BasicRequestForm: React.FC = () => {
             </CardContent>
           </ProfileFormCard>
         </FormProvider>
-        </div>
-      </Layout>
+      </div>
+    </Layout>
   );
 };
 export default BasicRequestForm;

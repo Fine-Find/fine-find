@@ -3,16 +3,15 @@ import { CardContent, Grid, TextField, InputLabel } from '@material-ui/core';
 import React from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-import { usaStates } from '@/utils/usaStates';
 import Layout from 'components/Layout';
 
 import { ProfileFormCard } from 'components/Profile/ProfileFormCard';
-import { basicApplyValidation } from './applyFormValidation';
+import { basicApplyValidation } from '../../utils/applyFormValidation';
 import styles from './apply.module.scss';
 
 
 // TODO: Remove the mask prior to storing the phone number in the DB
-const BasicApplyForm: React.FC = () => {
+const BasicApplyForm = () => {
   // TODO: Pull this from Firebase
   const values = {
     firstName: '',
@@ -38,9 +37,6 @@ const BasicApplyForm: React.FC = () => {
   } = methods;
 
   const CHARACTER_LIMIT = 20;
-  const [char, setChar] = React.useState({
-    location: '',
-  });
 
   const currentLocation = watch('location'); 
 
@@ -53,7 +49,7 @@ const BasicApplyForm: React.FC = () => {
         <FormProvider {...methods}>
           <ProfileFormCard
             title="Apply Today"
-            // subTitle="All about you"
+            subTitle=""
             buttonText="Apply Now"
             className={styles.paper}
           >
@@ -119,7 +115,7 @@ const BasicApplyForm: React.FC = () => {
                     fullWidth
                     error={errors.location ? true : false}
                     helperText=
-                    {errorMessage ? errorMessage : characterLimit}
+                      {errorMessage ? errorMessage : characterLimit}
                     {...register('location')}
                   />
                 </Grid>
@@ -236,8 +232,8 @@ const BasicApplyForm: React.FC = () => {
             </CardContent>
           </ProfileFormCard>
         </FormProvider>
-        </div>
-      </Layout>
+      </div>
+    </Layout>
   );
 };
 export default BasicApplyForm;
