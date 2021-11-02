@@ -91,24 +91,20 @@ $font-stack: 'Montserrat', sans-serif;
 .rotateLeft {
   transform: rotateY(360deg);
   // unicode-bidi: bidi-override;
-
 }
 
 .rotateRight {
   transform: rotateY(180deg);
   // unicode-bidi: bidi-override;
-
 }
 
 .leftToRight {
   direction: ltr;
   // unicode-bidi: bidi-override;
-
 }
 
 .rightToLeft {
   direction: rtl;
   // unicode-bidi: ;
   // unicode-bidi: bidi-override;
-
 }

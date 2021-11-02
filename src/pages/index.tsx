@@ -68,10 +68,12 @@ export default function Home() {
                     gutterBottom
                     className={styles.blocktext}
                   >
-                    Welcome fellow innovator! You’ve taken the first step toward bigger and
-                    greater things in your creative journey, and we’re here to keep pushing you forward. Our
-                    platform was built with the most important part of our industry in mind: the designer. Check out
-                    some of the ways we improve your business, increase sales, and maximize visibility for your
+                    Welcome fellow innovator! You’ve taken the first step toward
+                    bigger and greater things in your creative journey, and
+                    we’re here to keep pushing you forward. Our platform was
+                    built with the most important part of our industry in mind:
+                    the designer. Check out some of the ways we improve your
+                    business, increase sales, and maximize visibility for your
                     brand below.
                   </Typography>
                 </Box>
@@ -133,7 +135,10 @@ export default function Home() {
                         Want even more?
                       </h2>
                       <h4 className={styles.processfont}>
-                        The Fine Find is accepting new members. If you’re ready to build your business, earn an income on your passions, and expand your creative mindset, join us today! Visit our FAQ page for more information.
+                        The Fine Find is accepting new members. If you’re ready
+                        to build your business, earn an income on your passions,
+                        and expand your creative mindset, join us today! Visit
+                        our FAQ page for more information.
                       </h4>
                     </Grid>
                     <Grid item className={styles.processbutton}>

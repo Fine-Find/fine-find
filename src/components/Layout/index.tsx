@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React, { ReactElement, ReactNode } from 'react';
+
 // import Header from '../Header';
 import MarketingHeader from '../MarketingHeader';
 
