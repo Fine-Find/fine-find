@@ -11,6 +11,8 @@
   background-color: #fff;
   opacity: .8;
   padding: 50px;
-  width: 100vh;
   text-align: center;
+  @media (min-width: 1200px) {
+    width: 100vh;
+  }
 }
