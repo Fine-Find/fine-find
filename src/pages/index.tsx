@@ -47,19 +47,19 @@ export default function Home() {
         <div className={styles.container}>
           <main className={styles.main}>
             <div
-              style={{ position: 'relative',  maxHeight: "auto", maxWidth: 'auto'  }}
+              // style={{ position: 'relative',  maxHeight: "auto", maxWidth: 'auto' height: '40vw' }}
             >
-              <Image src={'/tina.jpeg'} layout="responsive" objectFit="contain" width= '100%' height= '100%'/>
+              <Image src={'/tina.jpeg'} layout="responsive" objectFit="cover" width= '100%' height= '60%'/>
             </div>
             <div>
               <Grid container className={styles.header}>
                 {/* <Grid> */}
-                <Grid item xs={12} sm={6} className={styles.h2}>
+                <Grid item xs={12} sm={8} md={9}className={styles.h2}>
                   <h2 className={styles.title}>
                     The Fine Find and You
                   </h2>
                 </Grid>
-                <Grid item xs={12} sm={6} className={styles.headerbutton}>
+                <Grid item xs={12} sm={4} md={3} className={styles.headerbutton}>
                   <Button label="Apply now" textSize="2.2em" />
                 </Grid>
                 <Box ml={6} mr={6}>
