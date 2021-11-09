@@ -23,6 +23,24 @@ $font-stack: 'Montserrat', sans-serif;
       }
 }
 
+.imageContainer {
+  width: 100%;
+  }
+  .imageContainer > div {
+        position: unset !important;
+    }
+
+    .image {
+        object-fit: cover;
+        width: 100% !important; //auto
+        position: relative !important;
+        height: unset !important; //100%
+        @media (min-width: 700px) {
+          max-height: 800px !important;
+        }
+    }
+
+
 .headerbutton {
   align-self: center;
   padding-left: 10px;

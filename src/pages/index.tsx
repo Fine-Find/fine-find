@@ -46,10 +46,8 @@ export default function Home() {
       <Layout>
         <div className={styles.container}>
           <main className={styles.main}>
-            <div
-              // style={{ position: 'relative',  maxHeight: "auto", maxWidth: 'auto' height: '40vw' }}
-            >
-              <Image src={'/tina.jpeg'} layout="responsive" objectFit="cover" width= '100%' height= '60%'/>
+            <div className={styles.imageContainer}>
+              <Image className={styles.image} src={'/tina.jpeg'} layout="fill" />
             </div>
             <div>
               <Grid container className={styles.header}>
