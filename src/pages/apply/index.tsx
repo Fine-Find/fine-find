@@ -1,17 +1,20 @@
+import { fineFindApis } from '@/utils/urls';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { CardContent, Grid, TextField, InputLabel } from '@material-ui/core';
+import { CardContent, Grid, InputLabel, TextField } from '@material-ui/core';
+import Layout from 'components/Layout';
+import { ProfileFormCard } from 'components/Profile/ProfileFormCard';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-import Layout from 'components/Layout';
 
-import { ProfileFormCard } from 'components/Profile/ProfileFormCard';
 import { basicApplyValidation } from '../../utils/applyFormValidation';
 import styles from './apply.module.scss';
 
-
 // TODO: Remove the mask prior to storing the phone number in the DB
 const BasicApplyForm = () => {
+  const router = useRouter();
+
   // TODO: Pull this from Firebase
   const values = {
     firstName: '',
@@ -38,11 +41,22 @@ const BasicApplyForm = () => {
 
   const CHARACTER_LIMIT = 20;
 
-  const currentLocation = watch('location'); 
+  const currentLocation = watch('location');
 
   const errorMessage = errors.location?.message;
-  const characterLimit = `${currentLocation ? currentLocation.length : 0} / ${CHARACTER_LIMIT}`;
-  
+  const characterLimit = `${
+    currentLocation ? currentLocation.length : 0
+  } / ${CHARACTER_LIMIT}`;
+
+  async function handleSubmit(data) {
+    await fetch(fineFindApis.submitApplication, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+
+    router.push('/thankyou');
+  }
+
   return (
     <Layout>
       <div className={styles.main}>
@@ -52,6 +66,7 @@ const BasicApplyForm = () => {
             subTitle=""
             buttonText="Apply Now"
             className={styles.paper}
+            onSubmit={handleSubmit}
           >
             <CardContent>
               <Grid container spacing={6}>
@@ -105,7 +120,7 @@ const BasicApplyForm = () => {
                     name="location"
                     label="Location"
                     inputProps={{
-                      maxLength: CHARACTER_LIMIT
+                      maxLength: CHARACTER_LIMIT,
                     }}
                     defaultValue={values.location}
                     type="text"
@@ -114,8 +129,7 @@ const BasicApplyForm = () => {
                     variant="outlined"
                     fullWidth
                     error={errors.location ? true : false}
-                    helperText=
-                      {errorMessage ? errorMessage : characterLimit}
+                    helperText={errorMessage ? errorMessage : characterLimit}
                     {...register('location')}
                   />
                 </Grid>
@@ -153,16 +167,12 @@ const BasicApplyForm = () => {
                   <TextField
                     label="Email Address"
                     name="email"
-                    defaultValue={values.email}
+                    defaultValue=""
                     type="email"
                     autoComplete="on"
                     aria-required
-                    aria-readonly
                     variant="outlined"
                     fullWidth
-                    InputProps={{
-                      readOnly: true,
-                    }}
                     error={errors.email ? true : false}
                     helperText={errors.email?.message}
                     {...register('email')}
@@ -172,7 +182,6 @@ const BasicApplyForm = () => {
                   <Controller
                     name="phone"
                     control={control}
-                    defaultValue={values.phone}
                     render={({ field: { onChange, value } }) => (
                       <InputMask
                         mask="+1 (999) 999-9999"
@@ -211,7 +220,10 @@ const BasicApplyForm = () => {
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>
-                  <InputLabel>Would you like to let us know anything else for the application?</InputLabel>
+                  <InputLabel>
+                    Would you like to let us know anything else for the
+                    application?
+                  </InputLabel>
                   <TextField
                     name="letUsKnow"
                     label=""

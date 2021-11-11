@@ -11,7 +11,7 @@ type Props = {
 
 // TODO: Fix this so that the dashboard displays the correct header
 export default function Layout({
-  title = 'The FineFind | Designers',
+  title = 'The Fine Find | Designers',
   children,
 }: Props): ReactElement {
   return (
