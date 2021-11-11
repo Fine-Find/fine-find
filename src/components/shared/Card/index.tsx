@@ -32,7 +32,7 @@ export const Card = ({
     direction === 'left' ? styles.iconLeft : styles.iconRight;
 
   const imageExist = src ? true : false;
-    
+
   return (
     <Paper
       className={`${styles.root} ${rotation}`}

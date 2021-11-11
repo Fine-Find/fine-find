@@ -7,6 +7,7 @@ export const fineFindPages = {
   signUp: '/signUp',
   products: '/dashboard/products',
   collections: '/dashboard/collections',
+  createCollections: '/dashboard/collections/create',
   orders: '/dashboard/orders',
 };
 

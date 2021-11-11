@@ -19,8 +19,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Skeleton from '@material-ui/lab/Skeleton';
 import throttle from 'lodash/throttle';
-import React, { useState } from 'react';
 import Image from 'next/image';
+import React, { useState } from 'react';
 
 import styles from './products.module.scss';
 
