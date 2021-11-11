@@ -3,6 +3,7 @@ import { Card } from '@/components/shared/Card/index';
 import { Button } from '@/components/shared/OutlineButton';
 import { Box, Grid, Typography } from '@material-ui/core';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Layout from '../components/Layout';
 import styles from './index.module.scss';
@@ -58,7 +59,9 @@ export default function Home() {
                   </h2>
                 </Grid>
                 <Grid item xs={12} sm={4} md={3} className={styles.headerbutton}>
-                  <Button label="Apply now" textSize="2.2em" />
+                  <Link href={'/apply'}>
+                    <Button label="Apply now" textSize="2.2em" />
+                  </Link>
                 </Grid>
                 <Box ml={6} mr={6}>
                   <Typography
