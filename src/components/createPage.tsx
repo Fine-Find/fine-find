@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { withRouter } from 'next/router';
+import Image from 'next/image';
 
 import styles from '../styles/Home.module.css';
 
@@ -47,7 +48,7 @@ function About({ router: { query } }) {
       </Head>
 
       <h1>Your Post</h1>
-      <img src={object} alt="Dashboard" />
+      <Image src={object} alt="Dashboard" />
 
       <button
         type="button"

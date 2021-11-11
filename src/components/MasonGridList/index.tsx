@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { InstagramMedia } from 'types/Instagram/InstagramMedia';
-
+// import Image from 'next/image';
 import styles from './MasonGridList.module.scss';
 
 const MAX_COLUMNS = 3;
