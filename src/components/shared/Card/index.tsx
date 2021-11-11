@@ -1,4 +1,5 @@
 import { Grid, Paper, Typography } from '@material-ui/core';
+import Link from 'next/link';
 import React from 'react';
 
 import { Button } from '../OutlineButton';
@@ -68,11 +69,13 @@ export const Card = ({
             </Grid>
             {!src && (
               <Grid item className={styles.button}>
-                <Button
-                  label="Apply now"
-                  textSize="16px"
-                  marginRight={direction === 'left' ? true : false}
-                />
+                <Link href={'/apply'}>
+                  <Button
+                    label="Apply now"
+                    textSize="16px"
+                    marginRight={direction === 'left' ? true : false}
+                  />
+                </Link>
               </Grid>
             )}
           </Grid>
