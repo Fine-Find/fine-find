@@ -59,7 +59,7 @@ export default function Header({ open, onDrawerToggled }: HeaderProps) {
           {MenuDrawer(onDrawerToggled, menuButtonStyle)}
           <Link href="/dashboard">
             <a>
-              <Image src="/main_navy.png" width={100} height={25} />
+              <Image src="/main_navy.png" layout='fixed' objectFit="contain" width='100%' height='100%' />
             </a>
           </Link>
           <Typography className={styles.appBarTypography} />

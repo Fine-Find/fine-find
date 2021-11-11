@@ -3,7 +3,7 @@ $font-stack: 'Montserrat', sans-serif;
 
 .root {
   padding: 2em;
-  margin: auto;
+  // margin: auto;
   border: 2px solid var(--main-primary-color);
   border-top-right-radius: 70px;
   border-bottom-right-radius: 70px;
@@ -13,6 +13,10 @@ $font-stack: 'Montserrat', sans-serif;
   padding-top: 30px;
   font-family: $font-stack;
   // margin-inline: 30px;
+  @media (max-width: 600px) {
+    all: unset;
+
+  }
 }
 .container {
   margin-inline: 20px;
@@ -20,14 +24,20 @@ $font-stack: 'Montserrat', sans-serif;
 
 .grid {
   // padding: 2em;
-  padding: 30px 0 20px 15px;
+  padding: 30px 0 20px 0px;
   display: flex;
   transform: none;
 }
 .text {
   // position: absolute;
   padding-right: 50px;
-  width: 25%;
+  // width: 25%;
+  color: #303455;
+  // @media (max-width: 600px) {
+  //   padding-left: 20px;
+  //   padding-right: 30px;
+
+  // }
 }
 
 .title {
@@ -35,6 +45,8 @@ $font-stack: 'Montserrat', sans-serif;
   font: 2.2em bolder;
   font-weight: 600;
   font-family: $font-stack;
+  color: #303455;
+
 }
 
 .paragraph {
@@ -42,18 +54,30 @@ $font-stack: 'Montserrat', sans-serif;
   font-weight: 600;
   font-family: $font-stack;
   transform: translateX(10px);
+  color: #303455;
+
 }
 
 .iconLeft {
   transform: translateX(-30px);
   width: 100px;
   height: 100px;
+  // @media (max-width: 600px) {
+  //   padding-left: 20px;
+  //   padding-right: 30px;
+
+  // }
 }
 
 .iconRight {
   transform: translateX(10px);
   width: 100px;
   height: 100px;
+  // @media (max-width: 600px) {
+  //   padding-left: 20px;
+  //   padding-right: 70px;
+
+  // }
 }
 
 .button {

@@ -30,13 +30,17 @@ export const Card = ({
   const iconDirection =
     direction === 'left' ? styles.iconLeft : styles.iconRight;
 
+  const imageExist = src ? true : false;
+    
   return (
     <Paper
       className={`${styles.root} ${rotation}`}
       style={{
+        minHeight: imageExist ? '350px' : '100%',
         background: bg,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        borderLeft: 'none',
       }}
     >
       <Grid container className={rotation}>
@@ -51,7 +55,7 @@ export const Card = ({
               <bdi>{title}</bdi>
             </Typography>
             <Grid container className={`${styles.grid} ${textDirection}`}>
-              <Grid item xs={1}>
+              <Grid item xs={2} sm={2} md={1}>
                 <Typography
                   variant="body2"
                   gutterBottom
@@ -60,7 +64,7 @@ export const Card = ({
                   {icon}
                 </Typography>
               </Grid>
-              <Grid item xs={11} className={styles.text}>
+              <Grid item xs={10} sm={10} md={11} className={styles.text}>
                 <Typography className={styles.paragraph}>
                   <bdi>{paragraph}</bdi>
                 </Typography>
