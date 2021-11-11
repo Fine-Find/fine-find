@@ -17,7 +17,7 @@ function sendEmail(req: FirebaseNextApiRequest, res: NextApiResponse) {
       subject: reqBody.subject,
       html: reqBody.html,
     };
-    mg.messages().send(data, function (error, body) {});
+    mg.messages().send(data);
   }
   return Promise.resolve(res.status(200).end('Success'));
 }
