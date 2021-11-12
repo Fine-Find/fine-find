@@ -1,10 +1,13 @@
+import { CreateCollectionButton } from '@/components/Collection/CreateCollectionButton';
 import DashboardLayout from '@/components/DashboardLayout';
 import { TitledImageCard } from '@/components/shared/TitledImageCard';
-import { useLoadInstagramMedia } from '@/hooks/useLoadInstragramMedia';
+import { useLoadCollection } from '@/hooks/useLoadCollections';
 import { useRequireAuth } from '@/hooks/useRequireAuth';
-import { CircularProgress, Container, GridListTile } from '@material-ui/core';
+import { fineFindPages } from '@/utils/urls';
+import { CircularProgress, Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { useRouter } from 'next/router';
 import React from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 
@@ -18,15 +21,18 @@ const Loading = () => {
   );
 };
 
-// TODO: Navigating to the page takes some time due to the facebook API call and loading all of the images. How can we improve this performance?
+// TODO: Navigating to the page takes some time due to the firebase apis and loading all of the images. How can we improve this performance?
+// Could we use blurred images to improve the look and feel?
+// TODO: Consolidate this page with the CollectionMasonGridList component
 const CollectionsPage: React.FC = () => {
   const auth = useRequireAuth();
-  const { isLoading, instagramMediaList, hasNextPage, error, loadMore } =
-    useLoadInstagramMedia();
+  const router = useRouter();
+  const { isLoading, collectionList, hasMoreDocuments, error, loadMore } =
+    useLoadCollection(auth.user?.uid);
 
   const [infiniteRef] = useInfiniteScroll({
     loading: isLoading,
-    hasNextPage,
+    hasNextPage: hasMoreDocuments,
     onLoadMore: loadMore,
     // When there is an error, we stop infinite loading.
     // It can be reactivated by setting "error" state as undefined.
@@ -38,18 +44,13 @@ const CollectionsPage: React.FC = () => {
     rootMargin: '0px 0px 400px 0px',
   });
 
-  const CircularLoader = (columns: number) => {
+  const CircularLoader = () => {
     return (
-      <GridListTile
-        key="loader"
-        cols={columns}
-        className={styles.circularLoader}
-        ref={infiniteRef}
-      >
+      <div key="loader" className={styles.circularLoader} ref={infiniteRef}>
         <div className={styles.centerCircleLoader}>
           <CircularProgress color="inherit" />
         </div>
-      </GridListTile>
+      </div>
     );
   };
 
@@ -59,23 +60,29 @@ const CollectionsPage: React.FC = () => {
     <DashboardLayout>
       <div className={styles.root}>
         <Container maxWidth="xl">
+          <CreateCollectionButton className={styles.createButton} />
           <h2>Your Collections</h2>
           <Grid
             container
             spacing={3}
             className={`${styles.container} ${styles.headerContainer}`}
           >
-            {instagramMediaList == null && isLoading && CircularLoader(4)}
-            {instagramMediaList &&
-              instagramMediaList.map((instagramData) => {
+            {collectionList === null && isLoading && CircularLoader()}
+            {collectionList &&
+              collectionList.map((document) => {
                 return (
-                  <Grid item xs={12} md={3} lg={3} key={instagramData.id}>
+                  <Grid item xs={12} md={3} lg={3} key={document.get('id')}>
                     <TitledImageCard
                       className={styles.card}
-                      title={`Collection`}
-                      subTitle="Lorem ipsum dolar sit amet, conseceteur."
-                      imgSrc={instagramData.media_url}
-                      alt={instagramData.caption || instagramData.id}
+                      title={document.get('title')}
+                      subTitle={document.get('description')}
+                      imgSrc={document.get('src')}
+                      alt={document.get('title')}
+                      onClick={() => {
+                        const manageMediaUri = `${fineFindPages.manageMedia}/${document.id}`;
+                        router.push(manageMediaUri);
+                      }}
+                      buttonText="View Collection"
                     />
                   </Grid>
                 );
@@ -89,7 +96,12 @@ const CollectionsPage: React.FC = () => {
                 {loading && <ListItem>Loading...</ListItem>}
               and leave "Loading" without this ref.
           */}
-            {hasNextPage && CircularLoader(1)}
+
+            {hasMoreDocuments && (
+              <Grid item xs={12} md={3} lg={3}>
+                {CircularLoader()}
+              </Grid>
+            )}
           </Grid>
         </Container>
       </div>

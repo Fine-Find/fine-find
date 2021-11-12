@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import { withRouter } from 'next/router';
 import Image from 'next/image';
+import { withRouter } from 'next/router';
 
 import styles from '../styles/Home.module.css';
 

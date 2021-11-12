@@ -1,6 +1,7 @@
 import { FirebaseApp, getApp, initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -22,8 +23,9 @@ try {
 
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
-export { auth, db };
+export { auth, db, storage, app };
 
 // eslint-disable-next-line no-console
 console.log(app.name ? 'Firebase Mode Activated!' : 'Firebase not working :(');

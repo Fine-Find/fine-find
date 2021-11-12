@@ -1,13 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { CardContent, Grid, TextField, MenuItem } from '@material-ui/core';
+import { CardContent, Grid, MenuItem, TextField } from '@material-ui/core';
+import Layout from 'components/Layout';
+import { ProfileFormCard } from 'components/Profile/ProfileFormCard';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import Layout from 'components/Layout';
 
-import { ProfileFormCard } from 'components/Profile/ProfileFormCard';
 import { basicRequestValidation } from '../../utils/requestFormValidation';
 import styles from './request.module.scss';
-
 
 // TODO: Remove the mask prior to storing the phone number in the DB
 const BasicRequestForm = () => {
@@ -30,9 +29,18 @@ const BasicRequestForm = () => {
     formState: { errors },
   } = methods;
 
-  const products = ['Fabric', 'Trim', 'Wallcovering', 'Upholstered Furniture', 'Casegoods', 'Lighting', 'Rugs', 'Other'];
+  const products = [
+    'Fabric',
+    'Trim',
+    'Wallcovering',
+    'Upholstered Furniture',
+    'Casegoods',
+    'Lighting',
+    'Rugs',
+    'Other',
+  ];
 
-  const selectProductType = watch('productType'); 
+  const selectProductType = watch('productType');
 
   return (
     <Layout>
@@ -65,7 +73,7 @@ const BasicRequestForm = () => {
                       <MenuItem key={option} value={option}>
                         {option}
                       </MenuItem>
-                    ))} 
+                    ))}
                   </TextField>
                 </Grid>
                 <Grid item md={12} xs={12}>
@@ -80,7 +88,7 @@ const BasicRequestForm = () => {
                     variant="outlined"
                     error={errors.vendorName ? true : false}
                     helperText={errors.vendorName?.message}
-                    {...register('vendorName')} 
+                    {...register('vendorName')}
                   />
                 </Grid>
                 <Grid item md={12} xs={12}>

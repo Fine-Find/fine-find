@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 $font-stack: 'Montserrat', sans-serif;
 
-
 .container {
   min-height: 100vh;
   display: flex;
@@ -18,67 +17,66 @@ $font-stack: 'Montserrat', sans-serif;
   background-attachment: fixed;
   max-width: 100%;
   @media (max-width: 600px) {
-        // font-size: 50%;
-        width: 50%;
-      }
+    // font-size: 50%;
+    width: 50%;
+  }
 }
 
 .imageContainer {
   width: 100%;
+}
+.imageContainer > div {
+  position: unset !important;
+}
+
+.image {
+  object-fit: cover;
+  width: 100% !important; //auto
+  position: relative !important;
+  height: unset !important; //100%
+  @media (min-width: 700px) {
+    max-height: 800px !important;
   }
-  .imageContainer > div {
-        position: unset !important;
-    }
-
-    .image {
-        object-fit: cover;
-        width: 100% !important; //auto
-        position: relative !important;
-        height: unset !important; //100%
-        @media (min-width: 700px) {
-          max-height: 800px !important;
-        }
-    }
-
+}
 
 .headerbutton {
   align-self: center;
   padding-left: 10px;
 
   @media (max-width: 600px) {
-        font-size: 50% ;
-        // width: 50%;
-      }
+    font-size: 50%;
+    // width: 50%;
+  }
 }
 
 .header {
   font-family: $font-stack;
 
   @media (max-width: 600px) {
-        text-align: center;
-        // box-sizing: 50%;
-        // font-size: 1em;
-        width: 100%;
-        // text-size-adjust: 50%;
-        padding: 0;
-      }
+    text-align: center;
+    // box-sizing: 50%;
+    // font-size: 1em;
+    width: 100%;
+    // text-size-adjust: 50%;
+    padding: 0;
+  }
 }
 
 .h2 {
-    font-size: 2.5rem;
-    @media (max-width: 600px) {
-      font-size: 1.5rem ;
-      // width: 50%;
-      padding: 0;
-      // text-size-adjust: 50%;
-      padding: 10px;
-    }
+  font-size: 2.5rem;
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+    // width: 50%;
+    padding: 0;
+    // text-size-adjust: 50%;
+    padding: 10px;
   }
+}
 
 .processtitle {
   font-family: $font-stack;
   // font-size: 3em;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   @media (max-width: 600px) {
     // font-size: 2em;
     text-align: center;
@@ -97,7 +95,6 @@ $font-stack: 'Montserrat', sans-serif;
   @media (max-width: 600px) {
     padding-inline: 0;
   }
-  
 }
 
 .processtext {
@@ -116,18 +113,18 @@ $font-stack: 'Montserrat', sans-serif;
   margin-bottom: 50px;
 
   @media (max-width: 900px) {
-        font-size: 50%;
-        margin: 0;
-        padding: 0;
-        // width: 200%;
-      }
+    font-size: 50%;
+    margin: 0;
+    padding: 0;
+    // width: 200%;
+  }
 }
 
 .blocktext {
   font-family: $font-stack;
   font-weight: 600;
   font-size: 1.6em;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   display: block;
   text-align: start;
   padding-top: 10px;
@@ -136,11 +133,11 @@ $font-stack: 'Montserrat', sans-serif;
   margin-inline-end: 70px;
 
   @media (max-width: 600px) {
-        font-size: 1rem;
-        margin: 0;
-        padding: 20px 0 0 0;
-        // width: 50%;
-      }
+    font-size: 1rem;
+    margin: 0;
+    padding: 20px 0 0 0;
+    // width: 50%;
+  }
 }
 
 .footer {
@@ -162,7 +159,7 @@ $font-stack: 'Montserrat', sans-serif;
   font-family: $font-stack;
   // font-size: 3em;
   padding-left: 40px;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   @media (max-width: 600px) {
     padding: 0;
     // font-size: 2.2em;
@@ -182,23 +179,35 @@ $font-stack: 'Montserrat', sans-serif;
   font-family: $font-stack;
 
   @media (max-width: 600px) {
-        // font-size: 50%;
-        width: 50%;
-        height: 50%;
-        .first {order: 1;}
-        .second {order: 2;}
-        .third {order: 4;}
-        .fourth {order: 3;}
-        .fifth {order: 5;}
-        .sixth {order: 6;}
-        .seventh {order: 8;}
-        .eighth {order: 7;}
-      }
-  
+    // font-size: 50%;
+    width: 50%;
+    height: 50%;
+    .first {
+      order: 1;
+    }
+    .second {
+      order: 2;
+    }
+    .third {
+      order: 4;
+    }
+    .fourth {
+      order: 3;
+    }
+    .fifth {
+      order: 5;
+    }
+    .sixth {
+      order: 6;
+    }
+    .seventh {
+      order: 8;
+    }
+    .eighth {
+      order: 7;
+    }
+  }
 }
-
-
-
 
 // .grid:nth-of-type(3) {order: 4;}
 // .grid:nth-child(4n+3) {
@@ -214,13 +223,13 @@ $font-stack: 'Montserrat', sans-serif;
   padding-top: 30px;
 
   @media (max-width: 600px) {
-        display: flex;
-        flex-direction: column;
-        padding: 0 0 20px 0;
-        // font-size: 50%;
-        // width: 50%;
-        // height: 100%;
-      }
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px 0;
+    // font-size: 50%;
+    // width: 50%;
+    // height: 100%;
+  }
   @media (max-width: 900px) {
     padding-right: 10px;
     padding-top: 5px;
@@ -235,10 +244,10 @@ $font-stack: 'Montserrat', sans-serif;
   padding-left: 30px;
 
   @media (max-width: 600px) {
-        display: flex;
-        flex-direction: column;
-        padding: 0 0 20px 0;
-      }
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 20px 0;
+  }
   @media (max-width: 900px) {
     padding-left: 10px;
     padding-top: 5px;
@@ -260,19 +269,29 @@ $font-stack: 'Montserrat', sans-serif;
 }
 
 @mixin respond-phone {
-    @media (max-width: 600px) {@content};
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+@mixin repond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
     }
-  @mixin repond ($breakpoint) {
-    @if $breakpoint == phone {
-      @media (max-width: 600px) {@content};
+  }
+  @if $breakpoint == tab-port {
+    @media (max-width: 900px) {
+      @content;
     }
-    @if $breakpoint == tab-port {
-      @media (max-width: 900px) {@content};
+  }
+  @if $breakpoint == tab-land {
+    @media (max-width: 1200px) {
+      @content;
     }
-    @if $breakpoint == tab-land {
-      @media (max-width: 1200px) {@content};
+  }
+  @if $breakpoint == big-desktop {
+    @media (min-width: 1800px) {
+      @content;
     }
-    @if $breakpoint == big-desktop {
-      @media (min-width: 1800px) {@content};
-    }
-  };
+  }
+} ;

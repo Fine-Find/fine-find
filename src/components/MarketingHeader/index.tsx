@@ -1,6 +1,9 @@
 import AppBar from '@material-ui/core/AppBar';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -9,10 +12,6 @@ import React from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../shared/OutlineButton';
 import styles from './MarketingHeader.module.scss';
-
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuIcon from '@material-ui/icons/Menu';
 
 export default function MarketingHeader() {
   const router = useRouter();
@@ -31,10 +30,7 @@ export default function MarketingHeader() {
   let button = null;
   if (auth.isInitialized) {
     button = !auth.user ? (
-      <Button
-        label="APPLY NOW"
-        onClick={() => router.push('/login')}
-      />
+      <Button label="APPLY NOW" onClick={() => router.push('/login')} />
     ) : (
       <Button
         label="Sign Out"
@@ -49,10 +45,16 @@ export default function MarketingHeader() {
   return (
     <>
       <AppBar position="absolute" className={styles.appBar} elevation={0}>
-        <Toolbar className={`${styles.toolbar} topnav`} id='myTopnav'>
+        <Toolbar className={`${styles.toolbar} topnav`} id="myTopnav">
           <Link href="/">
             <a className={styles.logos}>
-              <Image src="/main_navy.png" layout='fixed' objectFit="contain" width='100%' height='100%' />
+              <Image
+                src="/main_navy.png"
+                layout="fixed"
+                objectFit="contain"
+                width="100%"
+                height="100%"
+              />
             </a>
           </Link>
           <Typography className={styles.appBarTypography}> </Typography>
@@ -68,7 +70,11 @@ export default function MarketingHeader() {
             {button}
           </div>
           <div className={styles.hamburgerNavBar}>
-            <button aria-controls="simple-menu" aria-haspopup="true" onClick={(e) => handleClick(e)}>
+            <button
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={(e) => handleClick(e)}
+            >
               <MenuIcon />
             </button>
             <Menu
@@ -93,7 +99,6 @@ export default function MarketingHeader() {
                   <a className={styles.link}>APPLY NOW</a>
                 </Link>
               </MenuItem>
-
             </Menu>
           </div>
         </Toolbar>
