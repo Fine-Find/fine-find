@@ -59,12 +59,10 @@ export default function Header({ open, onDrawerToggled }: HeaderProps) {
           {MenuDrawer(onDrawerToggled, menuButtonStyle)}
           <Link href="/dashboard">
             <a>
-              <Image
+              <Image className={styles.image}
                 src="/main_navy.png"
-                layout="fixed"
+                layout="fill"
                 objectFit="contain"
-                width="100%"
-                height="100%"
               />
             </a>
           </Link>
