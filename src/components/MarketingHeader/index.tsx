@@ -48,12 +48,10 @@ export default function MarketingHeader() {
         <Toolbar className={`${styles.toolbar} topnav`} id="myTopnav">
           <Link href="/">
             <a className={styles.logos}>
-              <Image
+              <Image className={styles.image}
                 src="/main_navy.png"
-                layout="fixed"
+                layout="fill"
                 objectFit="contain"
-                width="100%"
-                height="100%"
               />
             </a>
           </Link>
