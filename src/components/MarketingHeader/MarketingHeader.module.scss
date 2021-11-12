@@ -37,3 +37,22 @@
     color: var(--light-primary-color);
   }
 }
+
+.logos {
+  // position: relative;
+  // margin-right: auto;
+}
+
+.bigNavBar {
+  display: none;
+  @media (min-width: 600px) {
+    display: block;
+  }
+}
+
+.hamburgerNavBar {
+  display: none;
+  @media (max-width: 600px) {
+    display: block;
+  }
+}

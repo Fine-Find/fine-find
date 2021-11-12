@@ -13,5 +13,6 @@ if (!firebaseAdmin.apps.length) {
 
 const firebaseAdminAuth = firebaseAdmin.auth();
 const firebaseAdminDb = firebaseAdmin.firestore();
+const firebaseAdminStorage = firebaseAdmin.storage();
 
-export { firebaseAdminAuth, firebaseAdminDb };
+export { firebaseAdminAuth, firebaseAdminDb, firebaseAdminStorage };

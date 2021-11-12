@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   width: auto;
+  padding-top: 100px;
 }
 .paper {
   margin: 100px 0px 50px 0px;
@@ -11,9 +12,6 @@
   background-color: #fff;
   opacity: 0.8;
   padding: 50px;
+  width: 100vh;
   text-align: center;
-  @media (min-width: 1200px) {
-    width: 100vh;
-  }
 }
-

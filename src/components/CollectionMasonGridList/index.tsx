@@ -1,26 +1,38 @@
+/* eslint-disable @next/next/no-img-element */
+import { useLoadCollection } from '@/hooks/useLoadCollections';
+import { useRequireAuth } from '@/hooks/useRequireAuth';
 import { fineFindPages } from '@/utils/urls';
+import { DocumentData, QueryDocumentSnapshot } from '@firebase/firestore';
 import { ImageList, ImageListItem } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import GridListTile from '@material-ui/core/GridListTile';
-import { useLoadInstagramMedia } from 'hooks/useLoadInstragramMedia';
+import { Skeleton } from '@material-ui/lab';
 import { useRouter } from 'next/router';
 import React from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import { InstagramMedia } from 'types/Instagram/InstagramMedia';
 
-// import Image from 'next/image';
 import styles from './MasonGridList.module.scss';
 
 const MAX_COLUMNS = 3;
 
-export default function MasonGridList() {
+const Loading = () => {
+  return (
+    <div id="skeleton">
+      <Skeleton variant="text" />
+    </div>
+  );
+};
+
+// TODO: Consolidate with the collections page. Lot's of duplicate code
+export default function CollectionMasonGridList() {
+  const auth = useRequireAuth();
   const router = useRouter();
-  const { isLoading, instagramMediaList, hasNextPage, error, loadMore } =
-    useLoadInstagramMedia();
+  const { isLoading, collectionList, hasMoreDocuments, error, loadMore } =
+    useLoadCollection(auth.user.uid);
 
   const [infiniteRef] = useInfiniteScroll({
     loading: isLoading,
-    hasNextPage,
+    hasNextPage: hasMoreDocuments,
     onLoadMore: loadMore,
     // When there is an error, we stop infinite loading.
     // It can be reactivated by setting "error" state as undefined.
@@ -32,29 +44,21 @@ export default function MasonGridList() {
     rootMargin: '0px 0px 400px 0px',
   });
 
-  const Card = (instagramData: InstagramMedia) => {
+  const Card = (document: QueryDocumentSnapshot<DocumentData>) => {
     return (
       <ImageListItem
-        key={instagramData.id}
+        key={document.id}
         cols={1}
         className={styles.card}
         onClick={() => {
-          const cardQueryParameters = new URLSearchParams({
-            media_url: instagramData.media_url,
-            media_type: instagramData.media_type,
-            caption: instagramData.caption,
-            permalink: instagramData.permalink,
-            timestamp: instagramData.timestamp,
-          });
-          const manageMediaUri = `${fineFindPages.manageMedia}/${instagramData.id}?${cardQueryParameters}`;
-
+          const manageMediaUri = `${fineFindPages.manageMedia}/${document.id}`;
           router.push(manageMediaUri);
         }}
       >
         <img
           className={styles.img}
-          src={instagramData.media_url}
-          alt={instagramData.caption || instagramData.id}
+          src={document.get('src')}
+          alt={document.get('title')}
         />
       </ImageListItem>
     );
@@ -75,12 +79,14 @@ export default function MasonGridList() {
     );
   };
 
+  if (!auth.isInitialized || !auth.user) return <>{Loading()}</>;
+
   // TODO: Need to adjust the height based on the device type?
   return (
     <div className={styles.masonic}>
       <ImageList cols={MAX_COLUMNS} gap={16}>
-        {instagramMediaList == null && isLoading && CircularLoader(MAX_COLUMNS)}
-        {instagramMediaList && instagramMediaList.map((tile) => Card(tile))}
+        {collectionList === null && isLoading && CircularLoader(MAX_COLUMNS)}
+        {collectionList && collectionList.map((tile) => Card(tile))}
         {/* 
               As long as we have a "next page", we show "Loading" right under the list.
               When it becomes visible on the screen, or it comes near, it triggers 'onLoadMore'.
@@ -90,7 +96,7 @@ export default function MasonGridList() {
                 {loading && <ListItem>Loading...</ListItem>}
               and leave "Loading" without this ref.
           */}
-        {hasNextPage && CircularLoader(1)}
+        {hasMoreDocuments && CircularLoader(1)}
       </ImageList>
     </div>
   );

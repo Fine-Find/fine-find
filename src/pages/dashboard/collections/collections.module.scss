@@ -1,0 +1,22 @@
+.createButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.loading {
+  text-align: center;
+}
+
+.centerCircleLoader {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+.circularLoader {
+  display: flex;
+  color: var(--main-instagram-color);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

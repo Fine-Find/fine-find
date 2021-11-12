@@ -1,3 +1,4 @@
+import { CreateCollectionButton } from '@/components/Collection/CreateCollectionButton';
 import { TitledImageCard } from '@/components/shared/TitledImageCard';
 import { fineFindApis } from '@/utils/urls';
 import { Card, CardHeader, Container } from '@material-ui/core';
@@ -8,9 +9,9 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { CreateInstagramAccountRequest } from 'types/Instagram/client/CreateInstagramAccountRequest';
 
+import CollectionMasonGridList from '../../components/CollectionMasonGridList';
 import DashboardLayout from '../../components/DashboardLayout';
 import InstagramLoginButton from '../../components/Instagram/InstagramLoginButton';
-import MasonGridList from '../../components/MasonGridList';
 import { useRequireAuth } from '../../hooks/useRequireAuth';
 import styles from './dashboard.module.scss';
 
@@ -57,13 +58,6 @@ function isLoggedIntoInstagram(session) {
   return true;
 }
 
-function displayGrid(session, auth) {
-  if (isInstagramStored(auth) || isLoggedIntoInstagram(session)) {
-    return <MasonGridList />;
-  }
-  return <> </>;
-}
-
 function displayInstagramLogin(session, auth) {
   if (!isInstagramStored(auth) || !isLoggedIntoInstagram(session)) {
     return <InstagramLoginButton />;
@@ -99,6 +93,7 @@ const DashBoardPage: React.FC = () => {
     <DashboardLayout>
       <div className={styles.root}>
         <Container maxWidth="xl">
+          <CreateCollectionButton className={styles.createButton} />
           <Grid
             container
             spacing={3}
@@ -122,8 +117,8 @@ const DashBoardPage: React.FC = () => {
               </Grid>
               <Grid item md={8} xs={12}>
                 <Card elevation={0}>
-                  <CardHeader title="Your Instagram Feed" />
-                  {displayGrid(session, auth)}
+                  <CardHeader title="Your Latest Collections" />
+                  <CollectionMasonGridList />
                 </Card>
               </Grid>
             </Grid>

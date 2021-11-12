@@ -5,7 +5,6 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import EditIcon from '@material-ui/icons/Edit';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import SettingsIcon from '@material-ui/icons/Settings';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Link from 'next/link';
 import React from 'react';
 
@@ -41,16 +40,6 @@ export const mainListItems = (
       <Link href={fineFindPages.products}>
         <a>
           <ListItemText primary="Products" />
-        </a>
-      </Link>
-    </ListItem>
-    <ListItem button className={styles.item}>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <Link href={fineFindPages.orders}>
-        <a>
-          <ListItemText primary="Orders" />
         </a>
       </Link>
     </ListItem>
