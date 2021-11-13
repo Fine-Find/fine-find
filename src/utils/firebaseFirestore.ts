@@ -18,11 +18,9 @@ import {
 export const getNextPostedCollectionNumber = async (
   postedCollection: CollectionReference<DocumentData>
 ) => {
-  if (!postedCollection) {
-    return 1;
-  } else {
-    const collectionSnapshot = await getDocs(postedCollection);
-
+  const collectionSnapshot = await getDocs(postedCollection);
+  
+  if (collectionSnapshot.docs && collectionSnapshot.docs.length > 0) {
     const latestPostedCollection = collectionSnapshot.docs.reduce(function (
       previousDoc,
       currentDoc
@@ -34,6 +32,8 @@ export const getNextPostedCollectionNumber = async (
     });
 
     return Number.parseInt(latestPostedCollection.id) + 1;
+  } else {
+    return 1;
   }
 };
 
