@@ -21,7 +21,6 @@ async function idIsValid(applyId: string | string[]) {
     method: 'POST',
     body: JSON.stringify(applyId),
   });
-  console.log(response);
   if (response.ok) {
     return true;
   } else return false;

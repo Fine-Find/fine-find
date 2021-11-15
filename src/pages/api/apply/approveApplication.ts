@@ -5,20 +5,17 @@ import { fineFindApis } from '@/utils/urls';
 import { NextApiResponse } from 'next';
 const { URL } = process.env;
 
-
 async function approveApplication(applicationId: any) {
   const applicationRef = firebaseAdminDb
     .collection(firebaseCollections.applications)
     .doc(applicationId);
   const doc = await applicationRef.get();
   if (!doc.exists) {
-    console.log('No such document!');
     return false;
   } else {
     await applicationRef.update({ approved: true });
     await sendEmails(doc.data().email, applicationId);
 
-    console.log('Document data:', doc.data());
     return true;
   }
 }

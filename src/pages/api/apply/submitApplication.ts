@@ -42,7 +42,7 @@ async function buildInternalMessageHtml(data: any, recordId) {
     `;
 }
 
-function buildExternalMessageHtml(data: any) {
+function buildExternalMessageHtml() {
   return `
         <!DOCTYPE html>
         <html>
@@ -67,7 +67,7 @@ async function sendEmails(data, recordId) {
     body: JSON.stringify(conciergeMessageData),
   });
 
-  const externalMessageText = buildExternalMessageHtml(data);
+  const externalMessageText = buildExternalMessageHtml();
   const externalMessageData = buildMessageData(
     data.email,
     'Thank you for applying!',
