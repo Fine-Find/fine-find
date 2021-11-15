@@ -23,7 +23,6 @@ async function checkApplication(applicationId: string) {
   } else {
     // eslint-disable-next-line no-console
     await applicationRef.update({ consumed: true });
-    console.log('Document data:', doc.data());
     return true;
   }
 }
