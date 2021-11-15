@@ -1,10 +1,27 @@
+import { firebaseAdminDb } from '@/config/firebaseAdmin';
 import { FirebaseNextApiRequest } from '@/types/FirebaseNextApiRequest';
+import { firebaseCollections } from '@/utils/firebaseCollections';
 import { fineFindApis } from '@/utils/urls';
 import { NextApiResponse } from 'next';
 const { URL } = process.env;
 
-async function sendEmail(data) {
-  const messageText = `
+function buildMessageData(to: string, subject: string, html: string) {
+  return {
+    from: 'Fine Find Concierge <concierge@thefinefind.com>',
+    to: to,
+    subject: subject,
+    html: html,
+  };
+}
+
+function createApprovalLink(recordId: any) {
+  const approvalLink = URL + '/api/apply/approveApplication?id=' + recordId;
+  return approvalLink;
+}
+
+async function buildInternalMessageHtml(data: any, recordId) {
+  const approvalLink = await createApprovalLink(recordId);
+  return `
         <!DOCTYPE html>
         <html>
         <head></head>
@@ -19,24 +36,63 @@ async function sendEmail(data) {
             <p>Phone: ${data.phone}</p>
             <p>Top Vendors: ${data.topVendors}</p>
             <p>Other Details: ${data.letUsKnow}</p>
+            <p>Would you like to approve this application? If so click this link. It will automatically email the client with an approval email and signup information: <a href="${approvalLink}">${approvalLink}</a></p>
         </body>
         </html>
     `;
-  const messageData = {
-    from: 'Fine Find Concierge <concierge@thefinefind.com>',
-    to: 'blaine@thefinefind.com',
-    subject: 'New Designer Application',
-    html: messageText,
-  };
-  const bodyData = {
-    ...data,
-    ...messageData,
-  };
+}
+
+function buildExternalMessageHtml(data: any) {
+  return `
+        <!DOCTYPE html>
+        <html>
+        <head></head>
+        <body>
+            <p>Thank you for applying to The Fine Find.</p>
+        </body>
+        </html>
+    `;
+}
+
+async function sendEmails(data, recordId) {
+  const conciergeMessageText = await buildInternalMessageHtml(data, recordId);
+  const conciergeMessageData = buildMessageData(
+    'concierge@thefinefind.com, blaine@thefinefind.com',
+    'New Designer Application',
+    conciergeMessageText
+  );
 
   await fetch(URL + fineFindApis.sendEmail, {
     method: 'POST',
-    body: JSON.stringify(bodyData),
+    body: JSON.stringify(conciergeMessageData),
   });
+
+  const externalMessageText = buildExternalMessageHtml(data);
+  const externalMessageData = buildMessageData(
+    data.email,
+    'Thank you for applying!',
+    externalMessageText
+  );
+
+  await fetch(URL + fineFindApis.sendEmail, {
+    method: 'POST',
+    body: JSON.stringify(externalMessageData),
+  });
+}
+
+async function addRecords(reqBody: any) {
+  const metaData = {
+    approved: false,
+    consumed: false,
+  };
+  const recId = await firebaseAdminDb
+    .collection(firebaseCollections.applications)
+    .add({
+      ...reqBody,
+      ...metaData,
+    });
+
+  return recId.id;
 }
 
 /**
@@ -54,7 +110,9 @@ const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
     if (!('email' in reqBody)) {
       res.status(400).end('Missing data');
     } else {
-      sendEmail(reqBody);
+      const recordId = await addRecords(reqBody);
+      await sendEmails(reqBody, recordId);
+
       res.status(200).end('Success');
     }
   }
