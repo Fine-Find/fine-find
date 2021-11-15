@@ -1,3 +1,4 @@
+import { fineFindApis } from '@/utils/urls';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -15,6 +16,16 @@ export interface SignUpData {
   password: string;
 }
 
+async function idIsValid(applyId: string | string[]) {
+  const response = await fetch(fineFindApis.checkApplication, {
+    method: 'POST',
+    body: JSON.stringify(applyId),
+  });
+  if (response.ok) {
+    return true;
+  } else return false;
+}
+
 const SignUpForm: React.FC = () => {
   const {
     register,
@@ -23,12 +34,22 @@ const SignUpForm: React.FC = () => {
   } = useForm();
   const auth = useAuth();
   const router = useRouter();
-  const onSubmit = (data: SignUpData) => {
-    return auth.signUp(data).then((user) => {
-      // eslint-disable-next-line no-console
-      console.log(user);
-      router.push('/dashboard');
-    });
+  const applyId = router.query.id;
+  const onSubmit = async (data: SignUpData) => {
+    if (applyId) {
+      const isValid = await idIsValid(applyId);
+      if (isValid) {
+        return auth.signUp(data).then((user) => {
+          // eslint-disable-next-line no-console
+          console.log(user);
+          router.push('/dashboard');
+        });
+      } else {
+        // eslint-disable-next-line no-console
+        console.log('');
+        //todo put notification of error on front end
+      }
+    }
   };
   return (
     <Box className={styles.formBox}>

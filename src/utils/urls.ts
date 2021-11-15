@@ -19,4 +19,6 @@ export const fineFindApis = {
   searchProducts: '/api/shopify/v1/products',
   sendEmail: '/api/email/sendEmail',
   submitApplication: '/api/apply/submitApplication',
+  approveApplication: '/api/apply/approveApplication',
+  checkApplication: '/api/apply/checkApplication',
 };
