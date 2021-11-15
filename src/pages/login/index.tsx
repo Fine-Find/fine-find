@@ -22,8 +22,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <Grid container component="main" className={styles.root}>
-      <Grid item xs={false} sm={false} md={7} className={styles.image} />
-      <Grid item xs={12} sm={12} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square>
         <Box className={styles.loginBox}>
           <Avatar className={styles.avatar}>
             <LockOutlinedIcon />
@@ -43,10 +42,10 @@ const LoginPage: React.FC = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/signup">
+              <Link href="/apply">
                 <a>
                   <Typography variant="body2" color="primary">
-                    {"Don't have an account? Sign Up"}
+                    {"Don't have an account? Apply Now"}
                   </Typography>
                 </a>
               </Link>

@@ -36,57 +36,63 @@ const LoginForm: React.FC = () => {
     <Grid container>
       <Box className={styles.formBox}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            error={errors.email ? true : false}
-            autoComplete="email"
-            {...register('email', {
-              required: 'Please enter an email',
-              pattern: {
-                value:
-                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: 'Not a valid email',
-              },
-            })}
-          />
-          {errors.email && (
-            <FormHelperText id="email-text" error>
-              {errors.email.message}
-            </FormHelperText>
-          )}
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            error={errors.password ? true : false}
-            autoComplete="current-password"
-            {...register('password', {
-              required: 'Please enter a password',
-              minLength: {
-                value: 6,
-                message: 'Should have at least 6 characters',
-              },
-            })}
-          />
-          {errors.password && (
-            <FormHelperText id="password-text" error>
-              {errors.password.message}
-            </FormHelperText>
-          )}
-          {error?.message && (
-            <FormHelperText id="form-error-text" error>
-              {errors.message}
-            </FormHelperText>
-          )}
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                error={errors.email ? true : false}
+                autoComplete="email"
+                {...register('email', {
+                  required: 'Please enter an email',
+                  pattern: {
+                    value:
+                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    message: 'Not a valid email',
+                  },
+                })}
+              />
+              {errors.email && (
+                <FormHelperText id="email-text" error>
+                  {errors.email.message}
+                </FormHelperText>
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                error={errors.password ? true : false}
+                autoComplete="current-password"
+                {...register('password', {
+                  required: 'Please enter a password',
+                  minLength: {
+                    value: 6,
+                    message: 'Should have at least 6 characters',
+                  },
+                })}
+              />
+              {errors.password && (
+                <FormHelperText id="password-text" error>
+                  {errors.password.message}
+                </FormHelperText>
+              )}
+              {error?.message && (
+                <FormHelperText id="form-error-text" error>
+                  {errors.message}
+                </FormHelperText>
+              )}
+            </Grid>
+          </Grid>
           <Button
             type="submit"
             fullWidth
