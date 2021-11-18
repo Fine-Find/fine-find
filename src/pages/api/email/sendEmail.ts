@@ -2,9 +2,9 @@ import { FirebaseNextApiRequest } from '@/types/FirebaseNextApiRequest';
 import mailgun from 'mailgun-js';
 import { NextApiResponse } from 'next';
 
-const DOMAIN = 'sandbox03ee53431bde406190ea61dddc4aa515.mailgun.org';
+const DOMAIN = 'mg.thefinefind.com';
 const mg = mailgun({
-  apiKey: '22a04f8b9bb2648f4a0073978c4f3245-30b9cd6d-29465f8d',
+  apiKey: process.env.MAILGUN_API_KEY,
   domain: DOMAIN,
 });
 
