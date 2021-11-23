@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Link from 'next/link';
+
 import styles from './signup.module.scss';
 const SignUpPage: React.FC = () => {
   return (

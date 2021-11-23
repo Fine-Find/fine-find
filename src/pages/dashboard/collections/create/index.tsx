@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { UploadImageCard } from '@/components/Collections/UploadImageCard';
 import DashboardLayout from '@/components/DashboardLayout';
+import { RequestProductModal } from '@/components/Products/RequestProductModal';
 import { useRequireAuth } from '@/hooks/useRequireAuth';
+import { RequestedProductDetails } from '@/types/RequestedProducts';
 import { ShopifyProduct } from '@/types/shopify/Products';
 import { createCollectionValidation } from '@/utils/CreateCollectionFormValidation';
 import {
@@ -30,6 +33,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { CloseOutlined } from '@material-ui/icons';
+import FiberNewIcon from '@material-ui/icons/FiberNew';
 import SearchIcon from '@material-ui/icons/Search';
 import { Alert } from '@material-ui/lab';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -50,6 +54,8 @@ const Loading = () => {
 };
 
 // TODO: Completely refactor this page to be simpler
+// TODO: How can we do nested forms with the modal so that it doesn't trigger the completion of the collection form?
+// TODO: Update the UI to be cleaner once the nested form issue is resolved
 const CreateCollectionPage: React.FC = () => {
   const auth = useRequireAuth();
   const [image, setImage] = useState(null);
@@ -57,12 +63,16 @@ const CreateCollectionPage: React.FC = () => {
   const [selectedProducts, setSelectedProducts] = useState<ShopifyProduct[]>(
     []
   );
+  const [requestedProducts, setRequestedProducts] = useState<
+    RequestedProductDetails[]
+  >([]);
   const [uploadingFile, setUploadingFile] = useState(false);
   const [productsError, setProductsError] = useState(false);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState<ShopifyProduct[]>([]);
   const [progress, setProgress] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const router = useRouter();
 
@@ -134,7 +144,28 @@ const CreateCollectionPage: React.FC = () => {
     );
     setSelectedProducts(updatedProductList);
 
-    if (updatedProductList && updatedProductList.length === 0) {
+    if (
+      updatedProductList &&
+      updatedProductList.length === 0 &&
+      requestedProducts &&
+      requestedProducts.length === 0
+    ) {
+      setProductsError(true);
+    }
+  }
+
+  function removeRequestedProduct(productToRemove: RequestedProductDetails) {
+    const updatedProductList = requestedProducts.filter(
+      (product) => product !== productToRemove
+    );
+    setRequestedProducts(updatedProductList);
+
+    if (
+      updatedProductList &&
+      updatedProductList.length === 0 &&
+      selectedProducts &&
+      selectedProducts.length === 0
+    ) {
       setProductsError(true);
     }
   }
@@ -151,7 +182,11 @@ const CreateCollectionPage: React.FC = () => {
   }
 
   // TODO: move this to server side code at some point
-  async function fileUpload(data: any, products: any[]) {
+  async function fileUpload(
+    data: any,
+    products: any[],
+    productsRequested: any[]
+  ) {
     setUploadingFile(true);
 
     const postedCollection = getPostedCollection(auth.user.uid);
@@ -198,6 +233,7 @@ const CreateCollectionPage: React.FC = () => {
             src: imageUrl,
             description: data.description || null,
             products,
+            productsRequested,
           };
 
           createPostedCollection(collectionData, auth.user.uid)
@@ -218,9 +254,12 @@ const CreateCollectionPage: React.FC = () => {
   }
 
   const onSubmit = (data) => {
-    if (selectedProducts && selectedProducts.length > 0) {
+    if (
+      (selectedProducts && selectedProducts.length > 0) ||
+      (requestedProducts && requestedProducts.length > 0)
+    ) {
       setProductsError(false);
-      fileUpload(data, selectedProducts);
+      fileUpload(data, selectedProducts, requestedProducts);
     } else {
       setProductsError(true);
     }
@@ -232,6 +271,35 @@ const CreateCollectionPage: React.FC = () => {
     } else {
       setProductsError(true);
     }
+  };
+
+  const addRequestedProduct = (newProduct: RequestedProductDetails) => {
+    if (newProduct === null || newProduct === undefined) {
+      return;
+    }
+
+    const foundProduct = requestedProducts.find((product) => {
+      return (
+        product.productName === newProduct.productName &&
+        product.vendorName === newProduct.vendorName &&
+        product.productType === newProduct.productType
+      );
+    });
+
+    if (foundProduct === undefined) {
+      setProductsError(false);
+      setRequestedProducts([...requestedProducts, newProduct]);
+    }
+
+    setOpenModal(false);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
+  const handleOpen = () => {
+    setOpenModal(true);
   };
 
   if (!auth.isInitialized || !auth.user) {
@@ -250,6 +318,28 @@ const CreateCollectionPage: React.FC = () => {
             <Alert severity="success">Collection was created!</Alert>
           </Snackbar>
           <h2>Create a new Collection</h2>
+          <Grid
+            container
+            spacing={3}
+            className={`${styles.container} ${styles.requestContainer}`}
+          >
+            <Grid item xs={12} md={6} lg={5} xl={4}>
+              <Button
+                variant="contained"
+                color="secondary"
+                fullWidth
+                onClick={handleOpen}
+                className={styles.modalButton}
+              >
+                Request a new product
+              </Button>
+            </Grid>
+            <RequestProductModal
+              open={openModal}
+              handleClose={handleClose}
+              submitForm={addRequestedProduct}
+            />
+          </Grid>
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit, onErrors)}>
               <Grid
@@ -400,36 +490,63 @@ const CreateCollectionPage: React.FC = () => {
                     </Grid>
                   )}
                   <Grid item>
-                    {selectedProducts.length > 0 && (
+                    {(selectedProducts.length > 0 ||
+                      requestedProducts.length > 0) && (
                       <List className={styles.selectProductList}>
-                        {selectedProducts.map((product) => {
-                          return (
-                            <ListItem key={product.id}>
-                              <ListItemAvatar>
-                                <img
-                                  className={styles.image}
-                                  src={product.originalSrc}
-                                  alt={product.title}
+                        {selectedProducts.length > 0 &&
+                          selectedProducts.map((product) => {
+                            return (
+                              <ListItem key={product.id}>
+                                <ListItemAvatar>
+                                  <img
+                                    className={styles.image}
+                                    src={product.originalSrc}
+                                    alt={product.title}
+                                  />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  primary={product.title}
+                                  //secondary={product.description}
                                 />
-                              </ListItemAvatar>
-                              <ListItemText
-                                primary={product.title}
-                                //secondary={product.description}
-                              />
 
-                              <IconButton
-                                type="submit"
-                                className={styles.iconButton}
-                                aria-label="remove"
-                                onClick={() => {
-                                  removeSelectedProduct(product.id);
-                                }}
-                              >
-                                <CloseOutlined />
-                              </IconButton>
-                            </ListItem>
-                          );
-                        })}
+                                <IconButton
+                                  type="submit"
+                                  className={styles.iconButton}
+                                  aria-label="remove"
+                                  onClick={() => {
+                                    removeSelectedProduct(product.id);
+                                  }}
+                                >
+                                  <CloseOutlined />
+                                </IconButton>
+                              </ListItem>
+                            );
+                          })}
+                        {requestedProducts.length > 0 &&
+                          requestedProducts.map((product) => {
+                            return (
+                              <ListItem key={product.productName}>
+                                <ListItemAvatar>
+                                  <FiberNewIcon />
+                                </ListItemAvatar>
+                                <ListItemText
+                                  primary={product.productName}
+                                  secondary={product.vendorName}
+                                />
+
+                                <IconButton
+                                  type="submit"
+                                  className={styles.iconButton}
+                                  aria-label="remove"
+                                  onClick={() => {
+                                    removeRequestedProduct(product);
+                                  }}
+                                >
+                                  <CloseOutlined />
+                                </IconButton>
+                              </ListItem>
+                            );
+                          })}
                       </List>
                     )}
                   </Grid>
