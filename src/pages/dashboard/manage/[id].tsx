@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import DashboardLayout from '@/components/DashboardLayout';
 import { useRequireAuth } from '@/hooks/useRequireAuth';
+import { RequestedProductDetails } from '@/types/RequestedProducts';
 import { ShopifyProduct } from '@/types/shopify/Products';
 import { getPostedCollectionById } from '@/utils/firebaseFirestore';
 import { fineFindPages } from '@/utils/urls';
@@ -15,6 +17,7 @@ import {
   ListItemText,
   Typography,
 } from '@material-ui/core';
+import FiberNewIcon from '@material-ui/icons/FiberNew';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import Image from 'next/image';
@@ -43,6 +46,9 @@ const ManageCollectionPage: React.FC = () => {
   const [selectedProducts, setSelectedProducts] = useState<ShopifyProduct[]>(
     []
   );
+  const [requestedProducts, setRequestedProducts] = useState<
+    RequestedProductDetails[]
+  >([]);
   const [collectionData, setCollectionData] =
     useState<DocumentSnapshot<DocumentData>>(null);
 
@@ -55,6 +61,7 @@ const ManageCollectionPage: React.FC = () => {
           if (collection.exists()) {
             setCollectionData(collection);
             setSelectedProducts(collection.get('products'));
+            setRequestedProducts(collection.get('productsRequested'));
           } else {
             router.push(fineFindPages.dashboard);
           }
@@ -99,23 +106,39 @@ const ManageCollectionPage: React.FC = () => {
                 Tagged Products
               </Typography>
               <Grid item>
-                {selectedProducts && selectedProducts.length > 0 && (
+                {(selectedProducts.length > 0 ||
+                  requestedProducts.length > 0) && (
                   <>
                     <List className={styles.selectProductList}>
-                      {selectedProducts.map((product) => {
-                        return (
-                          <ListItem key={product.id}>
-                            <ListItemAvatar>
-                              <Image
-                                className={styles.image}
-                                src={product.originalSrc}
-                                alt={product.title}
+                      {selectedProducts.length > 0 &&
+                        selectedProducts.map((product) => {
+                          return (
+                            <ListItem key={product.id}>
+                              <ListItemAvatar>
+                                <Image
+                                  className={styles.image}
+                                  src={product.originalSrc}
+                                  alt={product.title}
+                                />
+                              </ListItemAvatar>
+                              <ListItemText primary={product.title} />
+                            </ListItem>
+                          );
+                        })}
+                      {requestedProducts.length > 0 &&
+                        requestedProducts.map((product) => {
+                          return (
+                            <ListItem key={product.productName}>
+                              <ListItemAvatar>
+                                <FiberNewIcon />
+                              </ListItemAvatar>
+                              <ListItemText
+                                primary={product.productName}
+                                secondary={product.vendorName}
                               />
-                            </ListItemAvatar>
-                            <ListItemText primary={product.title} />
-                          </ListItem>
-                        );
-                      })}
+                            </ListItem>
+                          );
+                        })}
                     </List>
                   </>
                 )}

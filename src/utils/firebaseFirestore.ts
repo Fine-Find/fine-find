@@ -19,7 +19,7 @@ export const getNextPostedCollectionNumber = async (
   postedCollection: CollectionReference<DocumentData>
 ) => {
   const collectionSnapshot = await getDocs(postedCollection);
-  
+
   if (collectionSnapshot.docs && collectionSnapshot.docs.length > 0) {
     const latestPostedCollection = collectionSnapshot.docs.reduce(function (
       previousDoc,

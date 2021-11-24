@@ -59,7 +59,8 @@ export default function Header({ open, onDrawerToggled }: HeaderProps) {
           {MenuDrawer(onDrawerToggled, menuButtonStyle)}
           <Link href="/dashboard">
             <a>
-              <Image className={styles.image}
+              <Image
+                className={styles.image}
                 src="/main_navy.png"
                 layout="fill"
                 objectFit="contain"
