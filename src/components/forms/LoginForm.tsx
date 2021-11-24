@@ -1,3 +1,9 @@
+import {
+  LoginError,
+  LoginErrorType,
+  handleLoginError,
+} from '@/utils/firebase/fireBaseError';
+import { UserCredential } from '@firebase/auth';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -23,13 +29,18 @@ const LoginForm: React.FC = () => {
   } = useForm();
   const auth = useAuth();
   const router = useRouter();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<LoginError>(null);
 
   const onSubmit = (data: LoginData) => {
     setError(null);
-    return auth.signIn(data).then((response) => {
-      response.error ? setError(response.error) : router.push('/dashboard');
-    });
+    return auth
+      .signIn(data)
+      .then((_response: UserCredential) => {
+        router.push('/dashboard');
+      })
+      .catch((errorResponse) => {
+        setError(handleLoginError(errorResponse));
+      });
   };
 
   return (
@@ -61,6 +72,11 @@ const LoginForm: React.FC = () => {
                   {errors.email.message}
                 </FormHelperText>
               )}
+              {error?.type === LoginErrorType.email && (
+                <FormHelperText id="email-text" error>
+                  {error.message}
+                </FormHelperText>
+              )}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -86,9 +102,14 @@ const LoginForm: React.FC = () => {
                   {errors.password.message}
                 </FormHelperText>
               )}
-              {error?.message && (
+              {error?.type === LoginErrorType.password && (
+                <FormHelperText id="password-text" error>
+                  {error.message}
+                </FormHelperText>
+              )}
+              {error?.type === LoginErrorType.unknown && (
                 <FormHelperText id="form-error-text" error>
-                  {errors.message}
+                  {error.message}
                 </FormHelperText>
               )}
             </Grid>

@@ -1,5 +1,6 @@
 import {
   User,
+  UserCredential,
   createUserWithEmailAndPassword,
   sendEmailVerification,
   sendPasswordResetEmail,
@@ -31,8 +32,13 @@ const firebaseAuthProviderDefaultProps = {
   signUp: () => {
     return Promise.resolve();
   },
-  signIn: () => {
-    return Promise.resolve();
+  signIn: (): Promise<UserCredential> => {
+    return Promise.resolve({
+      credential: null,
+      user: null,
+      operationType: null,
+      providerId: null,
+    });
   },
   getUserAdditionalData: () => {
     return Promise.resolve();
@@ -110,14 +116,12 @@ const useAuthProvider = (): AuthEmission => {
     });
   };
 
-  const signIn = ({ email, password }) => {
-    return signInWithEmailAndPassword(auth, email, password)
-      .then((response) => {
-        return response.user;
-      })
-      .catch((error) => {
-        return { error };
-      });
+  const signIn = ({ email, password }): Promise<UserCredential> => {
+    return signInWithEmailAndPassword(auth, email, password).then(
+      (response) => {
+        return response;
+      }
+    );
   };
 
   const firestoreSignOut = () => {

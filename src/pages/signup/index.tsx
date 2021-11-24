@@ -9,6 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Link from 'next/link';
 
 import styles from './signup.module.scss';
+
 const SignUpPage: React.FC = () => {
   return (
     <Container component="main" maxWidth="xs">
