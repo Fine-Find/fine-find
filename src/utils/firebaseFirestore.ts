@@ -1,4 +1,5 @@
 import { db } from '@/config/firebase';
+import { BasicProfileType, BusinessProfileType } from '@/types/profile.types';
 import {
   CollectionReference,
   DocumentData,
@@ -13,6 +14,7 @@ import {
   query,
   setDoc,
   startAfter,
+  updateDoc,
 } from 'firebase/firestore';
 
 export const getNextPostedCollectionNumber = async (
@@ -91,4 +93,64 @@ export const getPostedCollectionById = async (
 ) => {
   const documentRef = doc(db, 'users', userId, 'collections', postId);
   return getDoc(documentRef);
+};
+
+const getUserDoc = async (userId: string) => {
+  return doc(db, 'users', userId);
+};
+
+const getUserDocData = async (userId: string) => {
+  const userDoc = await getUserDoc(userId);
+  return getDoc(userDoc);
+};
+
+export const getUserData = async (userId: string, field: string) => {
+  const userData = await getUserDocData(userId);
+
+  return userData.get(field);
+};
+
+export const getProfileData = async (userId: string) => {
+  const userData = await getUserDocData(userId);
+
+  const profile = {
+    basicProfile: userData.get('basicProfile'),
+    businessProfile: userData.get('businessProfile'),
+    profileImage: userData.get('profileImage'),
+    businessImage: userData.get('businessImage'),
+  };
+
+  return profile;
+};
+
+export const updateBasicProfile = async (
+  userId: string,
+  basicProfile: BasicProfileType
+) => {
+  const userDoc = await getUserDoc(userId);
+
+  return await updateDoc(userDoc, { basicProfile });
+};
+
+export const updateBusinessProfile = async (
+  userId: string,
+  businessProfile: BusinessProfileType
+) => {
+  const userDoc = await getUserDoc(userId);
+
+  return await updateDoc(userDoc, { businessProfile });
+};
+
+export const updateUserImage = async (
+  userId: string,
+  imageUrl: string,
+  imageType: 'profile' | 'business'
+) => {
+  const userDoc = await getUserDoc(userId);
+
+  if (imageType === 'profile') {
+    return await updateDoc(userDoc, { profileImage: imageUrl });
+  } else {
+    return await updateDoc(userDoc, { businessImage: imageUrl });
+  }
 };
