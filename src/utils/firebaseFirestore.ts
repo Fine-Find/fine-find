@@ -1,5 +1,10 @@
 import { db } from '@/config/firebase';
-import { BasicProfileType, BusinessProfileType } from '@/types/profile.types';
+import {
+  BasicProfileType,
+  BusinessProfileType,
+  UserOnboarding,
+  UserType,
+} from '@/types/profile.types';
 import {
   CollectionReference,
   DocumentData,
@@ -104,10 +109,15 @@ const getUserDocData = async (userId: string) => {
   return getDoc(userDoc);
 };
 
-export const getUserData = async (userId: string, field: string) => {
+export const getUserDataField = async (userId: string, field: string) => {
   const userData = await getUserDocData(userId);
 
   return userData.get(field);
+};
+
+export const getUserData = async (userId: string) => {
+  const userData = await getUserDocData(userId);
+  return userData.data() as UserType;
 };
 
 export const getProfileData = async (userId: string) => {
@@ -128,8 +138,11 @@ export const updateBasicProfile = async (
   basicProfile: BasicProfileType
 ) => {
   const userDoc = await getUserDoc(userId);
+  const name = `${basicProfile.firstName} ${basicProfile.lastName}`;
+  const phone = basicProfile.phone ?? '';
+  basicProfile.phone = phone;
 
-  return await updateDoc(userDoc, { basicProfile });
+  return await updateDoc(userDoc, { basicProfile, name });
 };
 
 export const updateBusinessProfile = async (
@@ -153,4 +166,13 @@ export const updateUserImage = async (
   } else {
     return await updateDoc(userDoc, { businessImage: imageUrl });
   }
+};
+
+export const updateUserOnboarding = async (
+  userId: string,
+  onboarding: UserOnboarding
+) => {
+  const userDoc = await getUserDoc(userId);
+
+  return await updateDoc(userDoc, { onboarding });
 };

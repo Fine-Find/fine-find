@@ -1,0 +1,19 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  margin-top: 2rem;
+}
+
+.imageCard {
+  margin-top: 2rem;
+}
+
+.error {
+  color: red;
+}

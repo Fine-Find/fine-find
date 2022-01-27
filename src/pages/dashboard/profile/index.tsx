@@ -31,7 +31,7 @@ const DashBoardPage: React.FC = () => {
   useEffect(() => {
     (async () => {
       setLoadingProfile(true);
-      if (auth?.user.uid) {
+      if (auth?.user?.uid) {
         const profiles = await getProfileData(auth?.user.uid);
         profiles.basicProfile.email = auth.user.email;
         setBasicProfile(profiles.basicProfile);

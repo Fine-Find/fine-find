@@ -74,6 +74,8 @@ const DashBoardPage: React.FC = () => {
   const router = useRouter();
   const [session, loading] = useSession();
 
+  // TODO: Add onboarding router
+
   const [loadingProfile, setLoadingProfile] = useState(false);
   const [businessProfile, setBusinessProfile] = useState<BusinessProfileType>();
   const [businessImage, setBusinessImage] = useState();
@@ -95,10 +97,12 @@ const DashBoardPage: React.FC = () => {
   useEffect(() => {
     (async () => {
       setLoadingProfile(true);
-      const profiles = await getProfileData(auth?.user.uid);
-      setBusinessProfile(profiles.businessProfile);
-      setBusinessImage(profiles.businessImage);
-      setLoadingProfile(false);
+      if (auth?.user?.uid) {
+        const profiles = await getProfileData(auth?.user.uid);
+        setBusinessProfile(profiles.businessProfile);
+        setBusinessImage(profiles.businessImage);
+        setLoadingProfile(false);
+      }
     })();
   }, [auth]);
 
