@@ -1,23 +1,52 @@
+import { BasicProfileType } from '@/types/profile.types';
+import { updateBasicProfile } from '@/utils/firebaseFirestore';
 import { usaStates } from '@/utils/usaStates';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { CardContent, Grid, TextField } from '@material-ui/core';
-import React from 'react';
+import {
+  CardContent,
+  Grid,
+  LinearProgress,
+  TextField,
+} from '@material-ui/core';
+import React, { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
 
 import { ProfileFormCard } from '../ProfileFormCard';
 import { basicProfileValidation } from './BasicProfileFormValidation';
 
-// TODO: Remove the mask prior to storing the phone number in the DB
-export const BasicProfileForm = () => {
-  // TODO: Pull this from Firebase
-  const values = {
+export type BasicProfileFormProps = {
+  userId: string;
+  basicProfile?: BasicProfileType;
+  updateProfile: (data: any) => void;
+};
+
+export const BasicProfileForm = ({
+  userId,
+  basicProfile,
+  updateProfile,
+}: BasicProfileFormProps) => {
+  const [updatingProfile, setUpdatingProfile] = useState(false);
+  const values = basicProfile ?? {
     firstName: 'Jane',
     lastName: 'Doe',
     email: 'jane@ld.co',
-    phone: '+15555555555',
+    phone: '+1 (555) 555-5555',
     state: '',
     country: 'USA',
+  };
+
+  const onSubmit = (data: BasicProfileType) => {
+    setUpdatingProfile(true);
+    updateBasicProfile(userId, data)
+      .then(() => {
+        updateProfile(data);
+        setUpdatingProfile(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setUpdatingProfile(false);
+      });
   };
 
   const methods = useForm({
@@ -31,10 +60,12 @@ export const BasicProfileForm = () => {
 
   return (
     <FormProvider {...methods}>
+      {updatingProfile && <LinearProgress />}
       <ProfileFormCard
         title="Profile"
         subTitle="All about you"
         buttonText="Update Profile"
+        onSubmit={onSubmit}
       >
         <CardContent>
           <Grid container spacing={3}>

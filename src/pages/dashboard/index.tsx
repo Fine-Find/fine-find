@@ -1,12 +1,14 @@
 import { CreateCollectionButton } from '@/components/Collection/CreateCollectionButton';
 import { TitledImageCard } from '@/components/shared/TitledImageCard';
+import { BusinessProfileType } from '@/types/profile.types';
+import { getProfileData } from '@/utils/firebaseFirestore';
 import { fineFindApis } from '@/utils/urls';
 import { Card, CardHeader, Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CreateInstagramAccountRequest } from 'types/Instagram/client/CreateInstagramAccountRequest';
 
 import CollectionMasonGridList from '../../components/CollectionMasonGridList';
@@ -70,8 +72,11 @@ function displayInstagramLogin(session, auth) {
 const DashBoardPage: React.FC = () => {
   const auth = useRequireAuth();
   const router = useRouter();
-
   const [session, loading] = useSession();
+
+  const [loadingProfile, setLoadingProfile] = useState(false);
+  const [businessProfile, setBusinessProfile] = useState<BusinessProfileType>();
+  const [businessImage, setBusinessImage] = useState();
 
   useEffect(() => {
     if (
@@ -87,7 +92,18 @@ const DashBoardPage: React.FC = () => {
     }
   }, [session, auth]);
 
-  if (!auth.isInitialized || !auth.user || loading) return <>{Loading()}</>;
+  useEffect(() => {
+    (async () => {
+      setLoadingProfile(true);
+      const profiles = await getProfileData(auth?.user.uid);
+      setBusinessProfile(profiles.businessProfile);
+      setBusinessImage(profiles.businessImage);
+      setLoadingProfile(false);
+    })();
+  }, [auth]);
+
+  if (!auth.isInitialized || !auth.user || loading || loadingProfile)
+    return <>{Loading()}</>;
 
   return (
     <DashboardLayout>
@@ -105,10 +121,10 @@ const DashBoardPage: React.FC = () => {
             <Grid container className={`${styles.moodRow}`} spacing={3}>
               <Grid item md={4} xs={12} className={`${styles.moodRow}`}>
                 <TitledImageCard
-                  title="Lighthouse Designs"
-                  subTitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                  title={businessProfile?.companyName}
+                  subTitle={businessProfile?.description}
                   buttonText="Update your profile"
-                  imgSrc="/img/undraw_Lighthouse_frb8.svg"
+                  imgSrc={businessImage}
                   className={`${styles.moodRow} ${styles.profile}`}
                   onClick={() => {
                     router.push('/dashboard/profile');
