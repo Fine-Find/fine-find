@@ -115,7 +115,7 @@ const ManageCollectionPage: React.FC = () => {
                           return (
                             <ListItem key={product.id}>
                               <ListItemAvatar>
-                                <Image
+                                <img
                                   className={styles.image}
                                   src={product.originalSrc}
                                   alt={product.title}

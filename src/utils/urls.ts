@@ -9,6 +9,7 @@ export const fineFindPages = {
   collections: '/dashboard/collections',
   createCollections: '/dashboard/collections/create',
   orders: '/dashboard/orders',
+  onboarding: '/onboarding',
 };
 
 export const fineFindApis = {
@@ -21,4 +22,5 @@ export const fineFindApis = {
   submitApplication: '/api/apply/submitApplication',
   approveApplication: '/api/apply/approveApplication',
   checkApplication: '/api/apply/checkApplication',
+  migrateApplication: '/api/apply/migrateApplication',
 };

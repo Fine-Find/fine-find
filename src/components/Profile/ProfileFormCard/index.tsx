@@ -21,9 +21,8 @@ export const ProfileFormCard = ({
   subTitle,
   children,
   buttonText,
-  onSubmit = (data) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+  onSubmit = (_data) => {
+    return;
   },
   className,
 }: ProfileFormCardProps) => {

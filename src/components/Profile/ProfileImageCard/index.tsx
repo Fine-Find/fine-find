@@ -24,7 +24,7 @@ type ProfileImageCardProps = {
   subTitle: string;
   imgSrc?: string;
   buttonText?: string;
-  onClick?: () => void;
+  afterUpload?: () => void;
   children?: ReactNode;
   className?: string;
   isAvatar?: boolean;
@@ -108,7 +108,9 @@ export const ProfileImageCard = ({
   children,
   imgSrc = '/img/undraw_Lighthouse_frb8.svg',
   buttonText,
-  //onClick,
+  afterUpload = () => {
+    return;
+  },
   className,
   isAvatar = false,
   alt = 'placeholder',
@@ -164,6 +166,7 @@ export const ProfileImageCard = ({
           updateUserImage(userId, imageUrl, fileName)
             .then(() => {
               setUploadingFile(false);
+              afterUpload();
             })
             .catch((error) => {
               console.error(error);

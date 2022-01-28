@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['cdninstagram.com'],
+    domains: ['cdninstagram.com','cdn.shopify.com'],
   },
   webpack: (config) => {
     // Important: return the modified config

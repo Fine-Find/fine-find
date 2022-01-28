@@ -40,13 +40,17 @@ const SignUpForm: React.FC = () => {
       const isValid = await idIsValid(applyId);
       if (isValid) {
         return auth.signUp(data).then((user) => {
-          // eslint-disable-next-line no-console
-          console.log(user);
-          router.push('/dashboard');
+          fetch(fineFindApis.migrateApplication, {
+            method: 'POST',
+            body: JSON.stringify({
+              applicationId: applyId,
+              userId: user.uid,
+            }),
+          }).finally(() => {
+            router.push('/onboarding');
+          });
         });
       } else {
-        // eslint-disable-next-line no-console
-        console.log('');
         //todo put notification of error on front end
       }
     }
