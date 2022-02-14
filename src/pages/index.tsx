@@ -97,7 +97,7 @@ export default function Home() {
                   md={3}
                   className={styles.headerbutton}
                 >
-                  <Link href={'/apply'}>
+                  <Link href={'/apply'} passHref>
                     <Button label="Apply now" textSize="2.2em" />
                   </Link>
                 </Grid>

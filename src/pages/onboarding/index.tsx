@@ -1,5 +1,6 @@
 import { BasicProfileOnboarding } from '@/components/Onboarding/BasicProfile';
 import { BusinessProfileOnboarding } from '@/components/Onboarding/BusinessProfile';
+import { PageCreation } from '@/components/Onboarding/PageCreation';
 import { ProfileImageOnboarding } from '@/components/Onboarding/ProfileImage';
 import { Welcome } from '@/components/Onboarding/Welcome';
 import { useRequireAuth } from '@/hooks/useRequireAuth';
@@ -22,7 +23,6 @@ const Loading = () => {
 };
 
 const getStepFrom = (onboarding: UserOnboarding) => {
-  debugger;
   if (!onboarding.welcome) {
     return 0;
   } else if (!onboarding.profileImage) {
@@ -33,8 +33,10 @@ const getStepFrom = (onboarding: UserOnboarding) => {
     return 3;
   } else if (!onboarding.businessProfile) {
     return 4;
-  } else {
+  } else if (!onboarding.pageCreated) {
     return 5;
+  } else {
+    return 6;
   }
 };
 
@@ -55,7 +57,7 @@ const OnboardingPage: React.FC = () => {
         setLoadingProfile(false);
         if (step === -1) {
           setStep(getStepFrom(data.onboarding));
-        } else if (step === 5) {
+        } else if (step === 6) {
           router.push(fineFindPages.dashboard);
         }
       }
@@ -158,6 +160,9 @@ const OnboardingPage: React.FC = () => {
               user={user}
               updateBusinessProfile={businessProfileSet}
             />
+          )}
+          {step === 5 && (
+            <PageCreation user={user} userIdToken={auth.userIdToken} />
           )}
         </Grid>
       </Container>

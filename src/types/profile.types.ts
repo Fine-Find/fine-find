@@ -33,12 +33,14 @@ export type UserOnboarding = {
   basicProfile: boolean;
   businessImage: boolean;
   businessProfile: boolean;
+  pageCreated: boolean;
 };
 
 export interface UserType {
   email: string;
   name: string;
   uid: string;
+  shopifyUrl?: string;
   basicProfile?: BasicProfileType;
   businessImage?: string;
   businessProfile?: BusinessProfileType;

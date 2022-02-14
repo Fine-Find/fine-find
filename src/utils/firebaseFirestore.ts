@@ -176,3 +176,9 @@ export const updateUserOnboarding = async (
 
   return await updateDoc(userDoc, { onboarding });
 };
+
+export const updateShopifyUrl = async (userId: string, url: string) => {
+  const userDoc = await getUserDoc(userId);
+
+  return await updateDoc(userDoc, { shopifyUrl: url });
+};

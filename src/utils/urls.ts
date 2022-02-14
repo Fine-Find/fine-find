@@ -23,4 +23,5 @@ export const fineFindApis = {
   approveApplication: '/api/apply/approveApplication',
   checkApplication: '/api/apply/checkApplication',
   migrateApplication: '/api/apply/migrateApplication',
+  createDesignerPage: '/api/shopify/v1/designer',
 };
