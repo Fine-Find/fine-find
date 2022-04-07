@@ -161,7 +161,7 @@ const ProductsPage: React.FC = () => {
                     <Grid container alignItems="center">
                       <Grid item>
                         {option.originalSrc && (
-                          <Image
+                          <img
                             className={styles.image}
                             src={option.originalSrc}
                             alt={option.title}

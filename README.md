@@ -2,22 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-The instagram API requires that all callback urls are https. This means that we need to configure the local development to run as HTTPS and not HTTP. You can follow these instructions to quickly and easily get started:
-https://medium.com/responsetap-engineering/nextjs-https-for-a-local-dev-server-98bb441eabd7
+The application is built using Next.JS, Firebase, and Material UI as the basic building blocks. We are not actively using Storybook, Jest, or React Testing library but those will be key technologies in the future.
 
-While following the guide above, name your cert and key:
-``` text
-server.crt
-server.key
-```
+Reach out to Blaine Hoyt to get the local environment variables needed to run the application. Create a file called `.env.local` and store the environment variables there.
 
-Once you have configured the certs, run the development server:
+Be sure that you are running on Node 14+. If you are developing on multiple projects that use different versions of node, I recommend installing `nvm` to manage the versions of node. This will enable you to easily switch back and forth between node versions.
 
-```bash
-npm run dev:cert
-```
+Install all of the dependencies by running `npm ci`.
 
-Open [https://localhost:3000](https://localhost:3000) with your browser to see the result.
+Start the application with `npm run dev`.
 
 ## Components
 Component should live in their own folder based on the name of the component. A component is declared in `PascalCase` and the folder named as such.
@@ -34,7 +27,7 @@ import SampleComponent from '../components/SampleComponent';
 
 A component should almost always have three corresponding files in the same folder.
 ```text
-SampleComponent.styles.scss
+SampleComponent.module.scss
 SampleComponent.tests.ts
 SampleComponent.stories.tsx
 SampleComponent.stories.mdx // only if we want to have some sort of MarkDown file that explains a more complex component
@@ -72,12 +65,15 @@ The following resources are helpful with getting started developing on the FineF
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [React Documentation](https://reactjs.org/docs/getting-started.html) - documentation that provides a great overview of the React framework
 - [Intro to Storybook](https://storybook.js.org/tutorials/intro-to-storybook/) - tutorial for getting started with Storybook and React
+- [Material UI v4](https://v4.mui.com/) - UI component library
 
 
 ## Searching Shopify API
 https://shopify.dev/docs/storefront-api/getting-started
+
 https://shopify.dev/graphiql/storefront-graphiql
 
+```graph
 {
   products(first:20 query:"title:shirt*") {
     edges{
@@ -97,3 +93,4 @@ https://shopify.dev/graphiql/storefront-graphiql
     }
   }
 }
+```
