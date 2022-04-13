@@ -79,8 +79,16 @@ const DashBoardPage: React.FC = () => {
   const [loadingProfile, setLoadingProfile] = useState(false);
   const [businessProfile, setBusinessProfile] = useState<BusinessProfileType>();
   const [businessImage, setBusinessImage] = useState();
+  const [designer, setDesigner] = useState(false);
 
   useEffect(() => {
+    const role = localStorage.getItem('role');
+    if(role === 'admin'){
+      router.push('/admin');
+    }
+    if(role === 'designer'){
+      setDesigner(true);
+    }
     if (
       auth.isInitialized &&
       !loading &&
@@ -108,8 +116,8 @@ const DashBoardPage: React.FC = () => {
 
   if (!auth.isInitialized || !auth.user || loading || loadingProfile)
     return <>{Loading()}</>;
-
-  return (
+  
+  const dashboard = (
     <DashboardLayout>
       <div className={styles.root}>
         <Container maxWidth="xl">
@@ -146,6 +154,12 @@ const DashBoardPage: React.FC = () => {
         </Container>
       </div>
     </DashboardLayout>
+  );
+
+  return (
+    <>
+      {designer ? dashboard : Loading()}
+    </>
   );
 };
 export default DashBoardPage;

@@ -122,7 +122,6 @@ export const getUserData = async (userId: string) => {
 
 export const getProfileData = async (userId: string) => {
   const userData = await getUserDocData(userId);
-
   const profile = {
     basicProfile: userData.get('basicProfile'),
     businessProfile: userData.get('businessProfile'),
@@ -131,6 +130,32 @@ export const getProfileData = async (userId: string) => {
   };
 
   return profile;
+};
+export const verifyDashboard = async (userId: string, router) => {
+  const role = localStorage.getItem('role');
+
+  if(role === 'admin'){
+    router.push('/admin');
+  }else if(role === 'designer'){
+    router.push('/dashboard');
+  }else{
+
+    getUserDocData(userId)
+      .then( userData =>{
+        const basicProfile = userData.get('basicProfile');
+        if(basicProfile?.role === 'admin'){
+          localStorage.setItem('role','admin');
+          router.push('/admin');
+        }
+        if(basicProfile?.role === 'designer'){
+          localStorage.setItem('role','designer');
+          router.push('/dashboard');
+        }
+      })
+      .catch(() => {
+        return false;
+      });
+  }
 };
 
 export const updateBasicProfile = async (

@@ -35,6 +35,7 @@ export default function Header({ open, onDrawerToggled }: HeaderProps) {
         color="inherit"
         onClick={() => {
           auth.firestoreSignOut();
+          localStorage.removeItem('role');
           router.push('/login');
         }}
       >
