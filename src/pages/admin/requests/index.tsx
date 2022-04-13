@@ -5,9 +5,9 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import DashboardLayout from '../../components/DashboardLayout';
-import { useRequireAuth } from '../../hooks/useRequireAuth';
-import styles from './admin.module.scss';
+import DashboardLayout from '../../../components/DashboardLayout';
+import { useRequireAuth } from '../../../hooks/useRequireAuth';
+import styles from './requests.module.scss';
 
 const Loading = () => {
   return (
@@ -17,27 +17,16 @@ const Loading = () => {
   );
 };
 
-const AdminDashboard: React.FC = () => {
+const AdminRequests: React.FC = () => {
   const auth = useRequireAuth();
   const router = useRouter();
   const [admin , setAdmin] = useState(false);
 
-
-  const [loadingProfile, setLoadingProfile] = useState(false);
   useEffect(() => {
     verifyAdminDashboard(router, setAdmin);
   }, []);
 
-  useEffect(() => {
-    (async () => {
-      setLoadingProfile(true);
-      if (auth?.user?.uid) {
-        setLoadingProfile(false);
-      }
-    })();
-  }, [auth]);
-
-  if (!auth.isInitialized || !auth.user || loadingProfile)
+  if (!auth.isInitialized || !auth.user)
     return <>{Loading()}</>;
 
   const dashboard = (
@@ -54,7 +43,7 @@ const AdminDashboard: React.FC = () => {
               
               <Grid item md={8} xs={12}>
                 <Card elevation={0}>
-                  <CardHeader title="Welcome to the admin dashboard" />
+                  <CardHeader title="admin requests" />
                 </Card>
               </Grid>
             </Grid>
@@ -70,4 +59,4 @@ const AdminDashboard: React.FC = () => {
     </>
   );
 };
-export default AdminDashboard;
+export default AdminRequests;

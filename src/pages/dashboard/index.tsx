@@ -2,6 +2,7 @@ import { CreateCollectionButton } from '@/components/Collection/CreateCollection
 import { TitledImageCard } from '@/components/shared/TitledImageCard';
 import { BusinessProfileType } from '@/types/profile.types';
 import { getProfileData } from '@/utils/firebaseFirestore';
+import { verifyDesignerDashboard } from '@/utils/roles';
 import { fineFindApis } from '@/utils/urls';
 import { Card, CardHeader, Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +18,7 @@ import InstagramLoginButton from '../../components/Instagram/InstagramLoginButto
 import { useRequireAuth } from '../../hooks/useRequireAuth';
 import styles from './dashboard.module.scss';
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <div id="skeleton">
       <Skeleton variant="text" />
@@ -82,13 +83,7 @@ const DashBoardPage: React.FC = () => {
   const [designer, setDesigner] = useState(false);
 
   useEffect(() => {
-    const role = localStorage.getItem('role');
-    if(role === 'admin'){
-      router.push('/admin');
-    }
-    if(role === 'designer'){
-      setDesigner(true);
-    }
+    verifyDesignerDashboard(router,true, setDesigner);
     if (
       auth.isInitialized &&
       !loading &&
