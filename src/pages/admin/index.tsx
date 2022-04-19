@@ -20,8 +20,7 @@ const Loading = () => {
 const AdminDashboard: React.FC = () => {
   const auth = useRequireAuth();
   const router = useRouter();
-  const [admin , setAdmin] = useState(false);
-
+  const [admin, setAdmin] = useState(false);
 
   const [loadingProfile, setLoadingProfile] = useState(false);
   useEffect(() => {
@@ -44,14 +43,12 @@ const AdminDashboard: React.FC = () => {
     <DashboardLayout>
       <div className={styles.root}>
         <Container maxWidth="xl">
-          
           <Grid
             container
             spacing={3}
             className={`${styles.container} ${styles.headerContainer}`}
           >
             <Grid container className={`${styles.moodRow}`} spacing={3}>
-              
               <Grid item md={8} xs={12}>
                 <Card elevation={0}>
                   <CardHeader title="Welcome to the admin dashboard" />
@@ -64,10 +61,6 @@ const AdminDashboard: React.FC = () => {
     </DashboardLayout>
   );
 
-  return (
-    <>
-      {admin ? dashboard : Loading()}
-    </>
-  );
+  return <>{admin ? dashboard : Loading()}</>;
 };
 export default AdminDashboard;

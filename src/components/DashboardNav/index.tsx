@@ -7,7 +7,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useEffect, useState } from 'react';
 
 import styles from './DashboardNav.module.scss';
-import { mainListItems, adminListItems } from './listItems';
+import { adminListItems, mainListItems } from './listItems';
 
 type Props = {
   toggleDrawer;
@@ -17,7 +17,7 @@ type Props = {
 export default function DashboardNav({ toggleDrawer, open }: Props) {
   const [designer, setDesigner] = useState(false);
 
-  useEffect(() =>{
+  useEffect(() => {
     verifyDesignerDashboard(null, false, setDesigner);
   });
 
@@ -37,7 +37,9 @@ export default function DashboardNav({ toggleDrawer, open }: Props) {
           </IconButton>
         </div>
         <Divider />
-        <List className={styles.list}>{designer ? mainListItems : adminListItems }</List>
+        <List className={styles.list}>
+          {designer ? mainListItems : adminListItems}
+        </List>
       </Drawer>
     </>
   );

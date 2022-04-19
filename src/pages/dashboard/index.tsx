@@ -83,7 +83,7 @@ const DashBoardPage: React.FC = () => {
   const [designer, setDesigner] = useState(false);
 
   useEffect(() => {
-    verifyDesignerDashboard(router,true, setDesigner);
+    verifyDesignerDashboard(router, true, setDesigner);
     if (
       auth.isInitialized &&
       !loading &&
@@ -111,7 +111,7 @@ const DashBoardPage: React.FC = () => {
 
   if (!auth.isInitialized || !auth.user || loading || loadingProfile)
     return <>{Loading()}</>;
-  
+
   const dashboard = (
     <DashboardLayout>
       <div className={styles.root}>
@@ -151,10 +151,6 @@ const DashBoardPage: React.FC = () => {
     </DashboardLayout>
   );
 
-  return (
-    <>
-      {designer ? dashboard : Loading()}
-    </>
-  );
+  return <>{designer ? dashboard : Loading()}</>;
 };
 export default DashBoardPage;
