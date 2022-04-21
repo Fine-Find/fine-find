@@ -4,6 +4,7 @@ import { firebaseCollections } from '@/utils/firebaseCollections';
 import { NextApiResponse } from 'next';
 
 async function checkApplication(applicationId: string) {
+  console.log('realcheckapp',applicationId);
   const applicationRef = firebaseAdminDb
     .collection(firebaseCollections.applications)
     .doc(applicationId);
@@ -22,6 +23,7 @@ async function checkApplication(applicationId: string) {
     return false;
   } else {
     // eslint-disable-next-line no-console
+    console.log('consumed message');
     await applicationRef.update({ consumed: true });
     return true;
   }
@@ -39,6 +41,7 @@ async function checkApplication(applicationId: string) {
 const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
   if (req.method && req.method.toUpperCase() === 'POST') {
     const id = JSON.parse(req.body);
+    console.log('checkApplication', req.body,id);
     if (!id) {
       res.status(400).end('Missing data');
     } else {

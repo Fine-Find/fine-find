@@ -127,6 +127,7 @@ const OnboardingPage: React.FC = () => {
               user={user}
               nextStepText="Step 2: Profile"
               cardTitle={`${user.application.firstName} ${user.application.lastName}`}
+              moreText="This will help you personalize your Shopify Page."
               stepNumber={1}
               stepTitle="Profile Image"
               fileName="profile"
@@ -153,6 +154,7 @@ const OnboardingPage: React.FC = () => {
               errorText="A company logo is required"
               onClick={businessImageSet}
               buttonText="Upload a company logo"
+              moreText="The logo is displayed on your shopify page."
             />
           )}
           {step === 4 && (

@@ -6,6 +6,7 @@ import { NextApiResponse } from 'next';
 const { URL } = process.env;
 
 function buildMessageData(to: string, subject: string, html: string) {
+  console.log('buildMessageData');
   return {
     from: 'Fine Find Concierge <concierge@thefinefind.com>',
     to: to,
@@ -21,6 +22,7 @@ function createApprovalLink(recordId: any) {
 
 async function buildInternalMessageHtml(data: any, recordId) {
   const approvalLink = await createApprovalLink(recordId);
+  console.log('buildIntermaMessage');
   return `
         <!DOCTYPE html>
         <html>
@@ -43,6 +45,7 @@ async function buildInternalMessageHtml(data: any, recordId) {
 }
 
 function buildExternalMessageHtml() {
+  console.log('buildExternalMessage');
   return `
         <!DOCTYPE html>
         <html>
@@ -57,15 +60,16 @@ function buildExternalMessageHtml() {
 async function sendEmails(data, recordId) {
   const conciergeMessageText = await buildInternalMessageHtml(data, recordId);
   const conciergeMessageData = buildMessageData(
-    'concierge@thefinefind.com, blaine@thefinefind.com',
+    'renepromesse@gmail.com, blaine@thefinefind.com',
     'New Designer Application',
     conciergeMessageText
   );
-
+  console.log('sendEmail',URL);
   await fetch(URL + fineFindApis.sendEmail, {
     method: 'POST',
     body: JSON.stringify(conciergeMessageData),
   });
+  console.log('sendEmails',URL);
 
   const externalMessageText = buildExternalMessageHtml();
   const externalMessageData = buildMessageData(
@@ -91,7 +95,7 @@ async function addRecords(reqBody: any) {
       ...reqBody,
       ...metaData,
     });
-
+  console.log('----->recordId', recId.id);
   return recId.id;
 }
 

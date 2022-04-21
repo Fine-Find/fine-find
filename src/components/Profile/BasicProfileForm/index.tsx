@@ -34,6 +34,7 @@ export const BasicProfileForm = ({
     phone: '+1 (555) 555-5555',
     state: '',
     country: 'USA',
+    role: 'designer',
   };
 
   const onSubmit = (data: BasicProfileType) => {

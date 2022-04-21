@@ -46,9 +46,11 @@ export const BusinessProfileForm = ({
   } = methods;
 
   const onSubmit = (data: BusinessProfileType) => {
+    console.log('onSubmit',data);
     setUpdatingProfile(true);
     updateBusinessProfile(userId, data)
       .then(() => {
+        console.log('doneSubmitting');
         updateProfile(data);
         setUpdatingProfile(false);
       })
@@ -109,7 +111,11 @@ export const BusinessProfileForm = ({
                 multiline
                 variant="outlined"
                 error={errors.description ? true : false}
-                helperText={errors.description?.message}
+                helperText={
+                  errors.description
+                    ? errors.description?.message
+                    : 'This description is displayed on your Shopify page'
+                }
                 {...register('description')}
               />
             </Grid>

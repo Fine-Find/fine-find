@@ -175,6 +175,7 @@ export const updateBusinessProfile = async (
   businessProfile: BusinessProfileType
 ) => {
   const userDoc = await getUserDoc(userId);
+  console.log('updateBusinessProfile',userId);
 
   return await updateDoc(userDoc, { businessProfile });
 };

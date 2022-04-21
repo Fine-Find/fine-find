@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,7 +11,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { useAuth } from '../../hooks/useAuth';
-import { Button } from '../shared/OutlineButton';
+// import { Button } from '../shared/OutlineButton';
 import styles from './MarketingHeader.module.scss';
 
 export default function MarketingHeader() {
@@ -30,15 +31,20 @@ export default function MarketingHeader() {
   let button = null;
   if (auth.isInitialized) {
     button = !auth.user ? (
-      <Button label="APPLY NOW" onClick={() => router.push('/login')} />
+      <Button color="inherit" onClick={() => router.push('/login')}>
+        Sign In
+      </Button>
     ) : (
       <Button
-        label="Sign Out"
+        color="inherit"
         onClick={() => {
           auth.firestoreSignOut();
+          localStorage.removeItem('role');
           router.push('/login');
         }}
-      />
+      >
+        Sign Out
+      </Button>
     );
   }
 

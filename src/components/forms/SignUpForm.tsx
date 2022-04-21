@@ -17,6 +17,7 @@ export interface SignUpData {
 }
 
 async function idIsValid(applyId: string | string[]) {
+  console.log('idIsValid', applyId);
   const response = await fetch(fineFindApis.checkApplication, {
     method: 'POST',
     body: JSON.stringify(applyId),
@@ -36,6 +37,7 @@ const SignUpForm: React.FC = () => {
   const router = useRouter();
   const applyId = router.query.id;
   const onSubmit = async (data: SignUpData) => {
+    console.log('submit', data, applyId);
     if (applyId) {
       const isValid = await idIsValid(applyId);
       if (isValid) {

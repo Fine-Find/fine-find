@@ -67,6 +67,7 @@ const buildRequest = (user: UserType): DesignerPage => {
 // TODO: Add sharing/embed links
 // TODO: Drop the timer if the page is already created
 export const PageCreation = ({ user, userIdToken }: PageCreationProps) => {
+  console.log('userInside----createion', user);
   const [designerUrl, setDesignerUrl] = useState<string>(user.shopifyUrl);
   const [preparing, setPreparing] = useState<boolean>(true);
   const [prepTimer, setPrepTimer] = useState<boolean>(false);
