@@ -10,6 +10,8 @@ export const fineFindPages = {
   createCollections: '/dashboard/collections/create',
   orders: '/dashboard/orders',
   onboarding: '/onboarding',
+  admin: '/admin',
+  requests: '/admin/requests'
 };
 
 export const fineFindApis = {

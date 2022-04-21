@@ -1,11 +1,13 @@
+import { verifyDesignerDashboard } from '@/utils/roles';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { useEffect, useState } from 'react';
 
 import styles from './DashboardNav.module.scss';
-import { mainListItems } from './listItems';
+import { mainListItems, adminListItems } from './listItems';
 
 type Props = {
   toggleDrawer;
@@ -13,6 +15,12 @@ type Props = {
 };
 
 export default function DashboardNav({ toggleDrawer, open }: Props) {
+  const [designer, setDesigner] = useState(false);
+
+  useEffect(() =>{
+    verifyDesignerDashboard(null, false, setDesigner);
+  });
+
   return (
     <>
       <Drawer
@@ -29,7 +37,7 @@ export default function DashboardNav({ toggleDrawer, open }: Props) {
           </IconButton>
         </div>
         <Divider />
-        <List className={styles.list}>{mainListItems}</List>
+        <List className={styles.list}>{designer ? mainListItems : adminListItems }</List>
       </Drawer>
     </>
   );

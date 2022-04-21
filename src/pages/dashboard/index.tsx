@@ -2,6 +2,7 @@ import { CreateCollectionButton } from '@/components/Collection/CreateCollection
 import { TitledImageCard } from '@/components/shared/TitledImageCard';
 import { BusinessProfileType } from '@/types/profile.types';
 import { getProfileData } from '@/utils/firebaseFirestore';
+import { verifyDesignerDashboard } from '@/utils/roles';
 import { fineFindApis } from '@/utils/urls';
 import { Card, CardHeader, Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +18,7 @@ import InstagramLoginButton from '../../components/Instagram/InstagramLoginButto
 import { useRequireAuth } from '../../hooks/useRequireAuth';
 import styles from './dashboard.module.scss';
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <div id="skeleton">
       <Skeleton variant="text" />
@@ -79,8 +80,10 @@ const DashBoardPage: React.FC = () => {
   const [loadingProfile, setLoadingProfile] = useState(false);
   const [businessProfile, setBusinessProfile] = useState<BusinessProfileType>();
   const [businessImage, setBusinessImage] = useState();
+  const [designer, setDesigner] = useState(false);
 
   useEffect(() => {
+    verifyDesignerDashboard(router,true, setDesigner);
     if (
       auth.isInitialized &&
       !loading &&
@@ -108,8 +111,8 @@ const DashBoardPage: React.FC = () => {
 
   if (!auth.isInitialized || !auth.user || loading || loadingProfile)
     return <>{Loading()}</>;
-
-  return (
+  
+  const dashboard = (
     <DashboardLayout>
       <div className={styles.root}>
         <Container maxWidth="xl">
@@ -146,6 +149,12 @@ const DashBoardPage: React.FC = () => {
         </Container>
       </div>
     </DashboardLayout>
+  );
+
+  return (
+    <>
+      {designer ? dashboard : Loading()}
+    </>
   );
 };
 export default DashBoardPage;

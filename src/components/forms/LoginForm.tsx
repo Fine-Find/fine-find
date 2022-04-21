@@ -3,6 +3,7 @@ import {
   LoginErrorType,
   handleLoginError,
 } from '@/utils/firebase/fireBaseError';
+import { verifyDashboard } from '@/utils/firebaseFirestore';
 import { UserCredential } from '@firebase/auth';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -21,6 +22,7 @@ export interface LoginData {
   email: string;
   password: string;
 }
+
 const LoginForm: React.FC = () => {
   const {
     register,
@@ -35,8 +37,8 @@ const LoginForm: React.FC = () => {
     setError(null);
     return auth
       .signIn(data)
-      .then((_response: UserCredential) => {
-        router.push('/dashboard');
+      .then( (_response: UserCredential) => {
+        verifyDashboard(_response?.user?.uid, router);
       })
       .catch((errorResponse) => {
         setError(handleLoginError(errorResponse));

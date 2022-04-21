@@ -7,6 +7,7 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Link from 'next/link';
 import React from 'react';
+import HistoryIcon from '@material-ui/icons/History';
 
 import { fineFindPages } from '../../utils/urls';
 import styles from './ListItems.module.scss';
@@ -50,6 +51,31 @@ export const mainListItems = (
       <Link href={fineFindPages.manageProfile}>
         <a>
           <ListItemText primary="Profile" />
+        </a>
+      </Link>
+    </ListItem>
+  </div>
+);
+
+export const adminListItems = (
+  <div className={styles.container}>
+    <ListItem button className={styles.item}>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <Link href={fineFindPages.admin}>
+        <a>
+          <ListItemText primary="Dashboard" />
+        </a>
+      </Link>
+    </ListItem>
+    <ListItem button className={styles.item}>
+      <ListItemIcon>
+        <HistoryIcon />
+      </ListItemIcon>
+      <Link href={fineFindPages.requests}>
+        <a>
+          <ListItemText primary="Requests" />
         </a>
       </Link>
     </ListItem>
