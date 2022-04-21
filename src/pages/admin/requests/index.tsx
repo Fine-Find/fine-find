@@ -1,3 +1,5 @@
+import { ProductsTable } from '@/components/shared/ProductsTable';
+import { useLoadCollection } from '@/hooks/useLoadCollections';
 import { verifyAdminDashboard } from '@/utils/roles';
 import { Card, CardHeader, Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -22,34 +24,49 @@ const AdminRequests: React.FC = () => {
   const router = useRouter();
   const [admin, setAdmin] = useState(false);
 
-  useEffect(() => {
-    verifyAdminDashboard(router, setAdmin);
-  }, []);
+  const { isLoading, collectionList } =
+  useLoadCollection('ec8xQrAkLTe2IBvGQANfegGac052');
+
+  // useEffect(() => {
+  //   verifyAdminDashboard(router, setAdmin);
+  // }, []);
+
+  
 
   if (!auth.isInitialized || !auth.user) return <>{Loading()}</>;
 
-  const dashboard = (
-    <DashboardLayout>
-      <div className={styles.root}>
-        <Container maxWidth="xl">
-          <Grid
-            container
-            spacing={3}
-            className={`${styles.container} ${styles.headerContainer}`}
-          >
-            <Grid container className={`${styles.moodRow}`} spacing={3}>
-              <Grid item md={8} xs={12}>
-                <Card elevation={0}>
-                  <CardHeader title="admin requests" />
-                </Card>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Container>
-      </div>
-    </DashboardLayout>
-  );
+  // const dashboard = (
+  // );
 
-  return <>{admin ? dashboard : Loading()}</>;
+  // return <>{admin ? dashboard : Loading()}</>;
+  return (
+    <>
+
+      <DashboardLayout>
+        <div className={styles.root}>
+          <Container maxWidth="xl">
+            <h2>Requested Products</h2><ProductsTable/>
+            {collectionList === null && isLoading && Loading()}
+            {console.log('collections', collectionList,auth.user?.uid)}
+            {collectionList &&
+              collectionList.map((document) => {
+                return(
+                  <Grid
+                    container
+                    spacing={3}
+                    className={`${styles.container} ${styles.headerContainer}`}
+                    key={document.id}
+                  >
+                    <h2>table</h2>
+                    
+                      
+                  </Grid>
+                );
+              })}
+          </Container>
+        </div>
+      </DashboardLayout>
+    </>
+  )
 };
 export default AdminRequests;
