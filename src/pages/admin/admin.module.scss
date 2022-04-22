@@ -1,17 +1,15 @@
 .root {
-    flex-grow: 1;
-  }
-  
-  .headerContainer {
-    justify-content: center;
-  }
-  
-  .moodRow {
-    max-height: 600px;
-  }
-  
-  .profile {
-    overflow-y: auto;
-  }
-  
-  
+  flex-grow: 1;
+}
+
+.headerContainer {
+  justify-content: center;
+}
+
+.moodRow {
+  max-height: 600px;
+}
+
+.profile {
+  overflow-y: auto;
+}

@@ -4,7 +4,6 @@ import { firebaseCollections } from '@/utils/firebaseCollections';
 import { NextApiResponse } from 'next';
 
 async function checkApplication(applicationId: string) {
-  console.log('realcheckapp',applicationId);
   const applicationRef = firebaseAdminDb
     .collection(firebaseCollections.applications)
     .doc(applicationId);
@@ -23,7 +22,6 @@ async function checkApplication(applicationId: string) {
     return false;
   } else {
     // eslint-disable-next-line no-console
-    console.log('consumed message');
     await applicationRef.update({ consumed: true });
     return true;
   }
@@ -39,22 +37,28 @@ async function checkApplication(applicationId: string) {
  * @param res API Response
  */
 const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
+  let endMsg = '';
   if (req.method && req.method.toUpperCase() === 'POST') {
     const id = JSON.parse(req.body);
-    console.log('checkApplication', req.body,id);
     if (!id) {
-      res.status(400).end('Missing data');
+      endMsg = 'Missing data';
+      res.status(400);
     } else {
       const applicationId = id;
       const isValid = await checkApplication(applicationId);
       if (isValid) {
-        res.status(200).end('Success');
+        endMsg = 'Success';
+        res.status(200);
       } else {
-        res.status(403).end('Application link is not valid.');
+        endMsg = 'Application link is not valid.';
+        res.status(403);
       }
     }
+  } else {
+    endMsg = 'Method not allowed';
+    res.status(405);
   }
-  res.status(405).end('Method not allowed');
+  res.end(endMsg);
 };
 
 export default handler;

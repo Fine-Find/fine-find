@@ -6,7 +6,6 @@ import { NextApiResponse } from 'next';
 const { URL } = process.env;
 
 function buildMessageData(to: string, subject: string, html: string) {
-  console.log('buildMessageData');
   return {
     from: 'Fine Find Concierge <concierge@thefinefind.com>',
     to: to,
@@ -22,7 +21,6 @@ function createApprovalLink(recordId: any) {
 
 async function buildInternalMessageHtml(data: any, recordId) {
   const approvalLink = await createApprovalLink(recordId);
-  console.log('buildIntermaMessage');
   return `
         <!DOCTYPE html>
         <html>
@@ -45,7 +43,6 @@ async function buildInternalMessageHtml(data: any, recordId) {
 }
 
 function buildExternalMessageHtml() {
-  console.log('buildExternalMessage');
   return `
         <!DOCTYPE html>
         <html>
@@ -60,16 +57,14 @@ function buildExternalMessageHtml() {
 async function sendEmails(data, recordId) {
   const conciergeMessageText = await buildInternalMessageHtml(data, recordId);
   const conciergeMessageData = buildMessageData(
-    'renepromesse@gmail.com, blaine@thefinefind.com',
+    'concierge@thefinefind.com, blaine@thefinefind.com, renepromesse@gmail.com',
     'New Designer Application',
     conciergeMessageText
   );
-  console.log('sendEmail',URL);
   await fetch(URL + fineFindApis.sendEmail, {
     method: 'POST',
     body: JSON.stringify(conciergeMessageData),
   });
-  console.log('sendEmails',URL);
 
   const externalMessageText = buildExternalMessageHtml();
   const externalMessageData = buildMessageData(
@@ -77,7 +72,6 @@ async function sendEmails(data, recordId) {
     'Thank you for applying!',
     externalMessageText
   );
-
   await fetch(URL + fineFindApis.sendEmail, {
     method: 'POST',
     body: JSON.stringify(externalMessageData),
@@ -95,7 +89,6 @@ async function addRecords(reqBody: any) {
       ...reqBody,
       ...metaData,
     });
-  console.log('----->recordId', recId.id);
   return recId.id;
 }
 
@@ -109,18 +102,22 @@ async function addRecords(reqBody: any) {
  * @param res API Response
  */
 const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
-  if (req.method && req.method.toUpperCase() === 'POST') {
-    const reqBody = JSON.parse(req.body);
-    if (!('email' in reqBody)) {
-      res.status(400).end('Missing data');
-    } else {
-      const recordId = await addRecords(reqBody);
-      await sendEmails(reqBody, recordId);
+  try {
+    if (req.method && req.method.toUpperCase() === 'POST') {
+      const reqBody = JSON.parse(req.body);
+      if (!('email' in reqBody)) {
+        return res.status(400).end('Missing data');
+      } else {
+        const recordId = await addRecords(reqBody);
+        await sendEmails(reqBody, recordId);
 
-      res.status(200).end('Success');
+        return res.status(200).end('Success');
+      }
     }
+    return res.status(405).end('Method not allowed');
+  } catch (err) {
+    res.status(500).end('Internal server error');
   }
-  res.status(405).end('Method not allowed');
 };
 
 export default handler;

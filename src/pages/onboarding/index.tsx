@@ -53,6 +53,7 @@ const OnboardingPage: React.FC = () => {
       setLoadingProfile(true);
       if (auth?.user?.uid) {
         const data = await getUserData(auth?.user.uid);
+        if (data) localStorage.setItem('user', JSON.stringify(data));
         setUser(data);
         setLoadingProfile(false);
         if (step === -1) {
@@ -127,7 +128,7 @@ const OnboardingPage: React.FC = () => {
               user={user}
               nextStepText="Step 2: Profile"
               cardTitle={`${user.application.firstName} ${user.application.lastName}`}
-              moreText="This will help you personalize your Shopify Page."
+              moreText="This will help you personalize your Page."
               stepNumber={1}
               stepTitle="Profile Image"
               fileName="profile"
@@ -154,7 +155,7 @@ const OnboardingPage: React.FC = () => {
               errorText="A company logo is required"
               onClick={businessImageSet}
               buttonText="Upload a company logo"
-              moreText="The logo is displayed on your shopify page."
+              moreText="The logo is displayed on your page."
             />
           )}
           {step === 4 && (
@@ -164,7 +165,9 @@ const OnboardingPage: React.FC = () => {
             />
           )}
           {step === 5 && (
-            <PageCreation user={user} userIdToken={auth.userIdToken} />
+            <>
+              <PageCreation user={user} userIdToken={auth.userIdToken} />
+            </>
           )}
         </Grid>
       </Container>

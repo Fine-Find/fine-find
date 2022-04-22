@@ -3,11 +3,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import EditIcon from '@material-ui/icons/Edit';
+import HistoryIcon from '@material-ui/icons/History';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Link from 'next/link';
 import React from 'react';
-import HistoryIcon from '@material-ui/icons/History';
 
 import { fineFindPages } from '../../utils/urls';
 import styles from './ListItems.module.scss';

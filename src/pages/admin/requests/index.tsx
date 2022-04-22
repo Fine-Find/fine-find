@@ -20,27 +20,24 @@ const Loading = () => {
 const AdminRequests: React.FC = () => {
   const auth = useRequireAuth();
   const router = useRouter();
-  const [admin , setAdmin] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     verifyAdminDashboard(router, setAdmin);
   }, []);
 
-  if (!auth.isInitialized || !auth.user)
-    return <>{Loading()}</>;
+  if (!auth.isInitialized || !auth.user) return <>{Loading()}</>;
 
   const dashboard = (
     <DashboardLayout>
       <div className={styles.root}>
         <Container maxWidth="xl">
-          
           <Grid
             container
             spacing={3}
             className={`${styles.container} ${styles.headerContainer}`}
           >
             <Grid container className={`${styles.moodRow}`} spacing={3}>
-              
               <Grid item md={8} xs={12}>
                 <Card elevation={0}>
                   <CardHeader title="admin requests" />
@@ -53,10 +50,6 @@ const AdminRequests: React.FC = () => {
     </DashboardLayout>
   );
 
-  return (
-    <>
-      {admin ? dashboard : Loading()}
-    </>
-  );
+  return <>{admin ? dashboard : Loading()}</>;
 };
 export default AdminRequests;

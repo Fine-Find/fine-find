@@ -11,7 +11,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { useAuth } from '../../hooks/useAuth';
-// import { Button } from '../shared/OutlineButton';
 import styles from './MarketingHeader.module.scss';
 
 export default function MarketingHeader() {

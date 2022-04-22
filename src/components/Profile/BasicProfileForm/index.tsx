@@ -38,6 +38,8 @@ export const BasicProfileForm = ({
   };
 
   const onSubmit = (data: BasicProfileType) => {
+    data.role = 'designer';
+    localStorage.setItem('role', 'designer');
     setUpdatingProfile(true);
     updateBasicProfile(userId, data)
       .then(() => {

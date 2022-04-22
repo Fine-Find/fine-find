@@ -46,11 +46,12 @@ export const BusinessProfileForm = ({
   } = methods;
 
   const onSubmit = (data: BusinessProfileType) => {
-    console.log('onSubmit',data);
     setUpdatingProfile(true);
     updateBusinessProfile(userId, data)
       .then(() => {
-        console.log('doneSubmitting');
+        const user = JSON.parse(localStorage.getItem('user'));
+        const newUser = { ...user, businessProfile: data };
+        localStorage.setItem('user', newUser);
         updateProfile(data);
         setUpdatingProfile(false);
       })

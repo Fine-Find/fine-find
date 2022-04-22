@@ -33,7 +33,7 @@ export const ProfileImageOnboarding = ({
   nextStepText,
   errorText,
   imgSrc,
-  moreText
+  moreText,
 }: ProfileImageProps) => {
   const [imageUploaded, setImageUploaded] = useState(false);
   const [errors, setErrors] = useState<string>();

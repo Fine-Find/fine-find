@@ -6,31 +6,39 @@ import { NextApiResponse } from 'next';
 const { URL } = process.env;
 
 async function approveApplication(applicationId: any) {
-  const applicationRef = firebaseAdminDb
-    .collection(firebaseCollections.applications)
-    .doc(applicationId);
-  const doc = await applicationRef.get();
-  if (!doc.exists) {
-    return false;
-  } else {
-    await applicationRef.update({ approved: true });
-    await sendEmails(doc.data().email, applicationId);
+  try {
+    const applicationRef = firebaseAdminDb
+      .collection(firebaseCollections.applications)
+      .doc(applicationId);
+    const doc = await applicationRef.get();
+    if (!doc.exists) {
+      return false;
+    } else {
+      await applicationRef.update({ approved: true });
+      await sendEmails(doc.data().email, applicationId);
 
-    return true;
+      return true;
+    }
+  } catch (err) {
+    return err;
   }
 }
 async function sendEmails(email, applicationId) {
-  const externalMessageText = buildExternalMessageHtml(applicationId);
-  const externalMessageData = buildMessageData(
-    email,
-    'Welcome to The Fine Find',
-    externalMessageText
-  );
+  try {
+    const externalMessageText = buildExternalMessageHtml(applicationId);
+    const externalMessageData = buildMessageData(
+      email,
+      'Welcome to The Fine Find',
+      externalMessageText
+    );
 
-  await fetch(URL + fineFindApis.sendEmail, {
-    method: 'POST',
-    body: JSON.stringify(externalMessageData),
-  });
+    await fetch(URL + fineFindApis.sendEmail, {
+      method: 'POST',
+      body: JSON.stringify(externalMessageData),
+    });
+  } catch (err) {
+    return err;
+  }
 }
 
 function buildExternalMessageHtml(applicationId) {
@@ -69,21 +77,32 @@ function buildMessageData(to: string, subject: string, html: string) {
  * @param res API Response
  */
 const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
-  if (req.method && req.method.toUpperCase() === 'GET') {
-    const reqQuery = req.query;
-    if (!('id' in reqQuery)) {
-      res.status(400).end('Missing data');
-    } else {
-      const applicationId = reqQuery.id;
-      const applicationApproved = await approveApplication(applicationId);
-      if (applicationApproved) {
-        res.status(200).end('Application Approved');
+  try {
+    let endMessage = '';
+    if (req.method && req.method.toUpperCase() === 'GET') {
+      const reqQuery = req.query;
+      if (!('id' in reqQuery)) {
+        endMessage = 'Missing data';
+        res.status(400);
       } else {
-        res.status(403).end('ID not valid');
+        const applicationId = reqQuery.id;
+        const applicationApproved = await approveApplication(applicationId);
+        if (applicationApproved) {
+          endMessage = 'Application Approved';
+          res.status(200);
+        } else {
+          endMessage = 'ID not valid';
+          res.status(403);
+        }
       }
+    } else {
+      endMessage = 'Method not allowed';
+      res.status(405);
     }
+    res.end(endMessage);
+  } catch (err) {
+    res.status(500).end('Internal server error');
   }
-  res.status(405).end('Method not allowed');
 };
 
 export default handler;

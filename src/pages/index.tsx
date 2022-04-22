@@ -75,9 +75,9 @@ const earn = {
 };
 export default function Home() {
   const router = useRouter();
-  useEffect(() =>{
+  useEffect(() => {
     const role = localStorage.getItem('role');
-    if(role){
+    if (role) {
       router.push('/dashboard');
     }
   });
