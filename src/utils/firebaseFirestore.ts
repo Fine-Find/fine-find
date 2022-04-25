@@ -134,21 +134,20 @@ export const getProfileData = async (userId: string) => {
 export const verifyDashboard = async (userId: string, router) => {
   const role = localStorage.getItem('role');
 
-  if(role === 'admin'){
+  if (role === 'admin') {
     router.push('/admin');
-  }else if(role === 'designer'){
+  } else if (role === 'designer') {
     router.push('/dashboard');
-  }else{
-
+  } else {
     getUserDocData(userId)
-      .then( userData =>{
+      .then((userData) => {
         const basicProfile = userData.get('basicProfile');
-        if(basicProfile?.role === 'admin'){
-          localStorage.setItem('role','admin');
+        if (basicProfile?.role === 'admin') {
+          localStorage.setItem('role', 'admin');
           router.push('/admin');
         }
-        if(basicProfile?.role === 'designer'){
-          localStorage.setItem('role','designer');
+        if (basicProfile?.role === 'designer') {
+          localStorage.setItem('role', 'designer');
           router.push('/dashboard');
         }
       })

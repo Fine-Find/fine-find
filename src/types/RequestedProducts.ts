@@ -5,4 +5,5 @@ export type RequestedProductDetails = {
   linkToProduct?: string;
   vendorContactInfo?: string;
   description?: string;
+  status?: string;
 };

@@ -11,7 +11,8 @@ export const fineFindPages = {
   orders: '/dashboard/orders',
   onboarding: '/onboarding',
   admin: '/admin',
-  requests: '/admin/requests'
+  requests: '/admin/requests',
+  designerRequests: '/dashboard/requests',
 };
 
 export const fineFindApis = {

@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
     setError(null);
     return auth
       .signIn(data)
-      .then( (_response: UserCredential) => {
+      .then((_response: UserCredential) => {
         verifyDashboard(_response?.user?.uid, router);
       })
       .catch((errorResponse) => {
