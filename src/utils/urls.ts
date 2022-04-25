@@ -12,6 +12,7 @@ export const fineFindPages = {
   onboarding: '/onboarding',
   admin: '/admin',
   requests: '/admin/requests',
+  designerRequests: '/dashboard/requests',
 };
 
 export const fineFindApis = {

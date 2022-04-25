@@ -44,6 +44,16 @@ export const mainListItems = (
         </a>
       </Link>
     </ListItem>
+    <ListItem button className={styles.item}>
+      <ListItemIcon>
+        <HistoryIcon />
+      </ListItemIcon>
+      <Link href={fineFindPages.designerRequests}>
+        <a>
+          <ListItemText primary="Requests" />
+        </a>
+      </Link>
+    </ListItem>
     <ListItem button className={`${styles.item} ${styles.itemEnd}`}>
       <ListItemIcon>
         <SettingsIcon />
