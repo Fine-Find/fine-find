@@ -17,6 +17,7 @@ type ProfileImageProps = {
   fileName: 'business' | 'profile';
   nextStepText: string;
   errorText: string;
+  moreText?: string;
 };
 
 // TODO: Listen for the profile image being set so that you can navigate to the next step
@@ -32,6 +33,7 @@ export const ProfileImageOnboarding = ({
   nextStepText,
   errorText,
   imgSrc,
+  moreText,
 }: ProfileImageProps) => {
   const [imageUploaded, setImageUploaded] = useState(false);
   const [errors, setErrors] = useState<string>();
@@ -62,6 +64,7 @@ export const ProfileImageOnboarding = ({
         userId={user.uid}
         afterUpload={afterUpload}
       />
+      <p>{moreText}</p>
       <Button variant="outlined" className={styles.button} onClick={nextStep}>
         {nextStepText}
       </Button>

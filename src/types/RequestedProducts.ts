@@ -7,3 +7,15 @@ export type RequestedProductDetails = {
   description?: string;
   status?: string;
 };
+
+export type RequestedProductsTable = {
+  id: number;
+  status: string;
+  productName: string;
+  vendor: string;
+  requestedOn?: string;
+  lastUpdated?: string;
+  description?: string;
+  vendorContact?: string;
+  productType?: string;
+};

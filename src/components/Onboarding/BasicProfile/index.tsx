@@ -21,6 +21,7 @@ export const BasicProfileOnboarding = ({ user, updateBasicProfile }: Props) => {
           email: user.email,
           state: '',
           country: 'USA',
+          role: 'designer',
         }}
         updateProfile={updateBasicProfile}
       />

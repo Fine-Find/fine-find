@@ -37,21 +37,28 @@ async function checkApplication(applicationId: string) {
  * @param res API Response
  */
 const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
+  let endMsg = '';
   if (req.method && req.method.toUpperCase() === 'POST') {
     const id = JSON.parse(req.body);
     if (!id) {
-      res.status(400).end('Missing data');
+      endMsg = 'Missing data';
+      res.status(400);
     } else {
       const applicationId = id;
       const isValid = await checkApplication(applicationId);
       if (isValid) {
-        res.status(200).end('Success');
+        endMsg = 'Success';
+        res.status(200);
       } else {
-        res.status(403).end('Application link is not valid.');
+        endMsg = 'Application link is not valid.';
+        res.status(403);
       }
     }
+  } else {
+    endMsg = 'Method not allowed';
+    res.status(405);
   }
-  res.status(405).end('Method not allowed');
+  res.end(endMsg);
 };
 
 export default handler;

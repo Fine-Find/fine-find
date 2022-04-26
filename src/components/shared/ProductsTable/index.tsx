@@ -1,133 +1,77 @@
 
 import React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { RequestedProductsTable } from '@/types/RequestedProducts';
 
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'id', headerName: 'No', width: 90 },
   {
-    field: 'firstName',
-    headerName: 'First name',
-    width: 150,
-    editable: true,
+    field: 'productName',
+    headerName: 'Product Name',
+    width: 170,
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
-    width: 150,
-    editable: true,
+    field: 'productType',
+    headerName: 'Product Type',
+    width: 190,
   },
   {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
+    field: 'status',
+    headerName: 'Status',
+    width: 150,
+  },
+  {
+    field: 'vendor',
+    headerName: 'Vendor',
     width: 110,
-    editable: true,
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
+    field: 'vendorContact',
+    headerName: 'Vendor Contact',
+    width: 210,
+  },
+  
+  {
+    field: 'requestedOn',
+    headerName: 'Request Date',
     sortable: false,
     width: 160,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${
-        params.getValue(params.id, 'lastName') || ''
+    valueGetter: () =>
+      `${
+        new Date().toLocaleDateString()
       }`,
   },
+  {
+    field: 'lastUpdated',
+    headerName: 'Last Updated',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 110,
+    valueGetter: (params: GridValueGetterParams) =>
+      ` ${
+        params.getValue(params.id, 'status') || ''
+      }`,
+  },
+  {
+    field: 'description',
+    headerName: 'Description',
+    width: 350,
+  }
 ];
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
+type ProductsTableProps = {
+  row?: RequestedProductsTable[];
+};
+export const ProductsTable= ({row}:ProductsTableProps ) => {
 
-// export type TitlePositionType = 'above' | 'below';
-
-// type TitledImageCardProps = {
-//   title: string;
-//   /**
-//    * Position of the title relative to the image
-//    */
-//   titlePosition?: TitlePositionType;
-//   subTitle: string;
-//   imgSrc?: string;
-//   buttonText?: string;
-//   onClick?: () => void;
-//   children?: ReactNode;
-//   className?: string;
-//   isAvatar?: boolean;
-//   alt?: string;
-// };
-
-// const renderButtonSection = (buttonText: string, onClick: () => void) => {
-//   if (buttonText === undefined || buttonText === null) {
-//     return null;
-//   }
-
-//   return (
-//     <>
-//       <Divider variant="middle" />
-//       <div className={styles.buttonSection}>
-//         <Button color="primary" variant="text" onClick={onClick}>
-//           {buttonText}
-//         </Button>
-//       </div>
-//     </>
-//   );
-// };
-
-// const renderImage = (imgSrc: string, isAvatar: boolean, alt: string) => {
-//   const imageStyle = isAvatar ? styles.avatar : styles.image;
-//   return (
-//     <div className={styles.imageBox}>
-//       <CardMedia
-//         component="img"
-//         height={150}
-//         image={imgSrc}
-//         className={imageStyle}
-//         alt={alt}
-//       />
-//     </div>
-//   );
-// };
-
-// const renderTitledImage = (
-//   title: string,
-//   subTitle: string,
-//   titlePosition: TitlePositionType,
-//   imgSrc: string,
-//   isAvatar: boolean,
-//   alt: string
-// ) => {
-//   return (
-//     <div className={styles.tileImageSection}>
-//       {titlePosition === 'below' && renderImage(imgSrc, isAvatar, alt)}
-//       <CardHeader
-//         className={styles.titleAndSubtitle}
-//         title={title}
-//         subheader={subTitle}
-//       />
-//       {titlePosition === 'above' && renderImage(imgSrc, isAvatar, alt)}
-//     </div>
-//   );
-// };
-
-export const ProductsTable = () => {
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 650, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        rows={row}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={10}
+        rowsPerPageOptions={[8]}
         checkboxSelection
         disableSelectionOnClick
       />

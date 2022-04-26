@@ -5,6 +5,7 @@ import {
   UserOnboarding,
   UserType,
 } from '@/types/profile.types';
+import { RequestedProductDetails, RequestedProductsTable } from '@/types/RequestedProducts';
 import {
   CollectionReference,
   DocumentData,
@@ -20,7 +21,37 @@ import {
   setDoc,
   startAfter,
   updateDoc,
+  collectionGroup,
+  where
 } from 'firebase/firestore';
+
+
+
+
+const collectionsQuery = query(collectionGroup(db, 'collections'), where('productsRequested', '!=', []));
+
+export const getAllProductsRequested = async ()=>{
+  const data = [];
+  const validData:RequestedProductsTable[] = [];
+  const querySnapshot = await getDocs(collectionsQuery);
+  querySnapshot.forEach((document) => {
+    const requestedProducts = document.get('productsRequested');
+    data.push(...requestedProducts);
+  });
+  data.map((product:RequestedProductDetails, idx:number)=>{
+    const row:RequestedProductsTable = {
+      id: idx + 1,
+      status: product.status ?? 'pending',
+      productName: product.productName,
+      vendor: product.vendorName,
+      vendorContact: product.vendorContactInfo,
+      productType: product.productType,
+      description: product.description,
+    };
+    validData.push(row);
+  });
+  return validData;
+};
 
 export const getNextPostedCollectionNumber = async (
   postedCollection: CollectionReference<DocumentData>

@@ -49,12 +49,15 @@ const BasicApplyForm = () => {
   } / ${CHARACTER_LIMIT}`;
 
   async function handleSubmit(data) {
-    await fetch(fineFindApis.submitApplication, {
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
-
-    router.push('/thankyou');
+    try {
+      await fetch(fineFindApis.submitApplication, {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+      router.push('/thankyou');
+    } catch (err) {
+      // do something
+    }
   }
 
   return (

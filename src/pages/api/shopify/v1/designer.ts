@@ -28,13 +28,10 @@ async function createDesignerPage(
   res: NextApiResponse
 ) {
   try {
-    console.log(req.body);
     const requestBody: DesignerPage = JSON.parse(req.body) as DesignerPage;
     await shopifyApiClient.page.create(requestBody);
     return res.status(200).end();
   } catch (err) {
-    console.error(err);
-    console.error(err.response.body);
     return res.status(500).json(err);
   }
 }
