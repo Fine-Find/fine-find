@@ -1,15 +1,15 @@
-import { getAllProductsRequested } from "./firebaseFirestore";
+import { getAllProductsRequested } from './firebaseFirestore';
 
-const products = (setData) =>{
-  
-  try{
+const products = (setData) => {
+  try {
     getAllProductsRequested()
-      .then(results => {
+      .then((results) => {
         setData([...results]);
-      }).catch(err => {
+      })
+      .catch((err) => {
         return err;
       });
-  }catch(err){
+  } catch (err) {
     return err;
   }
 };

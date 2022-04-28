@@ -5,13 +5,17 @@ import {
   UserOnboarding,
   UserType,
 } from '@/types/profile.types';
-import { RequestedProductDetails, RequestedProductsTable } from '@/types/RequestedProducts';
+import {
+  RequestedProductDetails,
+  RequestedProductsTable,
+} from '@/types/RequestedProducts';
 import {
   CollectionReference,
   DocumentData,
   Query,
   QueryDocumentSnapshot,
   collection,
+  collectionGroup,
   doc,
   getDoc,
   getDocs,
@@ -21,25 +25,24 @@ import {
   setDoc,
   startAfter,
   updateDoc,
-  collectionGroup,
-  where
+  where,
 } from 'firebase/firestore';
 
+const collectionsQuery = query(
+  collectionGroup(db, 'collections'),
+  where('productsRequested', '!=', [])
+);
 
-
-
-const collectionsQuery = query(collectionGroup(db, 'collections'), where('productsRequested', '!=', []));
-
-export const getAllProductsRequested = async ()=>{
+export const getAllProductsRequested = async () => {
   const data = [];
-  const validData:RequestedProductsTable[] = [];
+  const validData: RequestedProductsTable[] = [];
   const querySnapshot = await getDocs(collectionsQuery);
   querySnapshot.forEach((document) => {
     const requestedProducts = document.get('productsRequested');
     data.push(...requestedProducts);
   });
-  data.map((product:RequestedProductDetails, idx:number)=>{
-    const row:RequestedProductsTable = {
+  data.map((product: RequestedProductDetails, idx: number) => {
+    const row: RequestedProductsTable = {
       id: idx + 1,
       status: product.status ?? 'pending',
       productName: product.productName,

@@ -24,8 +24,7 @@ const ReqeustsPage: React.FC = () => {
   const auth = useRequireAuth();
   const router = useRouter();
   const { isLoading, collectionList, hasMoreDocuments, error, loadMore } =
-    useLoadCollection('7BXUh6pecId00uu4Z8QsfwJg8lC3');
-  // console.log('requesing', collectionList);
+    useLoadCollection(auth.user?.uid);
   const [designer, setDesigner] = useState(false);
   useEffect(() => {
     verifyDesignerDashboard(router, true, setDesigner);
@@ -64,7 +63,6 @@ const ReqeustsPage: React.FC = () => {
               collectionList.map((document) => {
                 return (
                   <>
-                    {console.log('requested', document.get('productsRequested'))}
                     <ProductsCard
                       productsRequested={
                         document.get('productsRequested').length &&

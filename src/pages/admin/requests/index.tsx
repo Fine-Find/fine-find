@@ -24,7 +24,7 @@ const AdminRequests: React.FC = () => {
   const router = useRouter();
   const [admin, setAdmin] = useState(false);
   const [data, setData] = useState([]);
-    
+
   useEffect(() => {
     products(setData);
     verifyAdminDashboard(router, setAdmin);
@@ -42,18 +42,13 @@ const AdminRequests: React.FC = () => {
             spacing={3}
             className={`${styles.container} ${styles.headerContainer}`}
           >
-            { data && <ProductsTable row={data}/>}
+            {data && <ProductsTable row={data} />}
           </Grid>
         </Container>
       </div>
     </DashboardLayout>
-
   );
 
-  return (
-    <>
-      { admin ? dashboard : Loading()}
-    </>
-  );
+  return <>{admin ? dashboard : Loading()}</>;
 };
 export default AdminRequests;
