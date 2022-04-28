@@ -237,8 +237,27 @@ const CreateCollectionPage: React.FC = () => {
           };
 
           createPostedCollection(collectionData, auth.user.uid)
-            .then(() => {
+            .then(async () => {
               setShowSuccess(true);
+              if (collectionData.productsRequested.length > 0) {
+                //send email to the admin
+                const emailBody = {
+                  requestedProducts: collectionData.productsRequested,
+                  collectionTitle: collectionData.title,
+                  user: {
+                    email: auth.user.email,
+                    name: auth.user.name,
+                  },
+                };
+                try {
+                  await fetch(fineFindApis.sendRequestedProductsEmail, {
+                    method: 'POST',
+                    body: JSON.stringify(emailBody),
+                  });
+                } catch (err) {
+                  console.error('error', err);
+                }
+              }
               setTimeout(function () {
                 router.push(fineFindPages.collections);
               }, 1500);
