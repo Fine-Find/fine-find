@@ -33,16 +33,22 @@ async function migrateApplication(applicationId: string, userId: string) {
  * @param res API Response
  */
 const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
+  let endMessage = '';
   if (req.method && req.method.toUpperCase() === 'POST') {
     const migration = JSON.parse(req.body);
     if (!migration) {
-      res.status(400).end('Missing data');
+      endMessage = 'Missing data';
+      res.status(400);
     } else {
       await migrateApplication(migration.applicationId, migration.userId);
-      res.status(200).end('Success');
+      endMessage = 'Success';
+      res.status(200);
     }
+  } else {
+    endMessage = 'Method not allowed';
+    res.status(405);
   }
-  res.status(405).end('Method not allowed');
+  res.end(endMessage);
 };
 
 export default handler;

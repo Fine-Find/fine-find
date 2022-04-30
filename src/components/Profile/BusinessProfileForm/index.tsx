@@ -49,6 +49,9 @@ export const BusinessProfileForm = ({
     setUpdatingProfile(true);
     updateBusinessProfile(userId, data)
       .then(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const newUser = { ...user, businessProfile: data };
+        localStorage.setItem('user', newUser);
         updateProfile(data);
         setUpdatingProfile(false);
       })
@@ -109,7 +112,11 @@ export const BusinessProfileForm = ({
                 multiline
                 variant="outlined"
                 error={errors.description ? true : false}
-                helperText={errors.description?.message}
+                helperText={
+                  errors.description
+                    ? errors.description?.message
+                    : 'This description is displayed on your Shopify page'
+                }
                 {...register('description')}
               />
             </Grid>

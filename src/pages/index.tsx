@@ -4,6 +4,8 @@ import { Button } from '@/components/shared/OutlineButton';
 import { Box, Grid, Typography } from '@material-ui/core';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 import Layout from '../components/Layout';
 import styles from './index.module.scss';
@@ -72,6 +74,13 @@ const earn = {
   ),
 };
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    const role = localStorage.getItem('role');
+    if (role) {
+      router.push('/dashboard');
+    }
+  });
   return (
     <>
       <Layout>

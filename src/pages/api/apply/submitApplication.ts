@@ -57,11 +57,10 @@ function buildExternalMessageHtml() {
 async function sendEmails(data, recordId) {
   const conciergeMessageText = await buildInternalMessageHtml(data, recordId);
   const conciergeMessageData = buildMessageData(
-    'concierge@thefinefind.com, blaine@thefinefind.com',
+    'concierge@thefinefind.com, blaine@thefinefind.com, renepromesse@gmail.com',
     'New Designer Application',
     conciergeMessageText
   );
-
   await fetch(URL + fineFindApis.sendEmail, {
     method: 'POST',
     body: JSON.stringify(conciergeMessageData),
@@ -73,7 +72,6 @@ async function sendEmails(data, recordId) {
     'Thank you for applying!',
     externalMessageText
   );
-
   await fetch(URL + fineFindApis.sendEmail, {
     method: 'POST',
     body: JSON.stringify(externalMessageData),
@@ -91,7 +89,6 @@ async function addRecords(reqBody: any) {
       ...reqBody,
       ...metaData,
     });
-
   return recId.id;
 }
 
@@ -105,18 +102,22 @@ async function addRecords(reqBody: any) {
  * @param res API Response
  */
 const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
-  if (req.method && req.method.toUpperCase() === 'POST') {
-    const reqBody = JSON.parse(req.body);
-    if (!('email' in reqBody)) {
-      res.status(400).end('Missing data');
-    } else {
-      const recordId = await addRecords(reqBody);
-      await sendEmails(reqBody, recordId);
+  try {
+    if (req.method && req.method.toUpperCase() === 'POST') {
+      const reqBody = JSON.parse(req.body);
+      if (!('email' in reqBody)) {
+        return res.status(400).end('Missing data');
+      } else {
+        const recordId = await addRecords(reqBody);
+        await sendEmails(reqBody, recordId);
 
-      res.status(200).end('Success');
+        return res.status(200).end('Success');
+      }
     }
+    return res.status(405).end('Method not allowed');
+  } catch (err) {
+    res.status(500).end('Internal server error');
   }
-  res.status(405).end('Method not allowed');
 };
 
 export default handler;

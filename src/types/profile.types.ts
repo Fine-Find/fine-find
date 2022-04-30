@@ -5,6 +5,7 @@ export type BasicProfileType = {
   phone?: string;
   state: string;
   country: string;
+  role: string;
 };
 
 export type BusinessProfileType = {
