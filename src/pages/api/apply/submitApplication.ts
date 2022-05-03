@@ -57,7 +57,7 @@ function buildExternalMessageHtml() {
 async function sendEmails(data, recordId) {
   const conciergeMessageText = await buildInternalMessageHtml(data, recordId);
   const conciergeMessageData = buildMessageData(
-    'concierge@thefinefind.com, blaine@thefinefind.com, renepromesse@gmail.com',
+    'concierge@thefinefind.com, blaine@thefinefind.com, renepromesse@gmail.com,mheir299@gmail.com',
     'New Designer Application',
     conciergeMessageText
   );
