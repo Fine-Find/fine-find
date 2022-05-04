@@ -51,6 +51,7 @@ export default function Header({ open, onDrawerToggled }: HeaderProps) {
 
   return (
     <>
+    {console.log('auth', auth)}
       <AppBar
         position="absolute"
         className={`${styles.appBar} ${appBarStyle}`}
@@ -72,7 +73,7 @@ export default function Header({ open, onDrawerToggled }: HeaderProps) {
           {button}
         </Toolbar>
       </AppBar>
-      <DashboardNav open={open} toggleDrawer={onDrawerToggled} />
+      <DashboardNav open={open} toggleDrawer={onDrawerToggled} shopifyLink={auth.user.shopifyUrl} />
     </>
   );
 }

@@ -53,11 +53,11 @@ function buildExternalMessageHtml() {
         </html>
     `;
 }
-
+// concierge@thefinefind.com, blaine@thefinefind.com, 
 async function sendEmails(data, recordId) {
   const conciergeMessageText = await buildInternalMessageHtml(data, recordId);
   const conciergeMessageData = buildMessageData(
-    'concierge@thefinefind.com, blaine@thefinefind.com, renepromesse@gmail.com',
+    'renepromesse@gmail.com',
     'New Designer Application',
     conciergeMessageText
   );
