@@ -35,11 +35,11 @@ async function buildInternalMessageHtml(data: any) {
         </html>
     `;
 }
-// concierge@thefinefind.com, blaine@thefinefind.com,
+
 async function sendEmails(data) {
   const conciergeMessageText = await buildInternalMessageHtml(data);
   const conciergeMessageData = buildMessageData(
-    ' renepromesse@gmail.com',
+    'concierge@thefinefind.com, blaine@thefinefind.com, renepromesse@gmail.com',
     `${data.requestedProducts.length ?? ''} Products Requested`,
     conciergeMessageText
   );

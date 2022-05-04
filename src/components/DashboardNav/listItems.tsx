@@ -19,7 +19,6 @@ import { RWebShare } from 'react-web-share';
 export const mainListItems = (shopifyLink: string, copy, setCopy) => {
 
   const handleCopy = () =>{
-    console.log('copy',shopifyLink);
     navigator.clipboard.writeText(shopifyLink);
     setCopy(true);
   };

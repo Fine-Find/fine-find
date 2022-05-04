@@ -51,7 +51,6 @@ export default function Header({ open, onDrawerToggled }: HeaderProps) {
 
   return (
     <>
-    {console.log('auth', auth)}
       <AppBar
         position="absolute"
         className={`${styles.appBar} ${appBarStyle}`}

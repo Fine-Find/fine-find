@@ -1,10 +1,14 @@
 import { fineFindApis } from '@/utils/urls';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAuth } from '../../hooks/useAuth';
@@ -27,11 +31,13 @@ async function idIsValid(applyId: string | string[]) {
 }
 
 const SignUpForm: React.FC = () => {
+  const [disabled, setDisabled] = React.useState(true);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const auth = useAuth();
   const router = useRouter();
   const applyId = router.query.id;
@@ -54,6 +60,9 @@ const SignUpForm: React.FC = () => {
         //todo put notification of error on front end
       }
     }
+  };
+  const acceptTerms = () => {
+    setDisabled(!disabled);
   };
   return (
     <Box className={styles.formBox}>
@@ -127,11 +136,23 @@ const SignUpForm: React.FC = () => {
             )}
           </Grid>
         </Grid>
+        <Typography className={styles.TermsAndCondition} component="p">
+          <Checkbox
+            color="primary"
+            checked={!disabled}
+            onChange={acceptTerms}
+          />
+          I agree to the{' '}
+          <Link href="/terms-condition">
+            <a className={styles.link}>Terms and Conditions</a>
+          </Link>
+        </Typography>
         <Button
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
+          disabled={disabled}
           className={styles.submitButton}
         >
           Sign Up
