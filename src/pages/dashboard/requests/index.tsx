@@ -25,7 +25,6 @@ const ReqeustsPage: React.FC = () => {
   const router = useRouter();
   const { isLoading, collectionList, hasMoreDocuments, error, loadMore } =
     useLoadCollection(auth.user?.uid);
-  // console.log('requesing', collectionList);
   const [designer, setDesigner] = useState(false);
   useEffect(() => {
     verifyDesignerDashboard(router, true, setDesigner);

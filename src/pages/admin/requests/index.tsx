@@ -1,5 +1,7 @@
+import { ProductsTable } from '@/components/shared/ProductsTable';
+import products from '@/utils/getAllProducts';
 import { verifyAdminDashboard } from '@/utils/roles';
-import { Card, CardHeader, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { useRouter } from 'next/router';
@@ -21,8 +23,10 @@ const AdminRequests: React.FC = () => {
   const auth = useRequireAuth();
   const router = useRouter();
   const [admin, setAdmin] = useState(false);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
+    products(setData);
     verifyAdminDashboard(router, setAdmin);
   }, []);
 
@@ -32,18 +36,13 @@ const AdminRequests: React.FC = () => {
     <DashboardLayout>
       <div className={styles.root}>
         <Container maxWidth="xl">
+          <h2>Requested Products</h2>
           <Grid
             container
             spacing={3}
             className={`${styles.container} ${styles.headerContainer}`}
           >
-            <Grid container className={`${styles.moodRow}`} spacing={3}>
-              <Grid item md={8} xs={12}>
-                <Card elevation={0}>
-                  <CardHeader title="admin requests" />
-                </Card>
-              </Grid>
-            </Grid>
+            {data && <ProductsTable row={data} />}
           </Grid>
         </Container>
       </div>

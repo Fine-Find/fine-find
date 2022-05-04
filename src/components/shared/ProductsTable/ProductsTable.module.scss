@@ -1,0 +1,35 @@
+.tileImageSection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.titleAndSubtitle {
+  text-align: center;
+}
+
+.avatar {
+  border-radius: 100%;
+  object-position: center;
+  object-fit: contain;
+  width: 150px;
+  padding-top: 1rem;
+}
+
+.buttonSection {
+  margin: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.imageBox {
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  width: 100%;
+}
+
+.image {
+  object-position: center center;
+  object-fit: contain;
+}
