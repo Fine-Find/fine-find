@@ -6,8 +6,10 @@ import {
   UserType,
 } from '@/types/profile.types';
 import {
+  RequestedProduct,
   RequestedProductDetails,
   RequestedProductsTable,
+  Status,
 } from '@/types/RequestedProducts';
 import {
   CollectionReference,
@@ -32,6 +34,23 @@ const collectionsQuery = query(
   collectionGroup(db, 'collections'),
   where('productsRequested', '!=', [])
 );
+const createRequestedProducts = (
+  products: [RequestedProductDetails],
+  collectionId: string,
+  userId: string
+) => {
+  products.forEach((product) => {
+    const newRequestedProduct: RequestedProduct = {
+      ...product,
+      collectionId,
+      userId,
+      requestedOn: new Date().toISOString(),
+      status: Status.pending,
+    };
+    const productRef = doc(db, `requestedProducts/${product.id}`);
+    setDoc(productRef, newRequestedProduct);
+  });
+};
 
 export const getAllProductsRequested = async () => {
   const data = [];
@@ -91,7 +110,11 @@ export const createPostedCollection = async (data: any, userId: string) => {
   const postData = data;
   postData.id = postId;
 
-  return await setDoc(newPostDocRef, postData);
+  const createdD = await setDoc(newPostDocRef, postData);
+
+  createRequestedProducts(data.productsRequested, newPostDocRef.id, userId);
+
+  return createdD;
 };
 
 export const getPaginatedPostedCollection = async (
@@ -126,12 +149,26 @@ export const getPaginatedPostedCollection = async (
   };
 };
 
+const getRequestedProductsByCollectionId = async (id) => {
+  //  get all requested products by collectionId
+  const requestedProducts = query(
+    collection(db, 'requestedProducts'),
+    where('collectionId', '==', id)
+  );
+  const requestedProductsSnapshot = await getDocs(requestedProducts);
+  const requestedProductsData = requestedProductsSnapshot.docs.map((products) =>
+    products.data()
+  );
+  return requestedProductsData;
+};
 export const getPostedCollectionById = async (
   postId: string,
   userId: string
 ) => {
   const documentRef = doc(db, 'users', userId, 'collections', postId);
-  return getDoc(documentRef);
+  const data = await getDoc(documentRef);
+  const requestedProduct = await getRequestedProductsByCollectionId(postId);
+  return { data, requestedProduct };
 };
 
 const getUserDoc = async (userId: string) => {
