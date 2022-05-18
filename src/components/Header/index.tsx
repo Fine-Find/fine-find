@@ -72,7 +72,11 @@ export default function Header({ open, onDrawerToggled }: HeaderProps) {
           {button}
         </Toolbar>
       </AppBar>
-      <DashboardNav open={open} toggleDrawer={onDrawerToggled} shopifyLink={auth.user.shopifyUrl} />
+      <DashboardNav
+        open={open}
+        toggleDrawer={onDrawerToggled}
+        shopifyLink={auth.user.shopifyUrl}
+      />
     </>
   );
 }
