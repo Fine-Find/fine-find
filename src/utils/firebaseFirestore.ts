@@ -32,6 +32,7 @@ const collectionsQuery = query(
   collectionGroup(db, 'collections'),
   where('productsRequested', '!=', [])
 );
+const allCollectionsQuery = query(collectionGroup(db, 'collections'));
 
 export const getAllProductsRequested = async () => {
   const data = [];
@@ -98,7 +99,7 @@ export const createPostedCollection = async (data: any, userId: string) => {
   if (docSnap.exists()) {
     const { totalPosts, publishedPosts, unpublishedPosts } = docSnap.data();
     const statsData = {
-      totalPosts: totalPosts ? totalPosts + 1 : 1,
+      totalPosts: totalPosts ? postId : 1,
       publishedPosts: publishedPosts ? publishedPosts : 0,
       unpublishedPosts: unpublishedPosts ? unpublishedPosts + 1 : 1,
     };
@@ -107,8 +108,11 @@ export const createPostedCollection = async (data: any, userId: string) => {
     await setDoc(statsRef, {}, { merge: true });
   }
 
+  const queryAllCollections = await getDocs(allCollectionsQuery);
+
   const postData = data;
   postData.id = postId;
+  postData.order = queryAllCollections.size ? queryAllCollections.size - 1 : 0;
 
   return await setDoc(newPostDocRef, postData);
 };
