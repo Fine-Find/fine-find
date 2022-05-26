@@ -9,6 +9,7 @@ import { ShopifyProduct } from '@/types/shopify/Products';
 import { getPostedCollectionById } from '@/utils/firebaseFirestore';
 import { fineFindPages } from '@/utils/urls';
 import {
+  Badge,
   Container,
   Grid,
   List,
@@ -49,19 +50,35 @@ const ManageCollectionPage: React.FC = () => {
   const [requestedProducts, setRequestedProducts] = useState<
     RequestedProductDetails[]
   >([]);
+  const [collectionrequestedProducts, setCollectionRequestedProducts] =
+    useState([]);
   const [collectionData, setCollectionData] =
     useState<DocumentSnapshot<DocumentData>>(null);
 
   const { id } = router.query;
-
+  useEffect(() => {
+    if (requestedProducts[0]) {
+      const requestedProductsMap = requestedProducts.map((product) => {
+        const ref = collectionrequestedProducts.find(
+          (p) => p.id === product.id
+        );
+        if (ref) {
+          return { ...product, ...ref };
+        }
+        return product;
+      });
+      setRequestedProducts(requestedProductsMap);
+    }
+  }, [collectionrequestedProducts]);
   useEffect(() => {
     if (auth.isInitialized && auth.user) {
       getPostedCollectionById(queryParameterAsString(id), auth.user.uid).then(
-        (collection) => {
-          if (collection.exists()) {
-            setCollectionData(collection);
-            setSelectedProducts(collection.get('products'));
-            setRequestedProducts(collection.get('productsRequested'));
+        ({ data, requestedProduct }) => {
+          if (data.exists()) {
+            setCollectionData(data);
+            setSelectedProducts(data.get('products'));
+            setRequestedProducts(data.get('productsRequested'));
+            setCollectionRequestedProducts(requestedProduct);
           } else {
             router.push(fineFindPages.dashboard);
           }
@@ -136,6 +153,9 @@ const ManageCollectionPage: React.FC = () => {
                                 primary={product.productName}
                                 secondary={product.vendorName}
                               />
+                              <Typography color="primary" variant="caption">
+                                {product.status || ''}
+                              </Typography>
                             </ListItem>
                           );
                         })}

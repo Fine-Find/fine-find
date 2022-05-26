@@ -43,6 +43,7 @@ import throttle from 'lodash/throttle';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { v4 } from 'uuid';
 
 import styles from './create.module.scss';
 
@@ -329,7 +330,7 @@ const CreateCollectionPage: React.FC = () => {
 
     if (foundProduct === undefined) {
       setProductsError(false);
-      setRequestedProducts([...requestedProducts, newProduct]);
+      setRequestedProducts([...requestedProducts, { id: v4(), ...newProduct }]);
     }
 
     setOpenModal(false);
