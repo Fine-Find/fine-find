@@ -53,7 +53,6 @@ function buildExternalMessageHtml() {
         </html>
     `;
 }
-
 async function sendEmails(data, recordId) {
   const conciergeMessageText = await buildInternalMessageHtml(data, recordId);
   const conciergeMessageData = buildMessageData(

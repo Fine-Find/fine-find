@@ -40,6 +40,7 @@
     "react-hook-form": "^7.14.2",
     "react-infinite-scroll-hook": "^4.0.1",
     "react-input-mask": "^2.0.4",
+    "react-web-share": "^1.1.6",
     "shopify-api-node": "^3.7.1",
     "slugify": "^1.6.5",
     "styled-components": "^5.3.5",

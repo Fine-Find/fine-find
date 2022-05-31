@@ -12,10 +12,16 @@ import { adminListItems, mainListItems } from './listItems';
 type Props = {
   toggleDrawer;
   open: boolean;
+  shopifyLink?: string;
 };
 
-export default function DashboardNav({ toggleDrawer, open }: Props) {
+export default function DashboardNav({
+  toggleDrawer,
+  open,
+  shopifyLink,
+}: Props) {
   const [designer, setDesigner] = useState(false);
+  const [copy, setCopy] = useState(false);
 
   useEffect(() => {
     verifyDesignerDashboard(null, false, setDesigner);
@@ -38,7 +44,9 @@ export default function DashboardNav({ toggleDrawer, open }: Props) {
         </div>
         <Divider />
         <List className={styles.list}>
-          {designer ? mainListItems : adminListItems}
+          {designer
+            ? mainListItems(shopifyLink, copy, setCopy)
+            : adminListItems}
         </List>
       </Drawer>
     </>

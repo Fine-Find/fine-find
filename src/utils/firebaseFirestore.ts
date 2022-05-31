@@ -34,6 +34,7 @@ const collectionsQuery = query(
   collectionGroup(db, 'collections'),
   where('productsRequested', '!=', [])
 );
+const allCollectionsQuery = query(collectionGroup(db, 'collections'));
 const createRequestedProducts = (
   products: [RequestedProductDetails],
   collectionId: string,
@@ -100,15 +101,37 @@ export const getNextPostedCollectionNumber = async (
 export const getPostedCollection = (userId: string) => {
   return collection(db, 'users', userId, 'collections');
 };
+export const getPosts = (userId: string) => {
+  return collection(db, 'users', userId, 'posts');
+};
 
 export const createPostedCollection = async (data: any, userId: string) => {
   const postedCollection = getPostedCollection(userId);
+  const postStats = getPosts(userId);
 
   const postId = await getNextPostedCollectionNumber(postedCollection);
   const newPostDocRef = doc(postedCollection, postId.toString());
+  const statsRef = doc(postStats, '--stats--');
+
+  const docSnap = await getDoc(statsRef);
+
+  if (docSnap.exists()) {
+    const { totalPosts, publishedPosts, unpublishedPosts } = docSnap.data();
+    const statsData = {
+      totalPosts: totalPosts ? postId : 1,
+      publishedPosts: publishedPosts ? publishedPosts : 0,
+      unpublishedPosts: unpublishedPosts ? unpublishedPosts + 1 : 1,
+    };
+    await setDoc(statsRef, statsData, { merge: true });
+  } else {
+    await setDoc(statsRef, {}, { merge: true });
+  }
+
+  const queryAllCollections = await getDocs(allCollectionsQuery);
 
   const postData = data;
   postData.id = postId;
+  postData.order = queryAllCollections.size ? queryAllCollections.size - 1 : 0;
 
   const createdD = await setDoc(newPostDocRef, postData);
 
