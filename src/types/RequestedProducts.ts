@@ -1,4 +1,5 @@
 export type RequestedProductDetails = {
+  id: string;
   productType: string;
   vendorName: string;
   productName: string;
@@ -7,6 +8,12 @@ export type RequestedProductDetails = {
   description?: string;
   status?: string;
 };
+export enum Status {
+  pending = 'Pending',
+  underReview = 'Under Review',
+  approved = 'Approved',
+  denied = 'Denied',
+}
 
 export type RequestedProductsTable = {
   id: number;
@@ -19,3 +26,12 @@ export type RequestedProductsTable = {
   vendorContact?: string;
   productType?: string;
 };
+
+interface requestedProduct {
+  collectionId: string;
+  userId: string;
+  requestedOn: string;
+  status: Status;
+}
+
+export type RequestedProduct = RequestedProductDetails & requestedProduct;

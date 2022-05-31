@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { PublishingCriteriaModal } from '@/components/Collection/PublishingCriteriaModal';
 import { UploadImageCard } from '@/components/Collections/UploadImageCard';
 import DashboardLayout from '@/components/DashboardLayout';
 import { RequestProductModal } from '@/components/Products/RequestProductModal';
@@ -42,6 +43,7 @@ import throttle from 'lodash/throttle';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { v4 } from 'uuid';
 
 import styles from './create.module.scss';
 
@@ -73,6 +75,10 @@ const CreateCollectionPage: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [postData, setpostData] = useState({});
+  const [openPublishingModal, setOpenPublishingModal] = useState(false);
+  const [publishingCriteria, setPublishingCriteria] = useState('manual');
+  const [isRequestedProductsOnly, setIsRequestedProductsOnly] = useState(false);
 
   const router = useRouter();
 
@@ -185,7 +191,9 @@ const CreateCollectionPage: React.FC = () => {
   async function fileUpload(
     data: any,
     products: any[],
-    productsRequested: any[]
+    productsRequested: any[],
+    publishOnCreation: boolean,
+    criteria: string
   ) {
     setUploadingFile(true);
 
@@ -234,6 +242,9 @@ const CreateCollectionPage: React.FC = () => {
             description: data.description || null,
             products,
             productsRequested,
+            published: publishOnCreation,
+            publishCondition: criteria,
+            publishOnCreation: publishOnCreation,
           };
 
           createPostedCollection(collectionData, auth.user.uid)
@@ -272,16 +283,28 @@ const CreateCollectionPage: React.FC = () => {
     );
   }
 
+  const isRequestedProducts = () => {
+    return selectedProducts.length < 1;
+  };
+
   const onSubmit = (data) => {
     if (
       (selectedProducts && selectedProducts.length > 0) ||
       (requestedProducts && requestedProducts.length > 0)
     ) {
       setProductsError(false);
-      fileUpload(data, selectedProducts, requestedProducts);
+      setpostData(data);
+      setIsRequestedProductsOnly(isRequestedProducts());
+      setOpenPublishingModal(true);
     } else {
       setProductsError(true);
     }
+  };
+
+  const confirmPublishingCriteria = (criteria: string) => {
+    setOpenPublishingModal(false);
+    setPublishingCriteria(criteria);
+    fileUpload(postData, selectedProducts, requestedProducts, false, criteria);
   };
 
   const onErrors = () => {
@@ -307,7 +330,7 @@ const CreateCollectionPage: React.FC = () => {
 
     if (foundProduct === undefined) {
       setProductsError(false);
-      setRequestedProducts([...requestedProducts, newProduct]);
+      setRequestedProducts([...requestedProducts, { id: v4(), ...newProduct }]);
     }
 
     setOpenModal(false);
@@ -319,6 +342,17 @@ const CreateCollectionPage: React.FC = () => {
 
   const handleOpen = () => {
     setOpenModal(true);
+  };
+  const isPublishedOnCreation = async (choice: any) => {
+    setOpenPublishingModal(false);
+    const publishOnCreation = choice == 'false' ? false : true;
+    fileUpload(
+      postData,
+      selectedProducts,
+      requestedProducts,
+      publishOnCreation,
+      publishingCriteria
+    );
   };
 
   if (!auth.isInitialized || !auth.user) {
@@ -357,6 +391,13 @@ const CreateCollectionPage: React.FC = () => {
               open={openModal}
               handleClose={handleClose}
               submitForm={addRequestedProduct}
+            />
+            <PublishingCriteriaModal
+              confirm={confirmPublishingCriteria}
+              handleClose={() => setOpenPublishingModal(false)}
+              isRequestedProductsOnly={isRequestedProductsOnly}
+              open={openPublishingModal}
+              publishOnCreation={isPublishedOnCreation}
             />
           </Grid>
           <FormProvider {...methods}>
