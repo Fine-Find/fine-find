@@ -27,7 +27,9 @@ async function buildInternalMessageHtml(data: any) {
             <li>Product Name: ${product.productName}</li>
             <li>Product Type: ${product.productType}</li>
             <li>Vendor Name: ${product.vendorName}</li>
-            <li>Vendor Contacts: ${product.vendorContactInfo ?? data.user.email}</li>
+            <li>Vendor Contacts: ${
+  product.vendorContactInfo ?? data.user.email
+}</li>
         </ul>
         <br/>`;
   })}
