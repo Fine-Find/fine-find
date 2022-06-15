@@ -53,7 +53,6 @@ function buildExternalMessageHtml() {
         </html>
     `;
 }
-// concierge@thefinefind.com, blaine@thefinefind.com, 
 async function sendEmails(data, recordId) {
   const conciergeMessageText = await buildInternalMessageHtml(data, recordId);
   const conciergeMessageData = buildMessageData(

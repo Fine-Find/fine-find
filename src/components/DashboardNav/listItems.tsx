@@ -10,24 +10,21 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Link from 'next/link';
 import React from 'react';
+import { RWebShare } from 'react-web-share';
 
 import { fineFindPages } from '../../utils/urls';
 import styles from './ListItems.module.scss';
-import { RWebShare } from 'react-web-share';
-
 
 export const mainListItems = (shopifyLink: string, copy, setCopy) => {
-
-  const handleCopy = () =>{
+  const handleCopy = () => {
     navigator.clipboard.writeText(shopifyLink);
     setCopy(true);
   };
   const shareData = {
-    text: "Web Share - Share your shopify page",
+    text: 'Web Share - Share your shopify page',
     url: `${shopifyLink}`,
-    title: "Share your shopify page",
+    title: 'Share your shopify page',
   };
- 
 
   return (
     <div className={styles.container}>
@@ -71,14 +68,15 @@ export const mainListItems = (shopifyLink: string, copy, setCopy) => {
           </a>
         </Link>
       </ListItem>
-      { shopifyLink ? (
+      {shopifyLink ? (
         <>
           <ListItem button className={`${styles.item}`}>
             <ListItemIcon>
-              {
-                copy ? <FilterNoneTwoTone onClick={() => handleCopy()} /> :  <FilterNone onClick={() => handleCopy()} />  
-              }
-           
+              {copy ? (
+                <FilterNoneTwoTone onClick={() => handleCopy()} />
+              ) : (
+                <FilterNone onClick={() => handleCopy()} />
+              )}
             </ListItemIcon>
             <Link href={shopifyLink}>
               <a>
@@ -87,23 +85,19 @@ export const mainListItems = (shopifyLink: string, copy, setCopy) => {
             </Link>
           </ListItem>
           <ListItem button className={`${styles.item}`}>
-            <RWebShare
-              data={shareData}
-            >
+            <RWebShare data={shareData}>
               <ListItemIcon>
                 <ShareIcon />
               </ListItemIcon>
             </RWebShare>
-            <RWebShare
-              data={shareData}
-            >
+            <RWebShare data={shareData}>
               <a>
                 <ListItemText primary="Share page" />
               </a>
             </RWebShare>
           </ListItem>
         </>
-      ) : null }
+      ) : null}
       <ListItem button className={`${styles.item} ${styles.itemEnd}`}>
         <ListItemIcon>
           <SettingsIcon />
@@ -115,7 +109,8 @@ export const mainListItems = (shopifyLink: string, copy, setCopy) => {
         </Link>
       </ListItem>
     </div>
-  );};
+  );
+};
 
 export const adminListItems = (
   <div className={styles.container}>
