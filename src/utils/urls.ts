@@ -28,4 +28,5 @@ export const fineFindApis = {
   migrateApplication: '/api/apply/migrateApplication',
   createDesignerPage: '/api/shopify/v1/designer',
   sendRequestedProductsEmail: '/api/email/requestedProductsEmail',
+  createDesignProduct: '/api/shopify/v1/product',
 };
