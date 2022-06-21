@@ -8,7 +8,6 @@ import {
 import {
   RequestedProduct,
   RequestedProductDetails,
-  RequestedProductsTable,
   Status,
 } from '@/types/RequestedProducts';
 import {
@@ -30,10 +29,8 @@ import {
   where,
 } from 'firebase/firestore';
 
-const collectionsQuery = query(
-  collectionGroup(db, 'collections'),
-  where('productsRequested', '!=', [])
-);
+import { notifyOwner } from './RequestedProductDenied';
+
 const allCollectionsQuery = query(collectionGroup(db, 'collections'));
 const createRequestedProducts = (
   products: [RequestedProductDetails],
@@ -54,26 +51,15 @@ const createRequestedProducts = (
 };
 
 export const getAllProductsRequested = async () => {
-  const data = [];
-  const validData: RequestedProductsTable[] = [];
-  const querySnapshot = await getDocs(collectionsQuery);
-  querySnapshot.forEach((document) => {
-    const requestedProducts = document.get('productsRequested');
-    data.push(...requestedProducts);
-  });
-  data.map((product: RequestedProductDetails, idx: number) => {
-    const row: RequestedProductsTable = {
-      id: idx + 1,
-      status: product.status ?? 'pending',
-      productName: product.productName,
-      vendor: product.vendorName,
-      vendorContact: product.vendorContactInfo,
-      productType: product.productType,
-      description: product.description,
+  const reqProductsCollection = collection(db, 'requestedProducts');
+  const docs = (await getDocs(reqProductsCollection)).docs;
+  const allDocs = docs.map((docdata, idx) => {
+    return {
+      ...docdata.data(),
+      no: idx + 1,
     };
-    validData.push(row);
   });
-  return validData;
+  return allDocs;
 };
 
 export const getNextPostedCollectionNumber = async (
@@ -299,4 +285,42 @@ export const updateShopifyUrl = async (userId: string, url: string) => {
   const userDoc = await getUserDoc(userId);
 
   return await updateDoc(userDoc, { shopifyUrl: url });
+};
+
+export const getRequestedProductById = async (id: string) => {
+  try {
+    const requestedProduct = doc(db, 'requestedProducts', id);
+    return getDoc(requestedProduct);
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateRequestedProduct = async ({
+  productInfo,
+  collectionInfo,
+}) => {
+  try {
+    const { id: productId } = productInfo;
+    const { id: collectionId, user } = collectionInfo;
+    const productToUpdate = doc(db, 'requestedProducts', productId);
+    await updateDoc(productToUpdate, { ...productInfo });
+    const updateProduct = doc(db, 'users', user, 'collections', collectionId);
+    const gotDoc = await getDoc(updateProduct);
+    const { productsRequested, ...other } = gotDoc.data();
+    const updatedData = productsRequested.map((product) => {
+      if (product.id === productId) {
+        product = { ...product, ...productInfo };
+      }
+      return product;
+    });
+    updateDoc(updateProduct, { productsRequested: updatedData });
+    const userData = await getUserDocData(user);
+    const userEmail = userData.get('email');
+    if (productInfo.status === 'Denied') {
+      notifyOwner({ ...productInfo, collection: other.title }, userEmail);
+    }
+  } catch (error) {
+    return error;
+  }
 };

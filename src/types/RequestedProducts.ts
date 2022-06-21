@@ -1,8 +1,8 @@
 export type RequestedProductDetails = {
-  id: string;
-  productType: string;
-  vendorName: string;
-  productName: string;
+  id?: string;
+  productType?: string;
+  vendorName?: string;
+  productName?: string;
   linkToProduct?: string;
   vendorContactInfo?: string;
   description?: string;
@@ -16,15 +16,20 @@ export enum Status {
 }
 
 export type RequestedProductsTable = {
-  id: number;
+  id: string;
   status: string;
   productName: string;
   vendor: string;
+  collectionId?: string;
   requestedOn?: string;
   lastUpdated?: string;
   description?: string;
   vendorContact?: string;
   productType?: string;
+  vendorContactInfo?: string;
+  linkToProduct?: string;
+  vendorName?: string;
+  userId?: string;
 };
 
 interface requestedProduct {
