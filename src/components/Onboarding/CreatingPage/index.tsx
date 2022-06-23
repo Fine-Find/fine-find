@@ -1,5 +1,9 @@
 import { UserType } from '@/types/profile.types';
-import { DesignerMetafields, DesignerPage } from '@/types/shopify/Designer';
+import {
+  DesignerMetafields,
+  DesignerPage,
+  DesignerProduct,
+} from '@/types/shopify/Designer';
 import { updateShopifyUrl } from '@/utils/firebaseFirestore';
 import { fineFindApis, fineFindPages } from '@/utils/urls';
 import { Button, LinearProgress, Typography } from '@material-ui/core';
@@ -53,6 +57,15 @@ const buildRequest = (user: UserType): DesignerPage => {
 
   return pageObj;
 };
+const buildProductBody = ({ username, handle, price }): DesignerProduct => {
+  return {
+    title: `Book time with ${username}`, //have to change here to  put the correct handle
+    vendor: `${username}`,
+    handle: `${handle}-1-1-video-consultation`,
+    product_type: 'video consultation',
+    variants: [{price: `${price}`}],
+  };
+};
 
 export const CreatingPage = ({ user, userIdToken }: PageCreationProps) => {
   const [designerUrl, setDesignerUrl] = useState<string>(user.shopifyUrl);
@@ -61,7 +74,7 @@ export const CreatingPage = ({ user, userIdToken }: PageCreationProps) => {
   const [liftOff, setLiftOff] = useState<boolean>(false);
   const [launching, setLaunching] = useState<boolean>(false);
   const [stage, setStage] = useState<string>(
-    `Preparing ${user?.businessProfile?.companyName}} for launch`
+    `Preparing ${user?.businessProfile?.companyName} for launch`
   );
 
   const liftOffText = 'And we have liftoff!';
@@ -94,11 +107,29 @@ export const CreatingPage = ({ user, userIdToken }: PageCreationProps) => {
         .then((response) => {
           if (!response.ok) {
             //TODO: proper error handling if response is not ok
+            console.error('error', response, user);
           } else {
-            const url = `https://thefinefind.com/pages/${requestBody.handle}`;
-            setDesignerUrl(url);
-            // update the user profile
-            updateShopifyUrl(user.uid, url);
+            const productBody = buildProductBody({
+              username: user.name,
+              handle: requestBody.handle,
+              price: user.businessProfile.hourlyRate,
+            });
+            fetch(fineFindApis.createDesignProduct, {
+              method: 'POST',
+              headers: {
+                authorization: `bearer ${userIdToken}`,
+              },
+              body: JSON.stringify(productBody),
+            })
+              .then(() => {
+                const url = `https://thefinefind.com/pages/${requestBody.handle}`;
+                setDesignerUrl(url);
+                // update the user profile
+                updateShopifyUrl(user.uid, url);
+              })
+              .catch((error) => {
+                console.error('errors', error);
+              });
           }
         })
         .catch((error) => {

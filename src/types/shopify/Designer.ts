@@ -29,3 +29,13 @@ export type DesignerPosts = {
   pic_link: string;
   post_href: string;
 };
+
+export type DesignerProduct = {
+  title: string;
+  body_html?: string;
+  vendor: string;
+  handle?: string;
+  product_type: string;
+  tags?: [string];
+  variants?: [any]
+};
