@@ -29,4 +29,5 @@ export const fineFindApis = {
   createDesignerPage: '/api/shopify/v1/designer',
   sendRequestedProductsEmail: '/api/email/requestedProductsEmail',
   createDesignProduct: '/api/shopify/v1/product',
+  requestedProductDenied: '/api/email/productDeniedEmail',
 };

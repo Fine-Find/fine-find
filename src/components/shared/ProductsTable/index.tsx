@@ -1,9 +1,17 @@
 import { RequestedProductsTable } from '@/types/RequestedProducts';
+import EyeIcon from '@material-ui/icons/RemoveRedEye';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import moment from 'moment';
+import Link from 'next/link';
 import React from 'react';
 
+const format = 'DD-MM-yyyy';
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'No', width: 90 },
+  {
+    field: 'no',
+    headerName: 'No',
+    width: 90,
+  },
   {
     field: 'productName',
     headerName: 'Product Name',
@@ -20,12 +28,7 @@ const columns: GridColDef[] = [
     width: 150,
   },
   {
-    field: 'vendor',
-    headerName: 'Vendor',
-    width: 110,
-  },
-  {
-    field: 'vendorContact',
+    field: 'vendorContactInfo',
     headerName: 'Vendor Contact',
     width: 210,
   },
@@ -35,7 +38,9 @@ const columns: GridColDef[] = [
     headerName: 'Request Date',
     sortable: false,
     width: 160,
-    valueGetter: () => `${new Date().toLocaleDateString()}`,
+    renderCell: (params: GridValueGetterParams) => {
+      return <>{moment(params.row.requestedOn).format(format)}</>;
+    },
   },
   {
     field: 'lastUpdated',
@@ -43,13 +48,29 @@ const columns: GridColDef[] = [
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 110,
-    valueGetter: (params: GridValueGetterParams) =>
-      ` ${params.getValue(params.id, 'status') || ''}`,
+    renderCell: (params: GridValueGetterParams) => {
+      return <>{moment(params.row.requestedOn).format(format)}</>;
+    },
   },
   {
     field: 'description',
     headerName: 'Description',
     width: 350,
+  },
+  {
+    headerName: 'Actions',
+    field: 'actions',
+    renderCell: (params: GridValueGetterParams) => {
+      return (
+        <>
+          <div>
+            <Link href={`requests/${params.row.id}`}>
+              <EyeIcon color="primary" />
+            </Link>
+          </div>
+        </>
+      );
+    },
   },
 ];
 
