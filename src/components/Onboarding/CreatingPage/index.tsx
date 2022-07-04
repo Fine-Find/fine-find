@@ -2,7 +2,7 @@ import { UserType } from '@/types/profile.types';
 import {
   DesignerMetafields,
   DesignerPage,
-  DesignerProduct,
+  
 } from '@/types/shopify/Designer';
 import { updateShopifyUrl } from '@/utils/firebaseFirestore';
 import { fineFindApis, fineFindPages } from '@/utils/urls';
@@ -57,13 +57,19 @@ const buildRequest = (user: UserType): DesignerPage => {
 
   return pageObj;
 };
-const buildProductBody = ({ username, handle, price }): DesignerProduct => {
+// const buildProductBody = ({ username, handle, price }): DesignerProduct => {
+//   return {
+//     title: `Book time with ${username}`, //have to change here to  put the correct handle
+//     vendor: `${username}`,
+//     handle: `${handle}-1-1-video-consultation`,
+//     product_type: 'video consultation',
+//     variants: [{price: `${price}`}],
+//   };
+// };
+const updateProductBody = (id: number, price: string) =>{
   return {
-    title: `Book time with ${username}`, //have to change here to  put the correct handle
-    vendor: `${username}`,
-    handle: `${handle}-1-1-video-consultation`,
-    product_type: 'video consultation',
-    variants: [{price: `${price}`}],
+    id,
+    variants: [{id: 42414709113031, price}],
   };
 };
 
@@ -107,25 +113,55 @@ export const CreatingPage = ({ user, userIdToken }: PageCreationProps) => {
         .then((response) => {
           if (!response.ok) {
             //TODO: proper error handling if response is not ok
-            console.error('error', response, user);
-          } else {
-            const productBody = buildProductBody({
-              username: user.name,
-              handle: requestBody.handle,
-              price: user.businessProfile.hourlyRate,
-            });
+            console.error('happening...',user.businessProfile.hourlyRate);
+            const productBody = updateProductBody(7390857527495,`${user.businessProfile.hourlyRate}`);
             fetch(fineFindApis.createDesignProduct, {
-              method: 'POST',
+              method: 'PUT',
               headers: {
                 authorization: `bearer ${userIdToken}`,
               },
               body: JSON.stringify(productBody),
             })
-              .then(() => {
+              .then((shopifyRes) => {
+                console.error('itworkds...');
                 const url = `https://thefinefind.com/pages/${requestBody.handle}`;
                 setDesignerUrl(url);
                 // update the user profile
-                updateShopifyUrl(user.uid, url);
+                
+                shopifyRes.json().then((res) => {
+                  updateShopifyUrl(user.uid, url,res.id);
+                  console.error('shopifyRes', res);
+                });
+              })
+              .catch((error) => {
+                console.error('errors', error);
+              });
+          } else {
+            // const productBody = buildProductBody({
+            //   username: user.name,
+            //   handle: requestBody.handle,
+            //   price: user.businessProfile.hourlyRate,
+            // });
+            // id: 42414709113031,
+            // product_id: 7390857527495
+            const productBody = updateProductBody(7390857527495,`${user.businessProfile.hourlyRate}`);
+            fetch(fineFindApis.createDesignProduct, {
+              method: 'GET',
+              headers: {
+                authorization: `bearer ${userIdToken}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(productBody),
+            })
+              .then((shopifyRes) => {
+                const url = `https://thefinefind.com/pages/${requestBody.handle}`;
+                setDesignerUrl(url);
+                // update the user profile
+                
+                shopifyRes.json().then((res) => {
+                  updateShopifyUrl(user.uid, url,res.id);
+                  console.error('shopifyRes', res);
+                });
               })
               .catch((error) => {
                 console.error('errors', error);
@@ -134,7 +170,8 @@ export const CreatingPage = ({ user, userIdToken }: PageCreationProps) => {
         })
         .catch((error) => {
           //TODO: proper error handling
-          console.error(error);
+          console.error('error ending...',error);
+
         })
         .finally(() => {
           setLaunching(false);

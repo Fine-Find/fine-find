@@ -17,9 +17,10 @@ import { NextApiResponse } from 'next';
  * @param res API Response
  */
 const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
-  if (req.method && req.method.toUpperCase() === 'POST') {
+  if (req.method && req.method.toUpperCase() === 'PUT') {
     return createDesignerProduct(req, res);
   }
+  console.error('==========>method', req.method);
   res.status(405).end('Method not allowed');
 };
 
@@ -28,12 +29,18 @@ async function createDesignerProduct(
   res: NextApiResponse
 ) {
   try {
-    console.log('==========>req', req.body);
+    console.error('==========>req', req.body);
     const requestBody: DesignerProduct = JSON.parse(
       req.body
     ) as DesignerProduct;
-    await shopifyApiClient.product.create(requestBody);
-    return res.status(200).end();
+    // shopifyApiClient.product.id= requestBody.id;
+    console.error('==========>json', requestBody);
+    // shopifyApiClient.product.id = requestBody.id;
+    // shopifyApiClient.product.variants = requestBody.variants;
+    // console.error('==========>product', shopifyApiClient.product);
+    const shopifyRes = await shopifyApiClient.product.update(requestBody);
+    console.error('---->done', shopifyRes);
+    return res.status(200).json(shopifyRes);
   } catch (err) {
     return res.status(500).json(err);
   }
