@@ -221,6 +221,7 @@ export const getProfileData = async (userId: string) => {
     businessProfile: userData.get('businessProfile'),
     profileImage: userData.get('profileImage'),
     businessImage: userData.get('businessImage'),
+    videoProductId: userData.get('videoProductId'),
   };
 
   return profile;
@@ -265,7 +266,7 @@ export const updateBasicProfile = async (
 
 export const updateBusinessProfile = async (
   userId: string,
-  businessProfile: BusinessProfileType
+  businessProfile: BusinessProfileType,
 ) => {
   const userDoc = await getUserDoc(userId);
 

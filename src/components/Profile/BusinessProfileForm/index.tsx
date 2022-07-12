@@ -1,5 +1,7 @@
-import { BusinessProfileType } from '@/types/profile.types';
-import { updateBusinessProfile } from '@/utils/firebaseFirestore';
+import { buildProductBody } from '@/components/Onboarding/CreatingPage';
+import { BasicProfileType, BusinessProfileType } from '@/types/profile.types';
+import { updateBusinessProfile, updateShopifyUrl } from '@/utils/firebaseFirestore';
+import { fineFindApis } from '@/utils/urls';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   CardContent,
@@ -10,6 +12,7 @@ import {
 import InputAdornment from '@material-ui/core/InputAdornment';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import slugify from 'slugify';
 
 import { ProfileFormCard } from '../ProfileFormCard';
 import { businessProfileValidation } from './BusinessProfileFormValidation';
@@ -19,12 +22,18 @@ export type BusinessProfileFormProps = {
   userId: string;
   businessProfile?: BusinessProfileType;
   updateProfile: (data: any) => void;
+  userIdToken?: string;
+  basicProfile?: BasicProfileType;
+  videoProdId?: any;
 };
 
 export const BusinessProfileForm = ({
   userId,
   businessProfile,
   updateProfile,
+  userIdToken,
+  basicProfile,
+  videoProdId,
 }: BusinessProfileFormProps) => {
   const [updatingProfile, setUpdatingProfile] = useState(false);
   // TODO: Pull this from Firebase
@@ -44,6 +53,7 @@ export const BusinessProfileForm = ({
     register,
     formState: { errors },
   } = methods;
+  
 
   const onSubmit = (data: BusinessProfileType) => {
     setUpdatingProfile(true);
@@ -52,8 +62,51 @@ export const BusinessProfileForm = ({
         const user = JSON.parse(localStorage.getItem('user'));
         const newUser = { ...user, businessProfile: data };
         localStorage.setItem('user', newUser);
-        updateProfile(data);
+        updateProfile({...data});
         setUpdatingProfile(false);
+
+        fetch(fineFindApis.deleteDesignProduct, {
+          method: 'DELETE',
+          headers: {
+            authorization: `bearer ${userIdToken}`,
+          },
+          body: JSON.stringify({id: videoProdId}),
+        })
+          .then(() =>{
+            
+            console.error('prod deleted');
+            const sluggedCompany = slugify(data.companyName, {
+              remove: /\./g,
+              trim: true,
+              lower: true,
+            });
+            const productBody = buildProductBody({
+              username: basicProfile.firstName,
+              handle: sluggedCompany,
+              price: data.hourlyRate,
+            });
+            fetch(fineFindApis.createDesignProduct, {
+              method: 'POST',
+              headers: {
+                authorization: `bearer ${userIdToken}`,
+              },
+              body: JSON.stringify(productBody),
+            })
+              .then((shopifyRes) => {
+                const url = `https://thefinefind.com/pages/${productBody.handle}`;
+                const newRes = shopifyRes;
+                newRes.json().then((res) => {
+                  updateShopifyUrl(userId, url,res.id);
+                  console.error('shopifyRes', res);
+                });
+              })
+              .catch((error) => {
+                console.error('errors', error);
+              });
+          })
+          .catch(err =>{
+            console.error('delete prodd error', err);
+          });
       })
       .catch((error) => {
         console.error(error);

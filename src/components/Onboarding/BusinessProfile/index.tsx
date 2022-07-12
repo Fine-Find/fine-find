@@ -7,11 +7,13 @@ import styles from './BusinessProfile.module.scss';
 type Props = {
   user: UserType;
   updateBusinessProfile: () => void;
+  userIdToken?: any;
 };
 
 export const BusinessProfileOnboarding = ({
   user,
   updateBusinessProfile,
+  userIdToken,
 }: Props) => {
   return (
     <div className={styles.form}>
@@ -24,6 +26,8 @@ export const BusinessProfileOnboarding = ({
           website: user.application.website,
         }}
         updateProfile={updateBusinessProfile}
+        userIdToken={userIdToken}
+        basicProfile={user.basicProfile}
       />
     </div>
   );

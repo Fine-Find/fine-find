@@ -2,9 +2,10 @@ import { UserType } from '@/types/profile.types';
 import {
   DesignerMetafields,
   DesignerPage,
+  DesignerProduct,
   
 } from '@/types/shopify/Designer';
-import { updateShopifyUrl } from '@/utils/firebaseFirestore';
+// import { updateShopifyUrl } from '@/utils/firebaseFirestore';
 import { fineFindApis, fineFindPages } from '@/utils/urls';
 import { Button, LinearProgress, Typography } from '@material-ui/core';
 import Link from 'next/link';
@@ -57,19 +58,13 @@ const buildRequest = (user: UserType): DesignerPage => {
 
   return pageObj;
 };
-// const buildProductBody = ({ username, handle, price }): DesignerProduct => {
-//   return {
-//     title: `Book time with ${username}`, //have to change here to  put the correct handle
-//     vendor: `${username}`,
-//     handle: `${handle}-1-1-video-consultation`,
-//     product_type: 'video consultation',
-//     variants: [{price: `${price}`}],
-//   };
-// };
-const updateProductBody = (id: number, price: string) =>{
+export const buildProductBody = ({ username, handle, price }): DesignerProduct => {
   return {
-    id,
-    variants: [{id: 42414709113031, price}],
+    title: `Book time with ${username}`,
+    vendor: `${username}`,
+    handle: `${handle}-1-1-video-consultation`,
+    product_type: 'video consultation',
+    variants: [{price: `${price}`}],
   };
 };
 
@@ -112,60 +107,15 @@ export const CreatingPage = ({ user, userIdToken }: PageCreationProps) => {
       })
         .then((response) => {
           if (!response.ok) {
-            //TODO: proper error handling if response is not ok
-            console.error('happening...',user.businessProfile.hourlyRate);
-            const productBody = updateProductBody(7390857527495,`${user.businessProfile.hourlyRate}`);
-            fetch(fineFindApis.createDesignProduct, {
-              method: 'PUT',
-              headers: {
-                authorization: `bearer ${userIdToken}`,
-              },
-              body: JSON.stringify(productBody),
-            })
-              .then((shopifyRes) => {
-                console.error('itworkds...');
-                const url = `https://thefinefind.com/pages/${requestBody.handle}`;
-                setDesignerUrl(url);
-                // update the user profile
-                
-                shopifyRes.json().then((res) => {
-                  updateShopifyUrl(user.uid, url,res.id);
-                  console.error('shopifyRes', res);
-                });
-              })
-              .catch((error) => {
-                console.error('errors', error);
-              });
+           
+            const url = `https://thefinefind.com/pages/${requestBody.handle}`;
+            setDesignerUrl(url);
+            
           } else {
-            // const productBody = buildProductBody({
-            //   username: user.name,
-            //   handle: requestBody.handle,
-            //   price: user.businessProfile.hourlyRate,
-            // });
-            // id: 42414709113031,
-            // product_id: 7390857527495
-            const productBody = updateProductBody(7390857527495,`${user.businessProfile.hourlyRate}`);
-            fetch(fineFindApis.createDesignProduct, {
-              method: 'GET',
-              headers: {
-                authorization: `bearer ${userIdToken}`,
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(productBody),
-            })
-              .then((shopifyRes) => {
-                const url = `https://thefinefind.com/pages/${requestBody.handle}`;
-                setDesignerUrl(url);
-                // update the user profile
-                
-                shopifyRes.json().then((res) => {
-                  updateShopifyUrl(user.uid, url,res.id);
-                  console.error('shopifyRes', res);
-                });
-              })
-              .catch((error) => {
-                console.error('errors', error);
-              });
+           
+            const url = `https://thefinefind.com/pages/${requestBody.handle}`;
+            setDesignerUrl(url);
+            console.error('page created!!!',response);
           }
         })
         .catch((error) => {

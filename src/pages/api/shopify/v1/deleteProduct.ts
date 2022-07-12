@@ -17,7 +17,7 @@ import { NextApiResponse } from 'next';
  * @param res API Response
  */
 const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
-  if (req.method && req.method.toUpperCase() === 'POST') {
+  if (req.method && req.method.toUpperCase() === 'DELETE') {
     return createDesignerProduct(req, res);
   }
   console.error('==========>method', req.method);
@@ -34,7 +34,7 @@ async function createDesignerProduct(
       req.body
     ) as DesignerProduct;
     console.error('==========>json', requestBody);
-    const shopifyRes = await shopifyApiClient.product.create(requestBody);
+    const shopifyRes = await shopifyApiClient.product.delete(requestBody.id);
     console.error('---->done', shopifyRes);
     return res.status(200).json(shopifyRes);
   } catch (err) {

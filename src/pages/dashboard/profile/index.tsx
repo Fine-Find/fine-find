@@ -27,6 +27,7 @@ const DashBoardPage: React.FC = () => {
   const [businessProfile, setBusinessProfile] = useState<BusinessProfileType>();
   const [profileImage, setProfileImage] = useState();
   const [businessImage, setBusinessImage] = useState();
+  const [videoId, setVideoId] = useState();
 
   useEffect(() => {
     (async () => {
@@ -39,6 +40,7 @@ const DashBoardPage: React.FC = () => {
         setProfileImage(profiles.profileImage);
         setBusinessImage(profiles.businessImage);
         setLoadingProfile(false);
+        setVideoId(profiles.videoProductId);
       }
     })();
   }, [auth]);
@@ -94,6 +96,9 @@ const DashBoardPage: React.FC = () => {
                 userId={auth.user.uid}
                 businessProfile={businessProfile}
                 updateProfile={updateBusinessProfile}
+                userIdToken={auth.userIdToken}
+                basicProfile={basicProfile}
+                videoProdId={videoId}
               />
             </Grid>
           </Grid>
