@@ -1,6 +1,6 @@
 import { buildProductBody } from '@/components/Onboarding/CreatingPage';
-import { BasicProfileType, BusinessProfileType } from '@/types/profile.types';
-import { updateBusinessProfile, updateShopifyUrl } from '@/utils/firebaseFirestore';
+import { BusinessProfileType } from '@/types/profile.types';
+import { updateBusinessProfile } from '@/utils/firebaseFirestore';
 import { fineFindApis } from '@/utils/urls';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -12,7 +12,6 @@ import {
 import InputAdornment from '@material-ui/core/InputAdornment';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import slugify from 'slugify';
 
 import { ProfileFormCard } from '../ProfileFormCard';
 import { businessProfileValidation } from './BusinessProfileFormValidation';
@@ -23,8 +22,6 @@ export type BusinessProfileFormProps = {
   businessProfile?: BusinessProfileType;
   updateProfile: (data: any) => void;
   userIdToken?: string;
-  basicProfile?: BasicProfileType;
-  videoProdId?: any;
 };
 
 export const BusinessProfileForm = ({
@@ -33,7 +30,6 @@ export const BusinessProfileForm = ({
   updateProfile,
   userIdToken,
   basicProfile,
-  videoProdId,
 }: BusinessProfileFormProps) => {
   const [updatingProfile, setUpdatingProfile] = useState(false);
   // TODO: Pull this from Firebase
@@ -53,60 +49,47 @@ export const BusinessProfileForm = ({
     register,
     formState: { errors },
   } = methods;
-  
 
   const onSubmit = (data: BusinessProfileType) => {
     setUpdatingProfile(true);
+    // if the prodcut rate is not = the newProduct rate
+    // then 
+    fetch(fineFindApis.deleteDesignProduct, {
+      method: 'DELETE',
+      headers: {
+        authorization: `bearer ${userIdToken}`,
+      },
+      body: JSON.stringify({id: businessProfile.videoProdId}),
+    })
+      .then((resp) =>{
+        if(!resp.ok){
+          console.error('product not deleted');
+        }else{
+          console.error('prod deleted');
+          const productBody = buildProductBody({
+            username: user.name,
+            handle: requestBody.handle,
+            price: user.businessProfile.hourlyRate,
+          });
+          fetch(fineFindApis.createDesignProduct, {
+            method: 'POST',
+            headers: {
+              authorization: `bearer ${userIdToken}`,
+            },
+            body: JSON.stringify(productBody),
+          })
+        }
+      })
+      .catch(err =>{
+        console.error('delete prodd error', err);
+      });
     updateBusinessProfile(userId, data)
       .then(() => {
         const user = JSON.parse(localStorage.getItem('user'));
         const newUser = { ...user, businessProfile: data };
         localStorage.setItem('user', newUser);
-        updateProfile({...data});
+        updateProfile({...data, videoProdId: businessProfile.videoProdId});
         setUpdatingProfile(false);
-
-        fetch(fineFindApis.deleteDesignProduct, {
-          method: 'DELETE',
-          headers: {
-            authorization: `bearer ${userIdToken}`,
-          },
-          body: JSON.stringify({id: videoProdId}),
-        })
-          .then(() =>{
-            
-            console.error('prod deleted');
-            const sluggedCompany = slugify(data.companyName, {
-              remove: /\./g,
-              trim: true,
-              lower: true,
-            });
-            const productBody = buildProductBody({
-              username: basicProfile.firstName,
-              handle: sluggedCompany,
-              price: data.hourlyRate,
-            });
-            fetch(fineFindApis.createDesignProduct, {
-              method: 'POST',
-              headers: {
-                authorization: `bearer ${userIdToken}`,
-              },
-              body: JSON.stringify(productBody),
-            })
-              .then((shopifyRes) => {
-                const url = `https://thefinefind.com/pages/${productBody.handle}`;
-                const newRes = shopifyRes;
-                newRes.json().then((res) => {
-                  updateShopifyUrl(userId, url,res.id);
-                  console.error('shopifyRes', res);
-                });
-              })
-              .catch((error) => {
-                console.error('errors', error);
-              });
-          })
-          .catch(err =>{
-            console.error('delete prodd error', err);
-          });
       })
       .catch((error) => {
         console.error(error);

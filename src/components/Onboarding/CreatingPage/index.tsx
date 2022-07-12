@@ -5,7 +5,7 @@ import {
   DesignerProduct,
   
 } from '@/types/shopify/Designer';
-// import { updateShopifyUrl } from '@/utils/firebaseFirestore';
+import { updateShopifyUrl } from '@/utils/firebaseFirestore';
 import { fineFindApis, fineFindPages } from '@/utils/urls';
 import { Button, LinearProgress, Typography } from '@material-ui/core';
 import Link from 'next/link';
@@ -60,13 +60,19 @@ const buildRequest = (user: UserType): DesignerPage => {
 };
 export const buildProductBody = ({ username, handle, price }): DesignerProduct => {
   return {
-    title: `Book time with ${username}`,
+    title: `Book time with ${username}`, //have to change here to  put the correct handle
     vendor: `${username}`,
     handle: `${handle}-1-1-video-consultation`,
     product_type: 'video consultation',
     variants: [{price: `${price}`}],
   };
 };
+// const updateProductBody = (id: number, price: string) =>{
+//   return {
+//     id,
+//     variants: [{id: 42414709113031, price}],
+//   };
+// };
 
 export const CreatingPage = ({ user, userIdToken }: PageCreationProps) => {
   const [designerUrl, setDesignerUrl] = useState<string>(user.shopifyUrl);
@@ -107,14 +113,64 @@ export const CreatingPage = ({ user, userIdToken }: PageCreationProps) => {
       })
         .then((response) => {
           if (!response.ok) {
-           
-            const url = `https://thefinefind.com/pages/${requestBody.handle}`;
-            setDesignerUrl(url);
-            
+            //TODO: proper error handling if response is not ok
+            console.error('happening...',user.businessProfile.hourlyRate);
+            // const productBody = updateProductBody(7390857527495,`${user.businessProfile.hourlyRate}`);
+            const productBody = buildProductBody({
+              username: user.name,
+              handle: requestBody.handle,
+              price: user.businessProfile.hourlyRate,
+            });
+            fetch(fineFindApis.createDesignProduct, {
+              method: 'POST',
+              headers: {
+                authorization: `bearer ${userIdToken}`,
+              },
+              body: JSON.stringify(productBody),
+            })
+              .then((shopifyRes) => {
+                console.error('Product reached...');
+                const url = `https://thefinefind.com/pages/${requestBody.handle}`;
+                setDesignerUrl(url);
+                // update the user profile
+                const newRes = shopifyRes;
+                newRes.json().then((res) => {
+                  updateShopifyUrl(user.uid, url,res.id);
+                });
+              })
+              .catch((error) => {
+                console.error('errors', error);
+              });
           } else {
-           
-            const url = `https://thefinefind.com/pages/${requestBody.handle}`;
-            setDesignerUrl(url);
+            // const productBody = buildProductBody({
+            //   username: user.name,
+            //   handle: requestBody.handle,
+            //   price: user.businessProfile.hourlyRate,
+            // });
+            // id: 42414709113031,
+            // product_id: 7390857527495
+            // const productBody = updateProductBody(7390857527495,`${user.businessProfile.hourlyRate}`);
+            // fetch(fineFindApis.createDesignProduct, {
+            //   method: 'GET',
+            //   headers: {
+            //     authorization: `bearer ${userIdToken}`,
+            //     'Content-Type': 'application/json'
+            //   },
+            //   body: JSON.stringify(productBody),
+            // })
+            //   .then((shopifyRes) => {
+            //     const url = `https://thefinefind.com/pages/${requestBody.handle}`;
+            //     setDesignerUrl(url);
+            //     // update the user profile
+                
+            //     shopifyRes.json().then((res) => {
+            //       updateShopifyUrl(user.uid, url,res.id);
+            //       console.error('shopifyRes', res);
+            //     });
+            //   })
+            //   .catch((error) => {
+            //     console.error('errors', error);
+            //   });
             console.error('page created!!!',response);
           }
         })
