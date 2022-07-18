@@ -37,5 +37,5 @@ export type DesignerProduct = {
   handle?: string;
   product_type: string;
   tags?: [string];
-  variants?: [any]
+  variants?: [any];
 };
