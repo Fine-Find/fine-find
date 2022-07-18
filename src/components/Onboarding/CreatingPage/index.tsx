@@ -63,7 +63,7 @@ const buildProductBody = ({ username, handle, price }): DesignerProduct => {
     vendor: `${username}`,
     handle: `${handle}-1-1-video-consultation`,
     product_type: 'video consultation',
-    variants: [{price: `${price}`}],
+    variants: [{ price: `${price}` }],
   };
 };
 

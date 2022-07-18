@@ -28,8 +28,10 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore';
+import { v4 } from 'uuid';
 
 import { notifyOwner } from './RequestedProductDenied';
+import { fineFindApis } from './urls';
 
 const allCollectionsQuery = query(collectionGroup(db, 'collections'));
 const createRequestedProducts = (
@@ -95,16 +97,16 @@ export const createPostedCollection = async (data: any, userId: string) => {
   const postedCollection = getPostedCollection(userId);
   const postStats = getPosts(userId);
 
-  const postId = await getNextPostedCollectionNumber(postedCollection);
+  const postId = v4();
   const newPostDocRef = doc(postedCollection, postId.toString());
   const statsRef = doc(postStats, '--stats--');
 
   const docSnap = await getDoc(statsRef);
 
   if (docSnap.exists()) {
-    const { totalPosts, publishedPosts, unpublishedPosts } = docSnap.data();
+    const { publishedPosts, unpublishedPosts } = docSnap.data();
     const statsData = {
-      totalPosts: totalPosts ? postId : 1,
+      totalPosts: v4(),
       publishedPosts: publishedPosts ? publishedPosts : 0,
       unpublishedPosts: unpublishedPosts ? unpublishedPosts + 1 : 1,
     };
@@ -323,4 +325,56 @@ export const updateRequestedProduct = async ({
   } catch (error) {
     return error;
   }
+};
+
+export const collectionPublish = async (
+  collectionId,
+  userId,
+  token,
+  collectionData
+) => {
+  const data = await fetch(
+    fineFindApis.createDesignProduct + '?type=collection',
+    {
+      method: 'POST',
+      headers: {
+        authorization: `bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title: collectionData.get('title'),
+        body_html: collectionData.get('description'),
+        published: true,
+      }),
+    }
+  );
+  const response = await data.json();
+  const updateProduct = doc(db, 'users', userId, 'collections', collectionId);
+  await updateDoc(updateProduct, {
+    published: true,
+    shopifyUrl: response.admin_graphql_api_id,
+    shopifyId: response.id,
+  });
+};
+export const collectionUnPublish = async (
+  collectionId,
+  userId,
+  token,
+  collectionData
+) => {
+  const id = collectionData.get('shopifyId');
+  const published = collectionData.get('published') as boolean;
+  await fetch(
+    fineFindApis.createDesignProduct + '?type=collectionupdate&id=' + id,
+    {
+      method: 'POST',
+      headers: {
+        authorization: `bearer ${token}`,
+      },
+      body: JSON.stringify({
+        published: !published,
+      }),
+    }
+  );
+  const updateProduct = doc(db, 'users', userId, 'collections', collectionId);
+  await updateDoc(updateProduct, { published: !published });
 };

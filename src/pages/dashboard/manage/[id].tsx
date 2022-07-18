@@ -2,25 +2,33 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { CollectionPublishModel } from '@/components/Collection/CollectionPublishModel';
 import DashboardLayout from '@/components/DashboardLayout';
 import { useRequireAuth } from '@/hooks/useRequireAuth';
 import { RequestedProductDetails } from '@/types/RequestedProducts';
 import { ShopifyProduct } from '@/types/shopify/Products';
-import { getPostedCollectionById } from '@/utils/firebaseFirestore';
+import {
+  collectionPublish,
+  collectionUnPublish,
+  getPostedCollectionById,
+} from '@/utils/firebaseFirestore';
 import { fineFindPages } from '@/utils/urls';
 import {
   Badge,
+  Button,
   Container,
   Grid,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Snackbar,
   Typography,
 } from '@material-ui/core';
 import FiberNewIcon from '@material-ui/icons/FiberNew';
+import Alert from '@material-ui/lab/Alert';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
+import { DocumentData, DocumentSnapshot, collection } from 'firebase/firestore';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -54,8 +62,11 @@ const ManageCollectionPage: React.FC = () => {
     useState([]);
   const [collectionData, setCollectionData] =
     useState<DocumentSnapshot<DocumentData>>(null);
-
+  const [isPublished, setIsPublished] = useState(false);
+  const [status, setStatus] = useState(true);
   const { id } = router.query;
+  const [open, setOpen] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
     if (requestedProducts[0]) {
       const requestedProductsMap = requestedProducts.map((product) => {
@@ -75,6 +86,7 @@ const ManageCollectionPage: React.FC = () => {
       getPostedCollectionById(queryParameterAsString(id), auth.user.uid).then(
         ({ data, requestedProduct }) => {
           if (data.exists()) {
+            setStatus(data.get('published'));
             setCollectionData(data);
             setSelectedProducts(data.get('products'));
             setRequestedProducts(data.get('productsRequested'));
@@ -91,8 +103,56 @@ const ManageCollectionPage: React.FC = () => {
     return <>{Loading()}</>;
   }
 
+  const publishCollection = async () => {
+    const shopifyId = collectionData.get('shopifyId');
+    if (shopifyId) {
+      await collectionUnPublish(
+        id,
+        auth.user.uid,
+        auth.userIdToken,
+        collectionData
+      );
+    } else {
+      await collectionPublish(
+        id,
+        auth.user.uid,
+        auth.userIdToken,
+        collectionData
+      );
+    }
+    setShowAlert(true);
+  };
+  const unPublishCollection = () => {
+    collectionUnPublish(id, auth.user.uid, auth.userIdToken, collectionData);
+  };
+
+  const showModal = (state) => {
+    setOpen(true);
+    setStatus(state);
+  };
+  const confirm = () => {
+    setOpen(false);
+    if (status) {
+      publishCollection();
+    } else {
+      unPublishCollection();
+    }
+  };
   return (
     <DashboardLayout>
+      <Snackbar
+        open={showAlert}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert severity="success">Collection was updated!</Alert>
+      </Snackbar>
+      <CollectionPublishModel
+        open={open}
+        status={status}
+        handleClose={() => setOpen(false)}
+        confirm={confirm}
+      />
       <div className={styles.root}>
         <Container maxWidth="xl">
           <h2>{collectionData.get('title')}</h2>
@@ -115,6 +175,27 @@ const ManageCollectionPage: React.FC = () => {
                   <Typography className={styles.descriptionDetails}>
                     {collectionData.get('description')}
                   </Typography>
+
+                  <div>
+                    {collectionData?.get('published') && (
+                      <Button
+                        onClick={() => showModal(false)}
+                        color="primary"
+                        variant="outlined"
+                      >
+                        Un publish
+                      </Button>
+                    )}
+                    {!collectionData?.get('published') && (
+                      <Button
+                        onClick={() => showModal(true)}
+                        color="primary"
+                        variant="contained"
+                      >
+                        Publish
+                      </Button>
+                    )}
+                  </div>
                 </>
               )}
             </Grid>
