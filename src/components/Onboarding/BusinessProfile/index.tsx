@@ -7,6 +7,7 @@ import styles from './BusinessProfile.module.scss';
 type Props = {
   user: UserType;
   updateBusinessProfile: () => void;
+  userIdToken?: any;
 };
 
 export const BusinessProfileOnboarding = ({

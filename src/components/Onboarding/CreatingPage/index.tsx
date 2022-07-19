@@ -134,7 +134,7 @@ export const CreatingPage = ({ user, userIdToken }: PageCreationProps) => {
         })
         .catch((error) => {
           //TODO: proper error handling
-          console.error(error);
+          console.error('error ending...', error);
         })
         .finally(() => {
           setLaunching(false);

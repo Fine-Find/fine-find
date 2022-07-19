@@ -162,6 +162,7 @@ const OnboardingPage: React.FC = () => {
             <BusinessProfileOnboarding
               user={user}
               updateBusinessProfile={businessProfileSet}
+              userIdToken={auth.userIdToken}
             />
           )}
           {step === 5 && (
