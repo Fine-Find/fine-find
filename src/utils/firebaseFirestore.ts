@@ -327,8 +327,12 @@ export const updateRequestedProduct = async ({
     updateDoc(updateProduct, { productsRequested: updatedData });
     const userData = await getUserDocData(user);
     const userEmail = userData.get('email');
-    if (productInfo.status === 'Denied') {
-      notifyOwner({ ...productInfo, collection: other.title }, userEmail);
+    if (productInfo.status === 'Denied' || productInfo.status === 'Approved') {
+      notifyOwner(
+        { ...productInfo, collection: other.title },
+        userEmail,
+        productInfo.status
+      );
     }
   } catch (error) {
     return error;

@@ -10,8 +10,9 @@ const handler = async (req: FirebaseNextApiRequest, res: NextApiResponse) => {
       method: 'POST',
       body: JSON.stringify(reqBody),
     });
+    return res.status(200).end('Success');
   } catch (err) {
-    res.status(500).end('Internal server error');
+    res.status(500).end(err);
   }
 };
 
