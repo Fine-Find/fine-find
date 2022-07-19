@@ -31,4 +31,6 @@ export const fineFindApis = {
   createDesignProduct: '/api/shopify/v1/product',
   requestedProductDenied: '/api/email/productDeniedEmail',
   createCollection: '/api/shopify/v1/customCollection',
+  updateDesignProduct: '/api/shopify/v1/updateProduct',
+  deleteDesignProduct: '/api/shopify/v1/deleteProduct',
 };

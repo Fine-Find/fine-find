@@ -209,6 +209,7 @@ export const getProfileData = async (userId: string) => {
     businessProfile: userData.get('businessProfile'),
     profileImage: userData.get('profileImage'),
     businessImage: userData.get('businessImage'),
+    videoProductId: userData.get('videoProductId'),
   };
 
   return profile;
@@ -283,10 +284,17 @@ export const updateUserOnboarding = async (
   return await updateDoc(userDoc, { onboarding });
 };
 
-export const updateShopifyUrl = async (userId: string, url: string) => {
+export const updateShopifyUrl = async (
+  userId: string,
+  url: string,
+  id?: string
+) => {
   const userDoc = await getUserDoc(userId);
 
-  return await updateDoc(userDoc, { shopifyUrl: url });
+  return await updateDoc(userDoc, {
+    shopifyUrl: url,
+    videoProductId: id || null,
+  });
 };
 
 export const getRequestedProductById = async (id: string) => {
