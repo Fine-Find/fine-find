@@ -1,6 +1,6 @@
 import { fineFindApis } from '@/utils/urls';
 
-const htmlData = (data) => {
+const deniedHtmlData = (data) => {
   return `
         <!DOCTYPE html>
         <html>
@@ -14,15 +14,30 @@ const htmlData = (data) => {
     `;
 };
 
-export const notifyOwner = async (data: any, to: string) => {
+const ApprovedHtmlData = (data) => {
+  return `
+        <!DOCTYPE html>
+        <html>
+        <body>
+            <h4>Products Approved</h4>
+            <p>Product name: ${data.productName}</p>
+            <p>Collection: ${data.collection}</p>
+        </body>
+        </html>
+    `;
+};
+
+export const notifyOwner = async (data: any, to: string, action: string) => {
   try {
+    const emailBody =
+      action === 'Denied' ? deniedHtmlData(data) : ApprovedHtmlData(data);
     await fetch(fineFindApis.requestedProductDenied, {
       method: 'POST',
       body: JSON.stringify({
         to,
         from: 'Fine Find Concierge <concierge@thefinefind.com>',
-        subject: 'Product Denied',
-        html: htmlData(data),
+        subject: 'Product ' + action,
+        html: emailBody,
       }),
     });
   } catch (error) {

@@ -1,4 +1,4 @@
-import { CardMedia, Grid } from '@material-ui/core';
+import { CardActionArea, CardMedia, Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -16,6 +16,7 @@ type ProductsRequestedProps = {
   vendorContactInfo: string;
   vendorName: string;
   status: string;
+  shopifyId?: string;
 };
 
 type TitleProductCardProps = {
@@ -31,6 +32,7 @@ type TitleProductCardProps = {
   className?: string;
   isAvatar?: boolean;
   alt?: string;
+  shopifyid?: string;
 };
 type ProductsCardProps = {
   imgSrc?: string;
@@ -97,12 +99,15 @@ export const TitleProductCard = ({
   isAvatar = false,
   alt = 'placeholder',
   title,
+  shopifyid,
 }: TitleProductCardProps) => {
   return (
     <Card className={className} elevation={0}>
-      {renderTitledImage(title, titlePosition, imgSrc, isAvatar, alt)}
-      {children}
-      {renderButtonSection(buttonText, null)}
+      <CardActionArea href={'' + shopifyid}>
+        {renderTitledImage(title, titlePosition, imgSrc, isAvatar, alt)}
+        {children}
+        {renderButtonSection(buttonText, null)}
+      </CardActionArea>
     </Card>
   );
 };
@@ -126,6 +131,11 @@ export const ProductsCard = ({
                   imgSrc={imgSrc}
                   buttonText={product.status}
                   className={className}
+                  shopifyid={
+                    product.status == 'Approved'
+                      ? 'https://thefinefind.com/Product/' + product.shopifyId
+                      : '#'
+                  }
                 />
               </Grid>
             </>
