@@ -13,7 +13,7 @@ Install all of the dependencies by running `npm ci`.
 Start the application with `npm run dev`.
 
 ## Components
-Component should live in their own folder based on the name of the component. A component is declared in `PascalCase` and the folder named as such.
+Components should live in their own folder based on the name of the component. A component is declared in `PascalCase` and the folder named as such.
 
 When a component lives in a folder sharing the name of the component, the name of the component file should be `index.tsx`. The reason the file is named `index.tsx` instead of `ComponentName.tsx` is to avoid ugly import statements.
 
